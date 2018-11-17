@@ -1,8 +1,10 @@
 package ch.epfl.cs107.play.game.demo1;
 
 import ch.epfl.cs107.play.game.Game;
-import ch.epfl.cs107.play.game.actor.*;
-import ch.epfl.cs107.play.game.actor.Graphics;
+import ch.epfl.cs107.play.game.actor.Actor;
+import ch.epfl.cs107.play.game.actor.GraphicsEntity;
+import ch.epfl.cs107.play.game.actor.ShapeGraphics;
+import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.demo1.actor.MovingRock;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.Circle;
