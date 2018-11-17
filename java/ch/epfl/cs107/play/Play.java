@@ -1,13 +1,15 @@
 package ch.epfl.cs107.play;
 
+import ch.epfl.cs107.play.game.demo1.Demo1;
 import ch.epfl.cs107.play.game.Game;
-import ch.epfl.cs107.play.game.enigme.Enigme;
 import ch.epfl.cs107.play.io.DefaultFileSystem;
 import ch.epfl.cs107.play.io.FileSystem;
-import ch.epfl.cs107.play.io.ResourceFileSystem;
+import ch.epfl.cs107.play.io.FolderFileSystem;
 import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.window.Window;
 import ch.epfl.cs107.play.window.swing.SwingWindow;
+
+import java.io.File;
 
 
 /**
@@ -25,10 +27,10 @@ public class Play {
 	public static void main(String[] args) {
 
 		// Define cascading file system
-		final FileSystem fileSystem = new ResourceFileSystem(DefaultFileSystem.INSTANCE);
+		final FileSystem fileSystem = new FolderFileSystem(DefaultFileSystem.INSTANCE, new File("res"));
 
         // Create a demo game and initialize corresponding texts
-		final Game game = new Enigme();
+		final Game game = new Demo1();
 		XMLTexts.initialize(fileSystem, "strings/enigme_fr.xml");
 
 		// Use Swing display
