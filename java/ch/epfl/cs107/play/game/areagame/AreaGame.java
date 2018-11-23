@@ -4,6 +4,9 @@ import ch.epfl.cs107.play.game.Game;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.window.Window;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * AreaGame is a type of Game displayed in a (MxN) Grid called Area
@@ -12,14 +15,19 @@ import ch.epfl.cs107.play.window.Window;
 abstract public class AreaGame implements Game {
 
     // Context objects
-    // TODO implements me #PROJECT #TUTO
+    private Window window;
+    private FileSystem filesystem;
+    // A map containing each area of the game
+    private Map<String, Area> areas;
+    // The current area we are in
+    private Area currentArea;
 
     /**
      * Add an Area to the AreaGame list
      * @param a (Area): The area to add, not null
      */
-    protected final void addArea(Area a){
-        // TODO implements me #PROJECT #TUTO
+    protected final void addArea(Area a) {
+        areas.put(a.getTitle(), a);
     }
 
     /**
@@ -29,9 +37,21 @@ abstract public class AreaGame implements Game {
      * @param forceBegin (boolean): force the key area to call begin even if it was already started
      * @return (Area): after setting it, return the new current area
      */
-    protected final Area setCurrentArea(String key, boolean forceBegin){
-        // TODO implements me #PROJECT #TUTO
-        return null;
+    protected final Area setCurrentArea(String key, boolean forceBegin) {
+        // Save the state of the current area
+        if (currentArea != null) {
+            currentArea.suspend();
+        }
+        Area nextArea = areas.get(key);
+        if (nextArea != null) {
+            if (!nextArea.hasBegun() || forceBegin) {
+                nextArea.begin(window, filesystem);
+            } else {
+                nextArea.resume(window, filesystem);
+            }
+            currentArea = nextArea;
+        }
+        return currentArea;
     }
 
 
@@ -52,7 +72,9 @@ abstract public class AreaGame implements Game {
 
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
-        // TODO implements me #PROJECT #TUTO
+        this.window = window;
+        this.filesystem = fileSystem;
+        this.areas = new HashMap<>();
         return true;
     }
 

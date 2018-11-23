@@ -19,6 +19,8 @@ public abstract class Area implements Playable {
     private Window window;
     // The filesystem we need to access resources
     private FileSystem filesystem;
+    // This is set to true if the area has begun before
+    private boolean begun = false;
     /* Actor parameters */
     // A list of actors inside the area
     private List<Actor> actors;
@@ -128,7 +130,17 @@ public abstract class Area implements Playable {
         this.window = window;
         this.filesystem = fileSystem;
         this.viewCenter = Vector.ZERO;
+        this.begun = true;
         return true;
+    }
+
+    /**
+     * This method is useful to know if an area has been started before,
+     * in order to not reinitialise it if it's in a certain state.
+     * @return true if the area has begun before
+     */
+    public boolean hasBegun() {
+        return begun;
     }
 
     /**
