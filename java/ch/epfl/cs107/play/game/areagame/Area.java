@@ -26,6 +26,8 @@ public abstract class Area implements Playable {
     private List<Actor> registeredActors;
     // A list of actors requested to be removed
     private List<Actor> unregisteredActors;
+    // The behavior associated with this area
+    private AreaBehavior areaBehavior;
     /* Camera Parameters */
     // Actor on which the camera is centered
     private Actor viewCandidate;
@@ -103,6 +105,14 @@ public abstract class Area implements Playable {
     public final int getHeight(){
         // TODO implements me #PROJECT #TUTO
         return 0;
+    }
+
+    /**
+     * Set the behavior of this method.
+     * @param behavior The behavior to set for this area
+     */
+    protected final void setBehavior(AreaBehavior behavior) {
+        this.areaBehavior = behavior;
     }
 
     /** @return the Window Keyboard for inputs */
