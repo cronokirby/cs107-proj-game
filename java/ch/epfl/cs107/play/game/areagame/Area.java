@@ -20,7 +20,7 @@ public abstract class Area implements Playable {
     // Context objects
     // TODO implements me #PROJECT #TUTO
 
-	/** @return (float): camera scale factor, assume it is the same in x and y direction */
+    /** @return (float): camera scale factor, assume it is the same in x and y direction */
     public abstract float getCameraScaleFactor();
     
     /**

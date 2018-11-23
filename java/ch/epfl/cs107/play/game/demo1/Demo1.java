@@ -19,17 +19,17 @@ import java.awt.*;
  * A simple game with just a moving rock and circle
  */
 public class Demo1 implements Game {
-	/// The window the game renders to
-	private Window window;
-	/// The file system the game uses
-	private FileSystem filesystem;
-	/// The circle in the game window
+    /// The window the game renders to
+    private Window window;
+    /// The file system the game uses
+    private FileSystem filesystem;
+    /// The circle in the game window
     private Actor circle;
     private final float circleRadius = 0.2f;
     /// The moving rock in the game window
-	private Actor rock;
-	/// The boom text to display
-	private TextGraphics boomText;
+    private Actor rock;
+    /// The boom text to display
+    private TextGraphics boomText;
 
     @Override
     public int getFrameRate() {
@@ -57,17 +57,17 @@ public class Demo1 implements Game {
 
     @Override
     public void update(float deltaTime) {
-    	Keyboard keyboard = window.getKeyboard();
-    	Button downArrow = keyboard.get(Keyboard.DOWN);
-    	if (downArrow.isDown())	{
-    		rock.update(deltaTime);
-		}
-    	circle.draw(window);
-    	rock.draw(window);
+        Keyboard keyboard = window.getKeyboard();
+        Button downArrow = keyboard.get(Keyboard.DOWN);
+        if (downArrow.isDown())	{
+            rock.update(deltaTime);
+        }
+        circle.draw(window);
+        rock.draw(window);
 
-		if (circle.getPosition().sub(rock.getPosition()).getLength() < circleRadius) {
-			boomText.draw(window);
-		}
+        if (circle.getPosition().sub(rock.getPosition()).getLength() < circleRadius) {
+            boomText.draw(window);
+        }
     }
 
     @Override
