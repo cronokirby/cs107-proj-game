@@ -15,6 +15,9 @@ import ch.epfl.cs107.play.window.Window;
 
 import java.awt.*;
 
+/**
+ * A simple game with just a moving rock and circle
+ */
 public class Demo1 implements Game {
 	/// The window the game renders to
 	private Window window;
