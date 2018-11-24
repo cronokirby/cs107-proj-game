@@ -2,6 +2,7 @@ package ch.epfl.cs107.play.game.areagame;
 
 import ch.epfl.cs107.play.game.Playable;
 import ch.epfl.cs107.play.game.actor.Actor;
+import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Transform;
@@ -9,33 +10,39 @@ import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Window;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 
 /**
  * Area is a "Part" of the AreaGame. It is characterized by its AreaBehavior and a List of Actors
  */
 public abstract class Area implements Playable {
-    // The window the game plays in
+    /// The window the game plays in
     private Window window;
-    // The filesystem we need to access resources
+    /// The filesystem we need to access resources
     private FileSystem filesystem;
-    // This is set to true if the area has begun before
+    /// This is set to true if the area has begun before
     private boolean begun = false;
     /* Actor parameters */
     // A list of actors inside the area
     private List<Actor> actors;
-    // A list of actors requested to be added
+    /// A list of actors requested to be added
     private List<Actor> registeredActors;
-    // A list of actors requested to be removed
+    /// A list of actors requested to be removed
     private List<Actor> unregisteredActors;
-    // The behavior associated with this area
+    /// A map of interactables that need to enter the area
+    private Map<Interactable, List<DiscreteCoordinates>> enteringInteractables;
+    /// A map of interactables that need to leave the are
+    private Map<Interactable, List<DiscreteCoordinates>> leavingInteractables;
+    /// The behavior associated with this area
     private AreaBehavior areaBehavior;
     /* Camera Parameters */
-    // Actor on which the camera is centered
+    /// Actor on which the camera is centered
     private Actor viewCandidate;
-    // Actual center of the view
+    /// Actual center of the view
     private Vector viewCenter;
 
     /** @return (float): camera scale factor, assume it is the same in x and y direction */
@@ -51,9 +58,11 @@ public abstract class Area implements Playable {
      * @param forced (Boolean): if true, add regardless of what the area wants
      */
     private void addActor(Actor a, boolean forced) {
-        // This is useless as long as we have no logic for
-        // refusing to add an actor, but is good as a placeholder
         boolean add = true;
+        if (a instanceof Interactable) {
+            Interactable aI = (Interactable) a;
+            add = transitionAreaCells(aI, new LinkedList<>(), aI.getCurrentCells());
+        }
         if (add || forced) {
             // add on LinkedList always returns true
            actors.add(a);
@@ -68,6 +77,10 @@ public abstract class Area implements Playable {
     private void removeActor(Actor a, boolean forced){
         // Like addActor, this can contain more complex veto logic
         boolean remove = true;
+        if (a instanceof Interactable) {
+            Interactable aI = (Interactable) a;
+            remove = transitionAreaCells(aI, aI.getCurrentCells(), new LinkedList<>());
+        }
         if (remove || forced) {
             // This will remove based on reference equality,
             // which is the behavior we want.
@@ -121,6 +134,35 @@ public abstract class Area implements Playable {
     }
 
     /**
+     * Make an entity leave a list of coordinates and enter another.
+     *
+     * It's necessary to not split this into 2 separate methods because
+     * of the following scenario:
+     * If we can enter the desired cells, but can leave the current ones,
+     * then one of the checks will successfully register us as entering,
+     * but the other won't register us as leaving, and we'll be registered as
+     * interactable in 2 cells at once, which is not the behavior we want.
+     * Joining them in a method allows to ensure that we will either
+     * not affect the state of the cells, or affect them in a valid way.
+     *
+     * @param entity the entity wanting to transition
+     * @param leaving the cells it wants to leave
+     * @param entering the cells it wants to enter
+     * @return whether or not the transition could be carried out
+     */
+    public final boolean transitionAreaCells(Interactable entity,
+                                             List<DiscreteCoordinates> leaving,
+                                             List<DiscreteCoordinates> entering) {
+        if (areaBehavior.canLeave(entity, leaving) &&
+            areaBehavior.canEnter(entity, entering)) {
+            leavingInteractables.put(entity, leaving);
+            enteringInteractables.put(entity, entering);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Set the behavior of this method.
      * @param behavior The behavior to set for this area
      */
@@ -143,6 +185,8 @@ public abstract class Area implements Playable {
         this.actors = new LinkedList<>();
         this.registeredActors = new LinkedList<>();
         this.unregisteredActors = new LinkedList<>();
+        this.enteringInteractables = new HashMap<>();
+        this.leavingInteractables = new HashMap<>();
         this.viewCenter = Vector.ZERO;
         this.begun = true;
         return true;
@@ -189,6 +233,17 @@ public abstract class Area implements Playable {
         // node, but none of the rest. Using this method avoids that
         registeredActors.clear();
         unregisteredActors.clear();
+
+        // Handling the Interactables
+
+        for (Map.Entry<Interactable, List<DiscreteCoordinates>> e : enteringInteractables.entrySet()) {
+            areaBehavior.enter(e.getKey(), e.getValue());
+        }
+        for (Map.Entry<Interactable, List<DiscreteCoordinates>> e : leavingInteractables.entrySet()) {
+            areaBehavior.leave(e.getKey(), e.getValue());
+        }
+        enteringInteractables.clear();
+        leavingInteractables.clear();
     }
 
     @Override

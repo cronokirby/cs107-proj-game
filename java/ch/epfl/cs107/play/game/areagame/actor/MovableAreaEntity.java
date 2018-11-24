@@ -49,7 +49,10 @@ public abstract class MovableAreaEntity extends AreaEntity {
      */
     protected  boolean move(int framesForMove){
         if (!isMoving || getCurrentMainCellCoordinates().equals(targetMainCellCoordinates)) {
-            // TODO: Add area conditions here
+            Area owner = getOwnerArea();
+            if (owner.transitionAreaCells(this, getLeavingCells(), getEnteringCells())) {
+
+            }
             framesForCurrentMove = framesForMove;
             isMoving = true;
             Vector orientation = getOrientation().toVector();
