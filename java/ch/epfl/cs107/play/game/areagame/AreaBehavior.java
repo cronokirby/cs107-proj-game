@@ -10,6 +10,8 @@ import ch.epfl.cs107.play.window.Window;
 public abstract class AreaBehavior {
     // The behavior is an Image of size height x width
     private final Image behaviorMap;
+    // We could make these public instead of having getters,
+    // but getters help with inheritance.
     private final int width, height;
     // An array of cells representing the behavior
     private final Cell[][] cells;
@@ -32,6 +34,17 @@ public abstract class AreaBehavior {
         cells = new Cell[width][height];
     }
 
-    // TODO implements me #PROJECT #TUTO
+    /**
+     * @return the width of the behavior map
+     */
+    public int getWidth() {
+        return width;
+    }
 
+    /**
+     * @return the height of the behavior map
+     */
+    public int getHeight() {
+        return height;
+    }
 }

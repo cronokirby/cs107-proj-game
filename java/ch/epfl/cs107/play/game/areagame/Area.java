@@ -96,8 +96,7 @@ public abstract class Area implements Playable {
      * @return (int) : the width in number of cols
      */
     public final int getWidth(){
-        // TODO implements me #PROJECT #TUTO
-        return 0;
+        return areaBehavior.getWidth();
     }
 
     /**
@@ -105,8 +104,7 @@ public abstract class Area implements Playable {
      * @return (int) : the height in number of rows
      */
     public final int getHeight(){
-        // TODO implements me #PROJECT #TUTO
-        return 0;
+        return areaBehavior.getHeight();
     }
 
     /**
