@@ -1,6 +1,7 @@
 package ch.epfl.cs107.play.game.areagame;
 
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Image;
 import ch.epfl.cs107.play.window.Window;
 
@@ -8,8 +9,8 @@ import ch.epfl.cs107.play.window.Window;
  * AreaBehavior manages a map of Cells.
  */
 public abstract class AreaBehavior {
-    // The behavior is an Image of size height x width
-    private final Image behaviorMap;
+    // The image representing the behavior map
+    private Image behaviorMap;
     // We could make these public instead of having getters,
     // but getters help with inheritance.
     private final int width, height;
@@ -19,8 +20,13 @@ public abstract class AreaBehavior {
     /**
      * Each game may have its own cell contents
      */
-    public abstract class Cell {}
+    public abstract class Cell {
+        private DiscreteCoordinates coordinates;
 
+        public Cell(int x, int y) {
+            this.coordinates = new DiscreteCoordinates(x, y);
+        }
+    }
 
     /**
      * Default AreaBehavior Constructor
@@ -28,10 +34,20 @@ public abstract class AreaBehavior {
      * @param fileName (String): name of the file containing the behavior image, not null
      */
     public AreaBehavior(Window window, String fileName){
-        behaviorMap = window.getImage(ResourcePath.getBehaviors(fileName), null, false);
+        Image behaviorMap = window.getImage(ResourcePath.getBehaviors(fileName), null, false);
         width = behaviorMap.getWidth();
         height = behaviorMap.getHeight();
         cells = new Cell[width][height];
+    }
+
+
+    /**
+     * This is useful to let subclasses toy around
+     * with the cell grid.
+     * @return a (mutable) reference to the cell grid
+     */
+    protected Cell[][] getCells() {
+       return cells;
     }
 
     /**
@@ -46,5 +62,12 @@ public abstract class AreaBehavior {
      */
     public int getHeight() {
         return height;
+    }
+
+    /**
+     * @return the image associated to this behavior
+     */
+    public Image getBehaviorMap() {
+        return behaviorMap;
     }
 }
