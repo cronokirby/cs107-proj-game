@@ -8,6 +8,7 @@ import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Window;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -127,6 +128,9 @@ public abstract class Area implements Playable {
     public boolean begin(Window window, FileSystem fileSystem) {
         this.window = window;
         this.filesystem = fileSystem;
+        this.actors = new LinkedList<>();
+        this.registeredActors = new LinkedList<>();
+        this.unregisteredActors = new LinkedList<>();
         this.viewCenter = Vector.ZERO;
         this.begun = true;
         return true;
@@ -181,6 +185,10 @@ public abstract class Area implements Playable {
         purgeRegistration();
         // drawing
         updateCamera();
+        for (Actor a : actors) {
+            a.update(deltaTime);
+            a.draw(window);
+        }
     }
 
     private void updateCamera () {

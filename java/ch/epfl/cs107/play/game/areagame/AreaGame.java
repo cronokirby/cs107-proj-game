@@ -81,7 +81,7 @@ abstract public class AreaGame implements Game {
 
     @Override
     public void update(float deltaTime) {
-        // TODO implements me #PROJECT #TUTO
+        this.currentArea.update(deltaTime);
     }
 
     @Override

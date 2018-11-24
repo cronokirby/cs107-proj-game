@@ -34,7 +34,7 @@ public abstract class AreaBehavior {
      * @param fileName (String): name of the file containing the behavior image, not null
      */
     public AreaBehavior(Window window, String fileName){
-        Image behaviorMap = window.getImage(ResourcePath.getBehaviors(fileName), null, false);
+        behaviorMap = window.getImage(ResourcePath.getBehaviors(fileName), null, false);
         width = behaviorMap.getWidth();
         height = behaviorMap.getHeight();
         cells = new Cell[width][height];
