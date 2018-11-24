@@ -1,9 +1,13 @@
 package ch.epfl.cs107.play.game.areagame;
 
+import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Image;
 import ch.epfl.cs107.play.window.Window;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * AreaBehavior manages a map of Cells.
@@ -20,11 +24,18 @@ public abstract class AreaBehavior {
     /**
      * Each game may have its own cell contents
      */
-    public abstract class Cell {
+    public abstract class Cell implements Interactable {
         private DiscreteCoordinates coordinates;
 
         public Cell(int x, int y) {
             this.coordinates = new DiscreteCoordinates(x, y);
+        }
+
+        @Override
+        public List<DiscreteCoordinates> getCurrentCells() {
+            LinkedList<DiscreteCoordinates> ret = new LinkedList<>();
+            ret.add(coordinates);
+            return ret;
         }
     }
 

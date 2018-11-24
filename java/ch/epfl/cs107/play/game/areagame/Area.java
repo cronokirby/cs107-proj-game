@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.areagame;
 import ch.epfl.cs107.play.game.Playable;
 import ch.epfl.cs107.play.game.actor.Actor;
 import ch.epfl.cs107.play.io.FileSystem;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Transform;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Keyboard;
@@ -106,6 +107,17 @@ public abstract class Area implements Playable {
      */
     public final int getHeight(){
         return areaBehavior.getHeight();
+    }
+
+    /**
+     * Check whether or not a pair of coordinates is in this area
+     * @param coords the coordinates to check
+     * @return true if the coordinates are in this area
+     */
+    public final boolean contains(DiscreteCoordinates coords) {
+        boolean containsX = coords.x >= 0 && coords.x < getWidth();
+        boolean containsY = coords.y >= 0 && coords.y < getHeight();
+        return containsX && containsY;
     }
 
     /**
