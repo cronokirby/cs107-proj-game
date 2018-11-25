@@ -3,6 +3,8 @@ package ch.epfl.cs107.play.game.enigme.actor;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.enigme.handler.EnigmeInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
@@ -11,14 +13,13 @@ import java.util.List;
 
 public class Door extends AreaEntity {
     /// The title of the area this door connects to
-    /// Having an area instead of a string for a much safer API
-    private Area destinationArea;
+    private String destinationArea;
     /// The coordinates where this door leads to
     private DiscreteCoordinates destination;
     /// The list of cells this door occupies
     private List<DiscreteCoordinates> currentCells;
 
-    public Door(Area area, Area destinationArea,
+    public Door(Area area, String destinationArea,
                 DiscreteCoordinates destination, DiscreteCoordinates mainPosition,
                 DiscreteCoordinates ...otherPositions) {
         // We just pass a dummy orientation
@@ -33,9 +34,9 @@ public class Door extends AreaEntity {
     }
 
     /**
-     * @return the area this door points to
+     * @return the name of the area this door points to
      */
-    public Area getDestinationArea() {
+    public String getDestinationArea() {
         return destinationArea;
     }
 
@@ -60,7 +61,7 @@ public class Door extends AreaEntity {
 
     @Override
     public boolean takeCellSpace() {
-        return true;
+        return false;
     }
 
     @Override
@@ -71,5 +72,10 @@ public class Door extends AreaEntity {
     @Override
     public boolean isCellInteractable() {
         return true;
+    }
+
+    @Override
+    public void acceptInteraction(AreaInteractionVisitor v) {
+        ((EnigmeInteractionVisitor)v).interactWith(this);
     }
 }

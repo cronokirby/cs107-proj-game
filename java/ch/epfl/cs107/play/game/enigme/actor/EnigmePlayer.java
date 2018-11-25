@@ -1,10 +1,9 @@
 package ch.epfl.cs107.play.game.enigme.actor;
 
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
-import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.areagame.actor.Sprite;
-import ch.epfl.cs107.play.game.enigme.demo2.Room;
+import ch.epfl.cs107.play.game.areagame.actor.*;
+import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.enigme.handler.EnigmeInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
@@ -15,13 +14,15 @@ import java.util.List;
 /**
  * Represents the main player of the demo2 game
  */
-public class EnigmePlayer extends MovableAreaEntity {
+public class EnigmePlayer extends MovableAreaEntity implements Interactor {
     /// Null if the player has never passed a door
     private Door lastDoor;
     /// The sprite for this player
     private Sprite sprite;
     /// The keyboard the player needs to listen to controls from
     private Keyboard controller;
+    /// The Interaction Handler for this player
+    private final EnigmePlayerHandler handler;
     /// The amount of frames per move
     private final int FRAMES_PER_MOVE = 8;
 
@@ -29,6 +30,7 @@ public class EnigmePlayer extends MovableAreaEntity {
         super(area, orientation, position);
         this.sprite = new Sprite("ghost.1", 1, 1.f, this);
         this.controller = controller;
+        this.handler = new EnigmePlayerHandler();
     }
 
     /**
@@ -56,7 +58,7 @@ public class EnigmePlayer extends MovableAreaEntity {
      * @param door the door the player should pass through
      */
     public void setIsPassingDoor(Door door) {
-        lastDoor = door;
+        handler.interactWith(door);
     }
 
     /**
@@ -86,11 +88,57 @@ public class EnigmePlayer extends MovableAreaEntity {
                 setOrientation(orientation);
             }
         }
+        lastDoor = null;
     }
 
     @Override
     public void draw(Canvas canvas) {
         sprite.draw(canvas);
+    }
+
+    /**
+     * The handler for interactions from this player
+     */
+    private class EnigmePlayerHandler implements EnigmeInteractionVisitor {
+        @Override
+        public void interactWith(Door door) {
+            lastDoor = door;
+        }
+
+        @Override
+        public void interactWith(Apple apple) {
+            apple.eat();
+        }
+    }
+
+    @Override
+    public void acceptInteraction(AreaInteractionVisitor v) {
+        ((EnigmeInteractionVisitor)v).interactWith(this);
+    }
+
+    /// EnigmePlayer implements Interactor
+
+    @Override
+    public List<DiscreteCoordinates> getFieldOfViewCells() {
+        DiscreteCoordinates here = getCurrentMainCellCoordinates();
+        DiscreteCoordinates nextCell = here.jump(getOrientation().toVector());
+        return Collections.singletonList(nextCell);
+    }
+
+    @Override
+    public boolean wantsCellInteraction() {
+        // The player always wants cell interaction
+        return true;
+    }
+
+    @Override
+    public boolean wantsViewInteraction() {
+        return controller.get(Keyboard.L).isDown();
+    }
+
+    @Override
+    public void interactWith(Interactable other) {
+        other.acceptInteraction(handler);
     }
 
     /// Demo2Player implements Interactable

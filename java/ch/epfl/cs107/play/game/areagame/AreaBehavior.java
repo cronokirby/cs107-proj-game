@@ -1,6 +1,7 @@
 package ch.epfl.cs107.play.game.areagame;
 
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Image;
@@ -63,14 +64,48 @@ public abstract class AreaBehavior {
          * @param entity the interactable to check
          * @return true if the entity can enter
          */
-        abstract protected boolean canEnter(Interactable entity);
+         protected boolean canEnter(Interactable entity) {
+             for (Interactable interactable : interactables) {
+                 if (interactable.takeCellSpace()) {
+                     return false;
+                 }
+             }
+             return true;
+         };
 
         /**
          * Check whether or not an interactable entity can leave this cell
          * @param entity the interactable to check
          * @return true if the entity can leave
          */
-        abstract protected boolean canLeave(Interactable entity);
+        protected boolean canLeave(Interactable entity) {
+            // No more logic to be had for the moment
+            return true;
+        }
+
+        /**
+         * Have an Interactor perform a cell interaction with each
+         * interactable in this cell
+         */
+        private void cellInteractionOf(Interactor interactor) {
+            for (Interactable interactable : interactables) {
+                if (interactable.isCellInteractable()) {
+                    interactor.interactWith(interactable);
+                }
+            }
+        }
+
+        /**
+         * Have an Interactor perform a distant interaction
+         * with each interactable in this cell
+         */
+        private void viewInteractionOf(Interactor interactor) {
+            for (Interactable interactable : interactables) {
+                if (interactable.isViewInteractable()) {
+                    interactor.interactWith(interactable);
+                }
+            }
+        }
     }
 
     /**
@@ -158,7 +193,25 @@ public abstract class AreaBehavior {
         return true;
     }
 
+    /**
+     * Trigger all direct interactions of an interactor with the cells here
+     * @param interactor the interactor to trigger interactions with
+     */
+    public void cellInteractionOf(Interactor interactor) {
+        for (DiscreteCoordinates position : interactor.getCurrentCells()) {
+            getCell(position).cellInteractionOf(interactor);
+        }
+    }
 
+    /**
+     * Trigger all distance interactions of an interactor with the cells here
+     * @param interactor the interactor to trigger interactions with
+     */
+    public void viewInteractionOf(Interactor interactor) {
+        for (DiscreteCoordinates position : interactor.getFieldOfViewCells()) {
+            getCell(position).viewInteractionOf(interactor);
+        }
+    }
 
     /**
      * @return the width of the behavior map

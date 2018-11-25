@@ -4,6 +4,7 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
+import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.enigme.demo2.Room;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
@@ -138,5 +139,12 @@ public class Demo2Player extends MovableAreaEntity {
     @Override
     public boolean isCellInteractable() {
         return true;
+    }
+
+    // this is need to compile, for compatability with later parts
+
+    @Override
+    public void acceptInteraction(AreaInteractionVisitor v) {
+
     }
 }

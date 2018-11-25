@@ -54,19 +54,24 @@ abstract public class AreaGame implements Game {
         return currentArea;
     }
 
+    protected final boolean beginAreas() {
+        boolean areasOK = true;
+        for (Area area : areas.values()) {
+            boolean areaOK = area.begin(window, filesystem);
+            areasOK = areasOK && areaOK;
+        }
+        return areasOK;
+    }
 
     /**@return (Window) : the Graphic and Audio context*/
     protected final Window getWindow(){
-        // TODO implements me #PROJECT #TUTO
-        return null;
+        return window;
     }
 
     /**@return (FIleSystem): the linked file system*/
     protected final FileSystem getFileSystem(){
-        // TODO implements me #PROJECT #TUTO
-        return null;
+        return filesystem;
     }
-
 
     /// AreaGame implements Playable
 

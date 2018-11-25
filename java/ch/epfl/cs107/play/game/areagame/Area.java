@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.areagame;
 import ch.epfl.cs107.play.game.Playable;
 import ch.epfl.cs107.play.game.actor.Actor;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Transform;
@@ -37,6 +38,8 @@ public abstract class Area implements Playable {
     private Map<Interactable, List<DiscreteCoordinates>> enteringInteractables;
     /// A map of interactables that need to leave the are
     private Map<Interactable, List<DiscreteCoordinates>> leavingInteractables;
+    /// A list of interactors in this area
+    private List<Interactor> interactors;
     /// The behavior associated with this area
     private AreaBehavior areaBehavior;
     /* Camera Parameters */
@@ -63,6 +66,10 @@ public abstract class Area implements Playable {
             Interactable aI = (Interactable) a;
             add = transitionAreaCells(aI, new LinkedList<>(), aI.getCurrentCells());
         }
+        if (a instanceof Interactor) {
+            Interactor aI = (Interactor) a;
+            interactors.add(aI);
+        }
         if (add || forced) {
             // add on LinkedList always returns true
            actors.add(a);
@@ -80,6 +87,10 @@ public abstract class Area implements Playable {
         if (a instanceof Interactable) {
             Interactable aI = (Interactable) a;
             remove = transitionAreaCells(aI, aI.getCurrentCells(), new LinkedList<>());
+        }
+        if (a instanceof Interactor) {
+            Interactor aI = (Interactor) a;
+            interactors.remove(aI);
         }
         if (remove || forced) {
             // This will remove based on reference equality,
@@ -188,6 +199,7 @@ public abstract class Area implements Playable {
         this.unregisteredActors = new LinkedList<>();
         this.enteringInteractables = new HashMap<>();
         this.leavingInteractables = new HashMap<>();
+        this.interactors = new LinkedList<>();
         this.viewCenter = Vector.ZERO;
         this.begun = true;
         return true;
@@ -256,6 +268,15 @@ public abstract class Area implements Playable {
         for (Actor a : actors) {
             a.update(deltaTime);
             a.draw(window);
+        }
+        // Handling interactions
+        for (Interactor interactor : interactors) {
+            if (interactor.wantsCellInteraction()) {
+                areaBehavior.cellInteractionOf(interactor);
+            }
+            if (interactor.wantsViewInteraction()) {
+                areaBehavior.viewInteractionOf(interactor);
+            }
         }
     }
 

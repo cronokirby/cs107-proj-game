@@ -2,6 +2,8 @@ package ch.epfl.cs107.play.game.enigme;
 
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.enigme.handler.EnigmeInteractionVisitor;
 import ch.epfl.cs107.play.window.Image;
 import ch.epfl.cs107.play.window.Window;
 
@@ -66,19 +68,22 @@ public class EnigmeBehavior extends AreaBehavior {
 
         @Override
         protected boolean canEnter(Interactable entity) {
-            switch (type) {
-                case NULL:
-                    return false;
-                case WALL:
-                    return false;
-                default:
-                    return true;
+            if (super.canEnter(entity)) {
+                switch (type) {
+                    case NULL:
+                        return false;
+                    case WALL:
+                        return false;
+                    default:
+                        return true;
+                }
             }
+            return false;
         }
 
         @Override
         protected boolean canLeave(Interactable entity) {
-            return true;
+            return super.canLeave(entity);
         }
 
         @Override
@@ -94,6 +99,11 @@ public class EnigmeBehavior extends AreaBehavior {
         @Override
         public boolean isCellInteractable() {
             return true;
+        }
+
+        @Override
+        public void acceptInteraction(AreaInteractionVisitor v) {
+            ((EnigmeInteractionVisitor)v).interactWith(this);
         }
     }
 

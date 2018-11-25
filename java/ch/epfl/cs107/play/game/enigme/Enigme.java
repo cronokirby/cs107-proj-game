@@ -3,20 +3,14 @@ package ch.epfl.cs107.play.game.enigme;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.enigme.actor.Apple;
+import ch.epfl.cs107.play.game.enigme.actor.Door;
 import ch.epfl.cs107.play.game.enigme.actor.EnigmePlayer;
-import ch.epfl.cs107.play.game.enigme.area.EnigmeArea;
+import ch.epfl.cs107.play.game.enigme.area.Level1;
+import ch.epfl.cs107.play.game.enigme.area.Level2;
+import ch.epfl.cs107.play.game.enigme.area.LevelSelector;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
-import ch.epfl.cs107.play.game.areagame.AreaGame;
-import ch.epfl.cs107.play.io.FileSystem;
-import ch.epfl.cs107.play.window.Window;
-import org.omg.PortableInterceptor.DISCARDING;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 
 /**
@@ -25,6 +19,7 @@ import java.util.List;
  */
 public class Enigme extends AreaGame {
     /// The player is a concept of RPG games
+    private EnigmePlayer player;
 
 
     /// Enigme implements Playable
@@ -38,22 +33,15 @@ public class Enigme extends AreaGame {
     public boolean begin(Window window, FileSystem fileSystem) {
         boolean superOK = super.begin(window, fileSystem);
         /// We want fast indexing
-        List<Area> areas = new ArrayList<>();
-        areas.add(new EnigmeArea("LevelSelector"));
-        areas.add(new EnigmeArea("Level1"));
-        areas.add(new EnigmeArea( "Level2"));
-        areas.add(new EnigmeArea("Level3"));
-        boolean roomsOK = true;
-        for (Area area : areas) {
-            boolean thisRoomOK = area.begin(window, fileSystem);
-            addArea(area);
-            roomsOK = roomsOK && thisRoomOK;
-        }
-        Area starting = areas.get(0);
+        Area starting = new LevelSelector();
+        addArea(starting);
+        addArea(new Level1());
+        addArea(new Level2());
+        boolean roomsOK = beginAreas();
         setCurrentArea(starting.getTitle(), false);
         // Initialising the player
         DiscreteCoordinates playerPOS = new DiscreteCoordinates(5, 5);
-        EnigmePlayer player = new EnigmePlayer(starting, Orientation.DOWN, playerPOS, window.getKeyboard());
+        player = new EnigmePlayer(starting, Orientation.DOWN, playerPOS, window.getKeyboard());
         player.enterArea(starting, playerPOS);
         return superOK && roomsOK;
     }
@@ -61,6 +49,14 @@ public class Enigme extends AreaGame {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
+        Door lastDoor = player.passedDoor();
+        if (lastDoor != null) {
+            player.leaveCurrentArea();
+            // We assume that this is successful
+            // This will fail if the door is badly programmed.
+            Area next = setCurrentArea(lastDoor.getDestinationArea(), false);
+            player.enterArea(next, lastDoor.getDestinationPosition());
+        }
     }
 
     @Override
