@@ -133,12 +133,13 @@ public abstract class Area implements Playable {
         return containsX && containsY;
     }
 
+
     /**
      * Make an entity leave a list of coordinates and enter another.
      *
      * It's necessary to not split this into 2 separate methods because
      * of the following scenario:
-     * If we can enter the desired cells, but can leave the current ones,
+     * If we can enter the desired cells, but cannot leave the current ones,
      * then one of the checks will successfully register us as entering,
      * but the other won't register us as leaving, and we'll be registered as
      * interactable in 2 cells at once, which is not the behavior we want.

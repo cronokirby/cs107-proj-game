@@ -40,6 +40,20 @@ public abstract class MovableAreaEntity extends AreaEntity {
         framesForCurrentMove = 0;
         isMoving = false;
         targetMainCellCoordinates = getCurrentMainCellCoordinates();
+        setCurrentPosition(getCurrentMainCellCoordinates().toVector());
+    }
+
+    /**
+     * Check if we're less than a frame away from the target.
+     * This is necessary because just checking our rounded position
+     * will cause us to jump to the target.
+     *
+     * Only call this when moving!
+     * @return whether the target coordinates are close to our position
+     */
+    private boolean targetClose() {
+        Vector diff = getPosition().sub(targetMainCellCoordinates.toVector());
+        return diff.getLength() < (1.0f / framesForCurrentMove);
     }
 
     /**
@@ -47,17 +61,16 @@ public abstract class MovableAreaEntity extends AreaEntity {
      * @param framesForMove (int): number of frames used for simulating motion
      * @return (boolean): returns true if motion can occur
      */
-    protected  boolean move(int framesForMove){
-        if (!isMoving || getCurrentMainCellCoordinates().equals(targetMainCellCoordinates)) {
+    protected boolean move(int framesForMove){
+        if (!isMoving || targetClose()) {
             Area owner = getOwnerArea();
             if (owner.transitionAreaCells(this, getLeavingCells(), getEnteringCells())) {
-
+                framesForCurrentMove = framesForMove;
+                isMoving = true;
+                Vector orientation = getOrientation().toVector();
+                targetMainCellCoordinates = getCurrentMainCellCoordinates().jump(orientation);
+                return true;
             }
-            framesForCurrentMove = framesForMove;
-            isMoving = true;
-            Vector orientation = getOrientation().toVector();
-            targetMainCellCoordinates = getCurrentMainCellCoordinates().jump(orientation);
-            return true;
         }
         return false;
     }
@@ -101,7 +114,7 @@ public abstract class MovableAreaEntity extends AreaEntity {
 
     @Override
     public void update(float deltaTime) {
-        if (isMoving) {
+        if (isMoving && !targetClose()) {
             Vector distance = getOrientation().toVector();
             distance = distance.mul(1.0f / framesForCurrentMove);
             setCurrentPosition(getPosition().add(distance));

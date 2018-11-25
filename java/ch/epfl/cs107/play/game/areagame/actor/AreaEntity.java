@@ -42,6 +42,13 @@ public abstract class AreaEntity extends Entity implements Interactable {
     }
 
     /**
+     * Change the area this entity is in
+     */
+    protected void setOwnerArea(Area area) {
+        ownerArea = area;
+    }
+
+    /**
      * @return the current orientation of this entity
      */
     protected Orientation getOrientation() {
@@ -66,6 +73,7 @@ public abstract class AreaEntity extends Entity implements Interactable {
 
     @Override
     protected void setCurrentPosition(Vector v) {
+        super.setCurrentPosition(v);
         Vector rounded = v.round();
         int x = (int)rounded.x;
         int y = (int)rounded.y;

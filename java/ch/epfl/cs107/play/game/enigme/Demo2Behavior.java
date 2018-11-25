@@ -1,6 +1,8 @@
 package ch.epfl.cs107.play.game.enigme;
 
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
+import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Image;
 import ch.epfl.cs107.play.window.Window;
 
@@ -60,6 +62,40 @@ public class Demo2Behavior extends AreaBehavior {
             super(x, y);
             this.type = type;
         }
+
+        // Cell behavior
+
+        @Override
+        protected boolean canEnter(Interactable entity) {
+            switch (type) {
+                case NULL:
+                    return false;
+                case WALL:
+                    return false;
+                default:
+                    return true;
+            }
+        }
+
+        @Override
+        protected boolean canLeave(Interactable entity) {
+            return true;
+        }
+
+        @Override
+        public boolean takeCellSpace() {
+            return false;
+        }
+
+        @Override
+        public boolean isViewInteractable() {
+            return false;
+        }
+
+        @Override
+        public boolean isCellInteractable() {
+            return true;
+        }
     }
 
     public Demo2Behavior(Window window, String filename) {
@@ -74,5 +110,17 @@ public class Demo2Behavior extends AreaBehavior {
                 cells[x][y] = new Demo2Cell(x, y, Demo2CellType.toType(type));
             }
         }
+    }
+
+    /**
+     * This is a dirty hack to check if a coordinate is a door
+     * @param position the position to check
+     * @return true if the position is a door
+     */
+    public boolean isDoor(DiscreteCoordinates position) {
+        int x = position.x;
+        int y = position.y;
+        int type = getBehaviorMap().getRGB(getHeight() - 1 - y, x);
+        return Demo2CellType.toType(type).equals(Demo2CellType.DOOR);
     }
 }
