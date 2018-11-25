@@ -16,8 +16,8 @@ import java.util.List;
  * Represents the main player of the demo2 game
  */
 public class EnigmePlayer extends MovableAreaEntity {
-    /// Whether or not we're going through a door
-    private boolean inDoor;
+    /// Null if the player has never passed a door
+    private Door lastDoor;
     /// The sprite for this player
     private Sprite sprite;
     /// The keyboard the player needs to listen to controls from
@@ -51,20 +51,19 @@ public class EnigmePlayer extends MovableAreaEntity {
         getOwnerArea().unregisterActor(this);
     }
 
-
     /**
-     * @return true if the player is in a door way
+     * Set the current door the player is passing through
+     * @param door the door the player should pass through
      */
-    public boolean isInDoor() {
-        return inDoor;
+    public void setIsPassingDoor(Door door) {
+        lastDoor = door;
     }
 
     /**
-     * Toggle whether or not the player is in a doorway
-     * @param inDoor true if the player is in a doorway
+     * @return the last door the player passed through, can be null
      */
-    public void toggleDoor(boolean inDoor) {
-        this.inDoor = inDoor;
+    public Door passedDoor() {
+        return lastDoor;
     }
 
     @Override
