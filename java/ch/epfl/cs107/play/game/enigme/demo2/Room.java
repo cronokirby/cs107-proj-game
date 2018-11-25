@@ -9,10 +9,12 @@ import ch.epfl.cs107.play.window.Window;
 
 /**
  * Represents a Room in the 2nd demo game
+ * Instead of creating 2 subclasses of this, just to change
+ * the title, we take it as a parameter
  */
 public class Room extends Area {
     private String title;
-    /// This is a dirty hack to be able to let the Player
+    /// This is a dirty hack to be able to let the EnigmePlayer
     /// check if a certain coordinate is a door.
     private Demo2Behavior behavior;
 
@@ -44,10 +46,5 @@ public class Room extends Area {
         setBehavior(behavior);
         registerActor(new Background(this));
         return superOK;
-    }
-
-    @Override
-    public void update(float deltaTime) {
-        super.update(deltaTime);
     }
 }

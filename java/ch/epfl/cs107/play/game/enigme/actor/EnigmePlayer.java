@@ -1,4 +1,4 @@
-package ch.epfl.cs107.play.game.enigme.demo2.actor;
+package ch.epfl.cs107.play.game.enigme.actor;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Represents the main player of the demo2 game
  */
-public class Demo2Player extends MovableAreaEntity {
+public class EnigmePlayer extends MovableAreaEntity {
     /// Whether or not we're going through a door
     private boolean inDoor;
     /// The sprite for this player
@@ -25,7 +25,7 @@ public class Demo2Player extends MovableAreaEntity {
     /// The amount of frames per move
     private final int FRAMES_PER_MOVE = 8;
 
-    public Demo2Player(Area area, Orientation orientation, DiscreteCoordinates position, Keyboard controller) {
+    public EnigmePlayer(Area area, Orientation orientation, DiscreteCoordinates position, Keyboard controller) {
         super(area, orientation, position);
         this.sprite = new Sprite("ghost.1", 1, 1.f, this);
         this.controller = controller;
@@ -94,31 +94,7 @@ public class Demo2Player extends MovableAreaEntity {
         sprite.draw(canvas);
     }
 
-    /// Demo2Player extends MovableAreaEntity
-
-    @Override
-    protected boolean move(int framesForMove) {
-        boolean couldMove = super.move(framesForMove);
-        boolean foundDoor = false;
-        // TODO: make this logic less implementation dependent
-        // We've implemented it this way to avoid polluting classes outside
-        // this specific game with dirty logic
-        Area area = getOwnerArea();
-        if (couldMove && area instanceof Room) {
-            Room room = (Room) area;
-            for (DiscreteCoordinates position : getEnteringCells()) {
-                if (room.isDoor(position)) {
-                    foundDoor = true;
-                    break;
-                }
-            }
-        }
-        inDoor = foundDoor;
-        return couldMove;
-    }
-
     /// Demo2Player implements Interactable
-
 
     @Override
     public List<DiscreteCoordinates> getCurrentCells() {
