@@ -75,6 +75,10 @@ public abstract class MovableAreaEntity extends AreaEntity {
         return false;
     }
 
+    protected boolean isMoving() {
+        return isMoving;
+    }
+
     /**
      * Get the list of cells this entity will be leaving upon moving
      * @return the corresponding list of coordinates
