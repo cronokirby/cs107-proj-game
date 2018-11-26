@@ -31,6 +31,10 @@ public class LevelSelector extends EnigmeArea {
                 doorTitle = "Level2";
                 doorDestination = new DiscreteCoordinates(5, 1);
             }
+            if (i == 3) {
+                doorTitle = "Level3";
+                doorDestination = new DiscreteCoordinates(5, 1);
+            }
             Door door = new Door(this, doorTitle, doorDestination, doorLocation);
         }
         return superOK;

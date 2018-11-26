@@ -114,12 +114,14 @@ public abstract class MovableAreaEntity extends AreaEntity {
 
     @Override
     public void update(float deltaTime) {
-        if (isMoving && !targetClose()) {
-            Vector distance = getOrientation().toVector();
-            distance = distance.mul(1.0f / framesForCurrentMove);
-            setCurrentPosition(getPosition().add(distance));
-        } else {
-            resetMotion();
+        if (isMoving) {
+            if (targetClose()) {
+                resetMotion();
+            } else {
+                Vector distance = getOrientation().toVector();
+                distance = distance.mul(1.0f / framesForCurrentMove);
+                setCurrentPosition(getPosition().add(distance));
+            }
         }
     }
 

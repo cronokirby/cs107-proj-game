@@ -29,6 +29,7 @@ public class Key extends AreaEntity implements Logic {
     public Key(Area area, DiscreteCoordinates position) {
         // We just pass in a dummy orientation
         super(area, Orientation.DOWN, position);
+        area.registerActor(this);
         collected = false;
         sprite = new Sprite("key.1", 1.f, 1.f, this);
     }

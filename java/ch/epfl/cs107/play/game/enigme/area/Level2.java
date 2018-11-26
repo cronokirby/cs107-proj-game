@@ -25,7 +25,7 @@ public class Level2 extends EnigmeArea {
         DiscreteCoordinates doorDest = new DiscreteCoordinates(2, 6);
         DiscreteCoordinates doorStart = new DiscreteCoordinates(5, 0);
         Door door = new Door(this, "LevelSelector", doorDest, doorStart);
-        Apple apple = new Apple(this, Orientation.DOWN, new DiscreteCoordinates(5, 6));
+        Apple apple = new Apple(this, new DiscreteCoordinates(5, 6));
         return superOK;
     }
 }
