@@ -30,7 +30,7 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
         super(area, orientation, position);
         this.animation = new Animation(
                 "boy.1", this, Orientation.DOWN,
-                1.f, 1.3f, 16, 21, 4
+                1.f, 1.3f, 16, 21, 4, 2
         );
         this.handler = new EnigmePlayerHandler();
     }

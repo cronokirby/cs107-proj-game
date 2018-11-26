@@ -7,7 +7,9 @@ import ch.epfl.cs107.play.math.Positionable;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,7 +18,7 @@ import java.util.Map;
  */
 public class Animation {
     /// The sprite cycles for each direction
-    Map<Orientation, Sprite[]> spriteMap;
+    Map<Orientation, List<Sprite>> spriteMap;
     /// The current direction
     private Orientation orientation;
     /// The current position in a cycle
@@ -30,7 +32,7 @@ public class Animation {
      * No deep copy of the map is done, so take care not to modify
      * the map unless you mean to.
      */
-    public Animation(Map<Orientation, Sprite[]> spriteMap) {
+    public Animation(Map<Orientation, List<Sprite>> spriteMap) {
         this.spriteMap = spriteMap;
     }
 
@@ -40,15 +42,22 @@ public class Animation {
      * represents the different cycles.
      *
      * The sheet must be in DOWN, LEFT, UP, RIGHT order
+     * @param spriteWidth how wide this sprite is relative to a 16px tile
+     * @param spriteHeight how tall this sprite is relative to a 16px tile
+     * @param pixelWidth the width of this sprite in pixels
+     * @param pixelHeight the height of this sprite in pixels
+     * @param cycleCount how many frames are in a cycle of animation
+     * @param repeat how many times to repeat a frame per animation cycle >= 1
      */
     public Animation(String animationSheet, Positionable parent, Orientation defaultDirection,
                      float spriteWidth, float spriteHeight,
                      int pixelWidth, int pixelHeight,
-                     int cycleCount) {
+                     int cycleCount, int repeat) {
         spriteMap = new HashMap<>();
         Orientation[] orientations = Orientation.values();
         for (Orientation o : orientations) {
-            Sprite[] arr = new Sprite[cycleCount];
+            // We want constant indexing
+            List<Sprite> arr = new ArrayList<>();
             spriteMap.put(o, arr);
         }
         for (int row = 0; row < cycleCount; ++row) {
@@ -60,7 +69,9 @@ public class Animation {
                 Sprite sprite = new Sprite(
                         animationSheet, spriteWidth, spriteHeight, parent, roi, Vector.ZERO
                 );
-                spriteMap.get(o)[row] = sprite;
+                for (int i = 0; i < repeat; ++i) {
+                    spriteMap.get(o).add(sprite);
+                }
             }
         }
         resetOrientation(defaultDirection);
@@ -70,7 +81,7 @@ public class Animation {
      * Updates the current position in the animation cycle
      */
     public void updateCycle() {
-        int cycleLength = spriteMap.get(orientation).length;
+        int cycleLength = spriteMap.get(orientation).size();
         ++cyclePosition;
         if (cyclePosition >= cycleLength) {
             cyclePosition = 0;
@@ -89,6 +100,6 @@ public class Animation {
      * Get the current sprite in the animation
      */
     public Sprite getSprite() {
-        return spriteMap.get(orientation)[cyclePosition];
+        return spriteMap.get(orientation).get(cyclePosition);
     }
 }
