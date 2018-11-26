@@ -109,6 +109,16 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
         public void interactWith(Apple apple) {
             apple.eat();
         }
+
+        @Override
+        public void interactWith(Key key) {
+            key.collect();
+        }
+
+        @Override
+        public void interactWith(Toggleable entity) {
+            entity.toggle();
+        }
     }
 
     @Override
@@ -142,11 +152,6 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
     }
 
     /// Demo2Player implements Interactable
-
-    @Override
-    public List<DiscreteCoordinates> getCurrentCells() {
-        return Collections.singletonList(getCurrentMainCellCoordinates());
-    }
 
     @Override
     public boolean takeCellSpace() {

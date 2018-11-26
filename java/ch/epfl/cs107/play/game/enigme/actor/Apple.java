@@ -9,9 +9,6 @@ import ch.epfl.cs107.play.game.enigme.handler.EnigmeInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
-import java.util.Collections;
-import java.util.List;
-
 /**
  * Represents a collectable apple in an area
  */
@@ -24,11 +21,11 @@ public class Apple extends AreaEntity {
      * Unlike EnigmePlayer, this will also register the apple in the area
      * passed to the constructor
      * @param area the area this apple will live in
-     * @param orientation the initial orientation of this apple
      * @param position the position of this apple in the area
      */
-    public Apple(Area area, Orientation orientation, DiscreteCoordinates position) {
-        super(area, orientation, position);
+    public Apple(Area area, DiscreteCoordinates position) {
+        // We just pass a dummy orientation
+        super(area, Orientation.DOWN, position);
         area.registerActor(this);
         sprite = new Sprite("apple.1", 1.f, 1.f, this);
     }
@@ -47,12 +44,6 @@ public class Apple extends AreaEntity {
     }
 
     /// Apple implements Interactable
-
-
-    @Override
-    public List<DiscreteCoordinates> getCurrentCells() {
-        return Collections.singletonList(getCurrentMainCellCoordinates());
-    }
 
     @Override
     public boolean takeCellSpace() {

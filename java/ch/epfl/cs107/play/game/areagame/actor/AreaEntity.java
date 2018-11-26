@@ -8,6 +8,9 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 
+import java.util.Collections;
+import java.util.List;
+
 
 /**
  * Actors leaving in a grid
@@ -69,6 +72,13 @@ public abstract class AreaEntity extends Entity implements Interactable {
      */
     protected DiscreteCoordinates getCurrentMainCellCoordinates(){
         return currentMainCellCoordinates;
+    }
+
+    // This is usually the default behavior we want for an entity.
+    // Occupying more than the main cell is an exception.
+    @Override
+    public List<DiscreteCoordinates> getCurrentCells() {
+        return Collections.singletonList(getCurrentMainCellCoordinates());
     }
 
     @Override

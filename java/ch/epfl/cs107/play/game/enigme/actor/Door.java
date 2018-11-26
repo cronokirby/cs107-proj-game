@@ -55,11 +55,6 @@ public class Door extends AreaEntity {
     /// Door implements interactable
 
     @Override
-    public List<DiscreteCoordinates> getCurrentCells() {
-        return currentCells;
-    }
-
-    @Override
     public boolean takeCellSpace() {
         return false;
     }

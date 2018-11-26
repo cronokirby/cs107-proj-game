@@ -2,9 +2,7 @@ package ch.epfl.cs107.play.game.enigme.handler;
 
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.enigme.EnigmeBehavior;
-import ch.epfl.cs107.play.game.enigme.actor.Apple;
-import ch.epfl.cs107.play.game.enigme.actor.Door;
-import ch.epfl.cs107.play.game.enigme.actor.EnigmePlayer;
+import ch.epfl.cs107.play.game.enigme.actor.*;
 
 public interface EnigmeInteractionVisitor extends AreaInteractionVisitor {
     /**
@@ -19,6 +17,18 @@ public interface EnigmeInteractionVisitor extends AreaInteractionVisitor {
      * @param door the door to interact with
      */
     default void interactWith(Door door) {
+    }
+
+    /**
+     * Simulate an interaction between an interactor and a key
+     */
+    default void interactWith(Key key) {
+    }
+
+    /**
+     * Simulate an interaction between an interactor and a toggleable entity
+     */
+    default void interactWith(Toggleable entity) {
     }
 
     /**
