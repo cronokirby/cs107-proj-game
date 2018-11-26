@@ -37,15 +37,9 @@ public class Level3 extends EnigmeArea {
         Logic allSwitches = new MultipleAnd(switches);
         int[] leverXs = {10, 9, 8};
         Logic[] levers = new Logic[leverXs.length];
-        for (int i = 0; i < leverXs.length; ++i) {
-            int x = leverXs[i];
-            Logic lever = new Lever(this, new DiscreteCoordinates(x, 5));
-            if (i == 1) {
-                levers[i] = new Not(lever);
-            } else {
-                levers[i] = lever;
-            }
-        }
+        levers[0] = new Lever(this, new DiscreteCoordinates(8, 5));
+        levers[1] = new Not(new Lever(this, new DiscreteCoordinates(9, 5)));
+        levers[2] = new Lever(this, new DiscreteCoordinates(10, 5));
         Logic rightLevers = new MultipleAnd(levers);
         new SignalDoor(key, this, "LevelSelector", new DiscreteCoordinates(3, 6),
                        new DiscreteCoordinates(5, 9));
