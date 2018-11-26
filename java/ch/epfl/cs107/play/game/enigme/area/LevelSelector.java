@@ -1,8 +1,9 @@
 package ch.epfl.cs107.play.game.enigme.area;
 
-import ch.epfl.cs107.play.game.enigme.actor.Door;
+import ch.epfl.cs107.play.game.enigme.actor.SignalDoor;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
 
 /**
@@ -23,19 +24,23 @@ public class LevelSelector extends EnigmeArea {
             String doorTitle = "LevelSelector";
             DiscreteCoordinates doorDestination = new DiscreteCoordinates(5, 5);
             DiscreteCoordinates doorLocation = new DiscreteCoordinates(i, 7);
+            Logic doorSignal = Logic.FALSE;
             if (i == 1) {
                 doorTitle = "Level1";
                 doorDestination = new DiscreteCoordinates(5, 1);
+                doorSignal = Logic.TRUE;
             }
             if (i == 2) {
                 doorTitle = "Level2";
                 doorDestination = new DiscreteCoordinates(5, 1);
+                doorSignal = Logic.TRUE;
             }
             if (i == 3) {
                 doorTitle = "Level3";
                 doorDestination = new DiscreteCoordinates(5, 1);
+                doorSignal = Logic.TRUE;
             }
-            Door door = new Door(this, doorTitle, doorDestination, doorLocation);
+            new SignalDoor(doorSignal, this, doorTitle, doorDestination, doorLocation);
         }
         return superOK;
     }

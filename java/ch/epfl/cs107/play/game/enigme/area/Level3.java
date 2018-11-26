@@ -3,6 +3,9 @@ package ch.epfl.cs107.play.game.enigme.area;
 import ch.epfl.cs107.play.game.enigme.actor.*;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.signal.logic.Logic;
+import ch.epfl.cs107.play.signal.logic.MultipleAnd;
+import ch.epfl.cs107.play.signal.logic.Not;
 import ch.epfl.cs107.play.window.Window;
 
 /**
@@ -20,20 +23,35 @@ public class Level3 extends EnigmeArea {
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
         boolean superOK = super.begin(window, fileSystem);
-        new Key(this, new DiscreteCoordinates(1, 3));
+        Logic key = new Key(this, new DiscreteCoordinates(1, 3));
         new Torch(this, new DiscreteCoordinates(7, 5));
-        new PressurePlate(0.5f, this, new DiscreteCoordinates(9, 8));
+        Logic plate = new PressurePlate(0.5f, this, new DiscreteCoordinates(9, 8));
         int[] switchXs = {4, 5, 6, 5, 4, 5, 6};
         int[] switchYs = {4, 4, 4, 5, 6, 6, 6};
+        Logic[] switches = new Logic[switchXs.length];
         for (int i = 0; i < switchXs.length; ++i) {
             int x = switchXs[i];
             int y = switchYs[i];
-            new PressureSwitch(this, new DiscreteCoordinates(x, y));
+            switches[i] = new PressureSwitch(this, new DiscreteCoordinates(x, y));
         }
+        Logic allSwitches = new MultipleAnd(switches);
         int[] leverXs = {10, 9, 8};
-        for (int x : leverXs) {
-            new Lever(this, new DiscreteCoordinates(x, 5));
+        Logic[] levers = new Logic[leverXs.length];
+        for (int i = 0; i < leverXs.length; ++i) {
+            int x = leverXs[i];
+            Logic lever = new Lever(this, new DiscreteCoordinates(x, 5));
+            if (i == 1) {
+                levers[i] = new Not(lever);
+            } else {
+                levers[i] = lever;
+            }
         }
+        Logic rightLevers = new MultipleAnd(levers);
+        new SignalDoor(key, this, "LevelSelector", new DiscreteCoordinates(3, 6),
+                       new DiscreteCoordinates(5, 9));
+        new SignalRock(plate, this, new DiscreteCoordinates(6, 8));
+        new SignalRock(allSwitches, this, new DiscreteCoordinates(5, 8));
+        new SignalRock(rightLevers, this, new DiscreteCoordinates(4, 8));
         return superOK;
     }
 }

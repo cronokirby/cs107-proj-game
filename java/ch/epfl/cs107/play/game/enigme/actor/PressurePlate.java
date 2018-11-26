@@ -29,7 +29,7 @@ public class PressurePlate extends AreaEntity implements Logic, Toggleable {
         area.registerActor(this);
         this.resetTime = resetTime;
         this.timeLeft = -1.f;
-        this.onSprite = new Sprite("shoes.1", 1.f, 1.f, this);
+        this.onSprite = new Sprite("GroundLightOn", 1.f, 1.f, this);
         this.offSprite = new Sprite("GroundPlateOff", 1.f, 1.f, this);
     }
 
