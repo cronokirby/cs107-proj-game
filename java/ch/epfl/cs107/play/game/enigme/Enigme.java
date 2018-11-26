@@ -43,7 +43,7 @@ public class Enigme extends AreaGame {
         setCurrentArea(starting.getTitle(), false);
         // Initialising the player
         DiscreteCoordinates playerPOS = new DiscreteCoordinates(5, 5);
-        player = new EnigmePlayer(starting, Orientation.DOWN, playerPOS, window.getKeyboard());
+        player = new EnigmePlayer(starting, Orientation.DOWN, playerPOS);
         player.enterArea(starting, playerPOS);
         return superOK && roomsOK;
     }

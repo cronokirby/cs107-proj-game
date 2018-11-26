@@ -4,7 +4,9 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.*;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.enigme.handler.EnigmeInteractionVisitor;
+import ch.epfl.cs107.play.game.octoMAN.actor.Animation;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
@@ -18,19 +20,23 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
     /// Null if the player has never passed a door
     private Door lastDoor;
     /// The sprite for this player
-    private Sprite sprite;
-    /// The keyboard the player needs to listen to controls from
-    private Keyboard controller;
+    private Animation animation;
     /// The Interaction Handler for this player
     private final EnigmePlayerHandler handler;
     /// The amount of frames per move
     private final int FRAMES_PER_MOVE = 8;
 
-    public EnigmePlayer(Area area, Orientation orientation, DiscreteCoordinates position, Keyboard controller) {
+    public EnigmePlayer(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
-        this.sprite = new Sprite("ghost.1", 1, 1.f, this);
-        this.controller = controller;
+        this.animation = new Animation(
+                "boy.1", this, Orientation.DOWN,
+                1.f, 1.3f, 16, 21, 4
+        );
         this.handler = new EnigmePlayerHandler();
+    }
+
+    private Button getKey(int code) {
+        return getOwnerArea().getKeyboard().get(code);
     }
 
     /**
@@ -72,13 +78,13 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
     public void update(float deltaTime) {
         super.update(deltaTime);
         Orientation orientation = null;
-        if (controller.get(Keyboard.LEFT).isDown()) {
+        if (getKey(Keyboard.LEFT).isDown()) {
             orientation = Orientation.LEFT;
-        } else if (controller.get(Keyboard.UP).isDown()) {
+        } else if (getKey(Keyboard.UP).isDown()) {
             orientation = Orientation.UP;
-        } else if (controller.get(Keyboard.RIGHT).isDown()) {
+        } else if (getKey(Keyboard.RIGHT).isDown()) {
             orientation = Orientation.RIGHT;
-        } else if (controller.get(Keyboard.DOWN).isDown()) {
+        } else if (getKey(Keyboard.DOWN).isDown()) {
             orientation = Orientation.DOWN;
         }
         if (orientation != null) {
@@ -88,12 +94,17 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
                 setOrientation(orientation);
             }
         }
+        if (isMoving()) {
+            animation.updateCycle();
+        } else {
+            animation.resetOrientation(getOrientation());
+        }
         lastDoor = null;
     }
 
     @Override
     public void draw(Canvas canvas) {
-        sprite.draw(canvas);
+        animation.getSprite().draw(canvas);
     }
 
     /**
@@ -143,7 +154,7 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
 
     @Override
     public boolean wantsViewInteraction() {
-        return controller.get(Keyboard.L).isPressed();
+        return getKey(Keyboard.L).isPressed();
     }
 
     @Override
