@@ -17,13 +17,13 @@ public class Demo2Behavior extends AreaBehavior {
     public enum Demo2CellType {
         NULL(0),
         // Black RGB Code
-        WALL(-16777216),
+        WALL(0xFF_00_00_00),
         // Red RGB Code
-        DOOR(-65536),
+        DOOR(0xFF_FF_00_00),
         // Blue RGB Code
-        WATER(-16776961),
-        INDOOR_WALKABLE(-1),
-        OUTDOOR_WALKABLE(-14112955);
+        WATER(0xFF_00_00_FF),
+        INDOOR_WALKABLE(0xFF_FF_FF_FF),
+        OUTDOOR_WALKABLE(0xFF_28_A7_45);
 
         final int type;
 
