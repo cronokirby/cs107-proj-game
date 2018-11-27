@@ -7,6 +7,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.enigme.demo2.Room;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
@@ -26,10 +27,13 @@ public class Demo2Player extends MovableAreaEntity {
     /// The amount of frames per move
     private final int FRAMES_PER_MOVE = 8;
 
-    public Demo2Player(Area area, Orientation orientation, DiscreteCoordinates position, Keyboard controller) {
+    public Demo2Player(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
         this.sprite = new Sprite("ghost.1", 1, 1.f, this);
-        this.controller = controller;
+    }
+
+    private Button getKey(int code) {
+        return getOwnerArea().getKeyboard().get(code);
     }
 
     /**
@@ -72,13 +76,13 @@ public class Demo2Player extends MovableAreaEntity {
     public void update(float deltaTime) {
         super.update(deltaTime);
         Orientation orientation = null;
-        if (controller.get(Keyboard.LEFT).isDown()) {
+        if (getKey(Keyboard.LEFT).isDown()) {
             orientation = Orientation.LEFT;
-        } else if (controller.get(Keyboard.UP).isDown()) {
+        } else if (getKey(Keyboard.UP).isDown()) {
             orientation = Orientation.UP;
-        } else if (controller.get(Keyboard.RIGHT).isDown()) {
+        } else if (getKey(Keyboard.RIGHT).isDown()) {
             orientation = Orientation.RIGHT;
-        } else if (controller.get(Keyboard.DOWN).isDown()) {
+        } else if (getKey(Keyboard.DOWN).isDown()) {
             orientation = Orientation.DOWN;
         }
         if (orientation != null) {
