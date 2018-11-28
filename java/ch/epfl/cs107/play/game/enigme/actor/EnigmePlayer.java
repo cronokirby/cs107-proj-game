@@ -20,7 +20,7 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
     /// Null if the player has never passed a door
     private Door lastDoor;
     /// The sprite for this player
-    private Animation animation;
+    private Sprite sprite;
     /// The Interaction Handler for this player
     private final EnigmePlayerHandler handler;
     /// The amount of frames per move
@@ -28,10 +28,7 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
 
     public EnigmePlayer(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
-        this.animation = new Animation(
-                "boy.1", this, orientation,
-                1.f, 1.3f, 16, 21, 4, 2
-        );
+        this.sprite = new Sprite("ghost.1", 1.f, 1.f, this);
         this.handler = new EnigmePlayerHandler();
     }
 
@@ -94,17 +91,12 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
                 setOrientation(orientation);
             }
         }
-        if (isMoving()) {
-            animation.updateCycle();
-        } else {
-            animation.resetOrientation(getOrientation());
-        }
         lastDoor = null;
     }
 
     @Override
     public void draw(Canvas canvas) {
-        animation.getSprite().draw(canvas);
+        sprite.draw(canvas);
     }
 
     /**
