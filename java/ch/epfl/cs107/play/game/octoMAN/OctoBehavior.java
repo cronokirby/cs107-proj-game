@@ -51,14 +51,17 @@ public class OctoBehavior extends AreaBehavior {
 
         @Override
         protected boolean canEnter(Interactable entity) {
-            switch (type) {
-                case WALL:
-                    return false;
-                case NULL:
-                    return false;
-                default:
-                    return true;
+            if (super.canEnter(entity)) {
+                switch (type) {
+                    case WALL:
+                        return false;
+                    case NULL:
+                        return false;
+                    default:
+                        return true;
+                }
             }
+            return false;
         }
 
         @Override

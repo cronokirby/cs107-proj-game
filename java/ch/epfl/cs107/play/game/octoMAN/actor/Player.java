@@ -98,6 +98,11 @@ public class Player extends MovableAreaEntity implements Interactor {
      */
     private class PlayerHandler implements OctoInteractionVisitor {
         @Override
+        public void interactWith(Boulder boulder) {
+            boulder.push(getOrientation());
+        }
+
+        @Override
         public void interactWith(OctoBehavior.OctoCell cell) {
             if (cell.type == OctoBehavior.OctoCellType.SLIPPERY) {
                 slipping = true;
