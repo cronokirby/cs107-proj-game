@@ -21,6 +21,9 @@ public class Player extends MovableAreaEntity implements Interactor {
     private Animation animation;
     /// The Interaction Handler for this player
     private final PlayerHandler handler;
+    /// Whether or not we're currently slipping
+    /// Used to not play moving frames
+    private boolean slipping;
     /// The amount of frames per move
     private final int FRAMES_PER_MOVE = 8;
 
@@ -77,10 +80,11 @@ public class Player extends MovableAreaEntity implements Interactor {
                 setOrientation(orientation);
             }
         }
-        if (isMoving()) {
+        if (!slipping && isMoving()) {
             animation.updateCycle();
         } else {
             animation.resetOrientation(getOrientation());
+            slipping = false;
         }
     }
 
@@ -95,7 +99,10 @@ public class Player extends MovableAreaEntity implements Interactor {
     private class PlayerHandler implements OctoInteractionVisitor {
         @Override
         public void interactWith(OctoBehavior.OctoCell cell) {
-            System.out.println(cell.type);
+            if (cell.type == OctoBehavior.OctoCellType.SLIPPERY) {
+                slipping = true;
+                move(FRAMES_PER_MOVE);
+            }
         }
     }
 
