@@ -93,6 +93,10 @@ public class Player extends MovableAreaEntity implements Interactor {
      * The handler for interactions from this player
      */
     private class PlayerHandler implements OctoInteractionVisitor {
+        @Override
+        public void interactWith(OctoBehavior.OctoCell cell) {
+            System.out.println(cell.type);
+        }
     }
 
     @Override

@@ -93,6 +93,7 @@ public abstract class AreaBehavior {
                     interactor.interactWith(interactable);
                 }
             }
+            interactor.interactWith(this);
         }
 
         /**
