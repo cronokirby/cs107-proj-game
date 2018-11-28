@@ -1,10 +1,13 @@
-package ch.epfl.cs107.play.game.enigme.actor;
+package ch.epfl.cs107.play.game.octoMAN.actor;
 
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.areagame.actor.*;
+import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.actor.Interactor;
+import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.enigme.handler.EnigmeInteractionVisitor;
-import ch.epfl.cs107.play.game.octoMAN.actor.Animation;
+import ch.epfl.cs107.play.game.octoMAN.OctoBehavior;
+import ch.epfl.cs107.play.game.octoMAN.handler.OctoInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
@@ -13,26 +16,21 @@ import ch.epfl.cs107.play.window.Keyboard;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Represents the main player of the demo2 game
- */
-public class EnigmePlayer extends MovableAreaEntity implements Interactor {
-    /// Null if the player has never passed a door
-    private Door lastDoor;
+public class Player extends MovableAreaEntity implements Interactor {
     /// The sprite for this player
     private Animation animation;
     /// The Interaction Handler for this player
-    private final EnigmePlayerHandler handler;
+    private final PlayerHandler handler;
     /// The amount of frames per move
     private final int FRAMES_PER_MOVE = 8;
 
-    public EnigmePlayer(Area area, Orientation orientation, DiscreteCoordinates position) {
+    public Player(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
         this.animation = new Animation(
                 "boy.1", this, orientation,
                 1.f, 1.3f, 16, 21, 4, 2
         );
-        this.handler = new EnigmePlayerHandler();
+        this.handler = new PlayerHandler();
     }
 
     private Button getKey(int code) {
@@ -57,21 +55,6 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
      */
     public void leaveCurrentArea() {
         getOwnerArea().unregisterActor(this);
-    }
-
-    /**
-     * Set the current door the player is passing through
-     * @param door the door the player should pass through
-     */
-    public void setIsPassingDoor(Door door) {
-        handler.interactWith(door);
-    }
-
-    /**
-     * @return the last door the player passed through, can be null
-     */
-    public Door passedDoor() {
-        return lastDoor;
     }
 
     @Override
@@ -99,7 +82,6 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
         } else {
             animation.resetOrientation(getOrientation());
         }
-        lastDoor = null;
     }
 
     @Override
@@ -110,31 +92,12 @@ public class EnigmePlayer extends MovableAreaEntity implements Interactor {
     /**
      * The handler for interactions from this player
      */
-    private class EnigmePlayerHandler implements EnigmeInteractionVisitor {
-        @Override
-        public void interactWith(Door door) {
-            lastDoor = door;
-        }
-
-        @Override
-        public void interactWith(Apple apple) {
-            apple.eat();
-        }
-
-        @Override
-        public void interactWith(Key key) {
-            key.collect();
-        }
-
-        @Override
-        public void interactWith(Toggleable entity) {
-            entity.toggle();
-        }
+    private class PlayerHandler implements OctoInteractionVisitor {
     }
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-        ((EnigmeInteractionVisitor)v).interactWith(this);
+        ((OctoInteractionVisitor)v).interactWith(this);
     }
 
     /// EnigmePlayer implements Interactor

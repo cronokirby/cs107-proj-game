@@ -82,11 +82,6 @@ public class EnigmeBehavior extends AreaBehavior {
         }
 
         @Override
-        protected boolean canLeave(Interactable entity) {
-            return super.canLeave(entity);
-        }
-
-        @Override
         public boolean takeCellSpace() {
             return false;
         }
