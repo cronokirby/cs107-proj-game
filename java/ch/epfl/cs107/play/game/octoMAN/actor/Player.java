@@ -1,14 +1,18 @@
 package ch.epfl.cs107.play.game.octoMAN.actor;
 
+import ch.epfl.cs107.play.game.actor.ImageGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.game.octoMAN.OctoBehavior;
 import ch.epfl.cs107.play.game.octoMAN.handler.OctoInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Transform;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
@@ -19,6 +23,10 @@ import java.util.List;
 public class Player extends MovableAreaEntity implements Interactor {
     /// The sprite for this player
     private Animation animation;
+    /// The halo around this player
+    private ImageGraphics halo;
+    /// Whether or not to display the halo
+    private boolean displayHalo;
     /// The Interaction Handler for this player
     private final PlayerHandler handler;
     /// Whether or not we're currently slipping
@@ -36,6 +44,10 @@ public class Player extends MovableAreaEntity implements Interactor {
                 1.f, 1.3f, 16, 21, 4, 2
         );
         this.handler = new PlayerHandler();
+        this.halo = new ImageGraphics(ResourcePath.getForegrounds("lightHalo"), 10.f, 10.f);
+        this.halo.setParent(this);
+        this.halo.setAnchor(new Vector(-4.5f, -4.5f));
+        this.displayHalo = false;
     }
 
     private Button getKey(int code) {
@@ -90,11 +102,15 @@ public class Player extends MovableAreaEntity implements Interactor {
             animation.resetOrientation(getOrientation());
             slipping = false;
         }
+        halo.setRelativeTransform(Transform.I.scaled(1.f));
     }
 
     @Override
     public void draw(Canvas canvas) {
         animation.getSprite().draw(canvas);
+        if (displayHalo) {
+            halo.draw(canvas);
+        }
     }
 
     /**
