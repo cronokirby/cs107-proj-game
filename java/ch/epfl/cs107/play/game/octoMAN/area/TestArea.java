@@ -1,6 +1,7 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.enigme.actor.Apple;
 import ch.epfl.cs107.play.game.octoMAN.actor.Boulder;
 import ch.epfl.cs107.play.game.octoMAN.actor.Potion;
 import ch.epfl.cs107.play.game.octoMAN.actor.TalkingMob;

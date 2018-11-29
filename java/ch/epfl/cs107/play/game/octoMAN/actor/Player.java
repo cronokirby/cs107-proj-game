@@ -159,7 +159,7 @@ public class Player extends MovableAreaEntity implements Interactor {
             Orientation orientation = getOrientation();
             DiscreteCoordinates behindMe = getCurrentMainCellCoordinates().jump(orientation.opposite().toVector());
             Area thisArea = getOwnerArea();
-            if (thisArea.transitionAreaCells(Player.this, Collections.emptyList(), Collections.singletonList(behindMe))) {
+            if (thisArea.canEnter(Player.this, Collections.singletonList(behindMe))) {
                 Player clone = new Player(thisArea, orientation, behindMe);
                 // We can't reuse enterArea
                 thisArea.registerActor(clone);
