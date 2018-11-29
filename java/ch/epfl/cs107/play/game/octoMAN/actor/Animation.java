@@ -78,6 +78,22 @@ public class Animation {
     }
 
     /**
+     * Construct a new animation from the name of a 4x4 16x21
+     * sprite sheet, the most common type for animations.
+     */
+    public static Animation from4x4(String sheetName, Positionable parent) {
+        return new Animation(sheetName, parent, Orientation.DOWN, 1.f, 1.3f, 16, 21, 4, 3);
+    }
+
+    public void setParent(Positionable parent) {
+        for (List<Sprite> sprites : spriteMap.values()) {
+            for (Sprite sprite : sprites) {
+                sprite.setParent(parent);
+            }
+        }
+    }
+
+    /**
      * Updates the current position in the animation cycle
      */
     public void updateCycle() {

@@ -24,6 +24,8 @@ public class Player extends MovableAreaEntity implements Interactor {
     /// Whether or not we're currently slipping
     /// Used to not play moving frames
     private boolean slipping;
+    /// Whether or not we're running
+    private boolean running;
     /// The amount of frames per move
     private final int FRAMES_PER_MOVE = 8;
 
@@ -64,18 +66,20 @@ public class Player extends MovableAreaEntity implements Interactor {
     public void update(float deltaTime) {
         super.update(deltaTime);
         Orientation orientation = null;
-        if (getKey(Keyboard.LEFT).isDown()) {
+        running = getKey(Keyboard.K).isDown();
+        if (getKey(Keyboard.LEFT).isDown() || getKey(Keyboard.A).isDown()) {
             orientation = Orientation.LEFT;
-        } else if (getKey(Keyboard.UP).isDown()) {
+        } else if (getKey(Keyboard.UP).isDown() || getKey(Keyboard.W).isDown()) {
             orientation = Orientation.UP;
-        } else if (getKey(Keyboard.RIGHT).isDown()) {
+        } else if (getKey(Keyboard.RIGHT).isDown() || getKey(Keyboard.D).isDown()) {
             orientation = Orientation.RIGHT;
-        } else if (getKey(Keyboard.DOWN).isDown()) {
+        } else if (getKey(Keyboard.DOWN).isDown() || getKey(Keyboard.S).isDown()) {
             orientation = Orientation.DOWN;
         }
         if (orientation != null) {
             if (getOrientation().equals(orientation)) {
-                move(FRAMES_PER_MOVE);
+                int frames = running ? 4 : 8;
+                move(frames);
             } else {
                 setOrientation(orientation);
             }
@@ -100,6 +104,13 @@ public class Player extends MovableAreaEntity implements Interactor {
         @Override
         public void interactWith(Boulder boulder) {
             boulder.push(getOrientation());
+        }
+
+        @Override
+        public void interactWith(SpriteGiver giver) {
+            animation = giver.getAnimation();
+            animation.resetOrientation(getOrientation());
+            animation.setParent(Player.this);
         }
 
         @Override
