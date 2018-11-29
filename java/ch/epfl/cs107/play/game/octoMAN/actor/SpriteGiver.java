@@ -6,7 +6,6 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.octoMAN.handler.OctoInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.signal.logic.Or;
 import ch.epfl.cs107.play.window.Canvas;
 
 /**
@@ -19,6 +18,13 @@ public class SpriteGiver extends AreaEntity {
     /// The name of this animation
     private String animationName;
 
+    /**
+     * Construct a sprite giver from the name of a 4x4 16x21 sprite sheet,
+     * an area, and a position.
+     *
+     * This restricted form is general enough for all the animation
+     * sheets we're interested in.
+     */
     public SpriteGiver(String animationSheet, Area area, DiscreteCoordinates position) {
         super(area, Orientation.DOWN, position);
         area.registerActor(this);
