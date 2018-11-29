@@ -151,8 +151,7 @@ public class Player extends MovableAreaEntity implements Interactor {
 
         @Override
         public void interactWith(Talkable entity) {
-            String text = entity.talk(getOrientation());
-            dialog.fill(text);
+            dialog.setTalker(entity, getOrientation());
         }
 
         @Override

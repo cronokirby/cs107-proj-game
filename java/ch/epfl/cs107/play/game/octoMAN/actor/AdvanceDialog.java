@@ -2,6 +2,7 @@ package ch.epfl.cs107.play.game.octoMAN.actor;
 
 import ch.epfl.cs107.play.game.actor.Graphics;
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.enigme.actor.Dialog;
 import ch.epfl.cs107.play.window.Canvas;
 
@@ -12,6 +13,8 @@ import ch.epfl.cs107.play.window.Canvas;
 public class AdvanceDialog implements Graphics {
     /// The dialog we're wrapping around.
     private Dialog dialog;
+    /// The talker we're wrapping around
+    private Talkable talker;
     /// Whether or not to display this
     private boolean display;
 
@@ -22,10 +25,12 @@ public class AdvanceDialog implements Graphics {
 
     /**
      * Fill this dialog with text, which may take multiple dialogs
-     * @param text the text to fill this with
+     * @param talker the entity talking via this dialog
+     * @param orientation the orientation of the entity being talked to
      */
-    public void fill(String text) {
-        dialog.resetDialog(text);
+    public void setTalker(Talkable talker, Orientation orientation) {
+        dialog.resetDialog(talker.talk(orientation));
+        this.talker = talker;
         display = true;
     }
 
@@ -35,6 +40,9 @@ public class AdvanceDialog implements Graphics {
      */
     public void advance() {
         display = !dialog.push();
+        if (!display) {
+            talker.doneTalking();
+        }
     }
 
     /**

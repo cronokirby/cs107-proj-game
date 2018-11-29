@@ -11,4 +11,9 @@ public interface Talkable {
      * @param orientation the orientation of the entity this is talking to
      */
     String talk(Orientation orientation);
+
+    /**
+     * Tell this entity that you're doing talking
+     */
+    void doneTalking();
 }
