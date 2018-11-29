@@ -1,6 +1,8 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.octoMAN.actor.Boulder;
+import ch.epfl.cs107.play.game.octoMAN.actor.OldMan;
 import ch.epfl.cs107.play.game.octoMAN.actor.SpriteGiver;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -20,7 +22,7 @@ public class TestArea extends OctoArea {
         new SpriteGiver("girl.2", this, new DiscreteCoordinates(6, 8));
         new SpriteGiver("boy.1", this, new DiscreteCoordinates(8, 8));
         new SpriteGiver("boy.2", this, new DiscreteCoordinates(10, 8));
-        new SpriteGiver("old.man.1", this, new DiscreteCoordinates(12, 8));
+        new OldMan("Je m'apelle Fürbringer, j'ammène le Für", this, Orientation.DOWN, new DiscreteCoordinates(12, 8));
         return superOK;
     }
 }

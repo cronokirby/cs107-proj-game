@@ -5,6 +5,7 @@ import ch.epfl.cs107.play.game.octoMAN.OctoBehavior;
 import ch.epfl.cs107.play.game.octoMAN.actor.Boulder;
 import ch.epfl.cs107.play.game.octoMAN.actor.Player;
 import ch.epfl.cs107.play.game.octoMAN.actor.SpriteGiver;
+import ch.epfl.cs107.play.game.octoMAN.actor.Talkable;
 
 public interface OctoInteractionVisitor extends AreaInteractionVisitor {
     /**
@@ -17,6 +18,12 @@ public interface OctoInteractionVisitor extends AreaInteractionVisitor {
      * Simulate an interaction with a sprite giver
      */
     default void interactWith(SpriteGiver giver) {
+    }
+
+    /**
+     * Simulate an interaction with a talkable entity
+     */
+    default void interactWith(Talkable entity) {
     }
 
     /**
