@@ -187,7 +187,9 @@ public abstract class AreaBehavior {
      */
     public boolean canEnter(Interactable entity, List<DiscreteCoordinates> coordinates) {
         for (DiscreteCoordinates coordinate : coordinates) {
-            if (!getCell(coordinate).canEnter(entity)) {
+            if (coordinate.x >= 0 && coordinate.x < width
+                && coordinate.y >= 0 && coordinate.y < height
+                && !getCell(coordinate).canEnter(entity)) {
                 return false;
             }
         }

@@ -2,10 +2,7 @@ package ch.epfl.cs107.play.game.octoMAN.handler;
 
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.octoMAN.OctoBehavior;
-import ch.epfl.cs107.play.game.octoMAN.actor.Boulder;
-import ch.epfl.cs107.play.game.octoMAN.actor.Player;
-import ch.epfl.cs107.play.game.octoMAN.actor.SpriteGiver;
-import ch.epfl.cs107.play.game.octoMAN.actor.Talkable;
+import ch.epfl.cs107.play.game.octoMAN.actor.*;
 
 public interface OctoInteractionVisitor extends AreaInteractionVisitor {
     /**
@@ -24,6 +21,9 @@ public interface OctoInteractionVisitor extends AreaInteractionVisitor {
      * Simulate an interaction with a talkable entity
      */
     default void interactWith(Talkable entity) {
+    }
+
+    default void interactWith(Potion potion) {
     }
 
     /**

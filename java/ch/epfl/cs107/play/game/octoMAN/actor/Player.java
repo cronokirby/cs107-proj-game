@@ -155,6 +155,20 @@ public class Player extends MovableAreaEntity implements Interactor {
         }
 
         @Override
+        public void interactWith(Potion potion) {
+            Orientation orientation = getOrientation();
+            DiscreteCoordinates behindMe = getCurrentMainCellCoordinates().jump(orientation.opposite().toVector());
+            Area thisArea = getOwnerArea();
+            if (thisArea.transitionAreaCells(Player.this, Collections.emptyList(), Collections.singletonList(behindMe))) {
+                Player clone = new Player(thisArea, orientation, behindMe);
+                // We can't reuse enterArea
+                thisArea.registerActor(clone);
+                clone.setOwnerArea(thisArea);
+                potion.consume();
+            }
+        }
+
+        @Override
         public void interactWith(OctoBehavior.OctoCell cell) {
             if (cell.type == OctoBehavior.OctoCellType.SLIPPERY) {
                 slipping = true;
