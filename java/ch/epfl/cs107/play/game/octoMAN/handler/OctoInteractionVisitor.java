@@ -23,8 +23,25 @@ public interface OctoInteractionVisitor extends AreaInteractionVisitor {
     default void interactWith(Talkable entity) {
     }
 
+    /**
+     * Simulate an interaction with a potion
+     */
     default void interactWith(Potion potion) {
     }
+
+    /**
+     * Simulate an interaction with a wire
+     */
+    default void interactWith(Wire wire) {
+    }
+
+    /**
+     * Simulate an interaction with a WiredLever
+     */
+    default void interactWith(WiredLever lever) {
+    }
+
+
 
     /**
      * Simulate an interaction with a cell

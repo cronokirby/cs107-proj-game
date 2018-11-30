@@ -8,7 +8,6 @@ import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
-import ch.epfl.cs107.play.game.enigme.actor.Dialog;
 import ch.epfl.cs107.play.game.octoMAN.OctoBehavior;
 import ch.epfl.cs107.play.game.octoMAN.handler.OctoInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -169,6 +168,11 @@ public class Player extends MovableAreaEntity implements Interactor {
                 clone.setOwnerArea(thisArea);
                 potion.consume();
             }
+        }
+
+        @Override
+        public void interactWith(WiredLever lever) {
+            lever.toggle();
         }
 
         @Override
