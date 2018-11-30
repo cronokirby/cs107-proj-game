@@ -35,10 +35,10 @@ public class SpriteGiver extends AreaEntity {
     }
 
     /**
-     * Return the animation this entity can transfer.
+     * Return the name of the animation this entity can transfer.
      */
-    public Animation getAnimation() {
-        return Animation.from4x4(animationName, this);
+    public String getAnimationName() {
+        return animationName;
     }
 
     @Override

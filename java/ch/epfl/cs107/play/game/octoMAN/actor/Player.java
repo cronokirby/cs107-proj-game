@@ -24,6 +24,8 @@ import java.util.List;
 public class Player extends MovableAreaEntity implements Interactor {
     /// The sprite for this player
     private Animation animation;
+    /// The name of the animation for this player
+    private String animationName;
     /// The halo around this player
     private ImageGraphics halo;
     /// Whether or not to display the halo
@@ -44,12 +46,13 @@ public class Player extends MovableAreaEntity implements Interactor {
     /// The amount of frames per move
     private final int FRAMES_PER_MOVE = 8;
 
-    public Player(Area area, Orientation orientation, DiscreteCoordinates position) {
+    public Player(Area area, String animationName, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
         this.animation = new Animation(
-                "boy.1", this, orientation,
+                animationName, this, orientation,
                 1.f, 1.3f, 16, 21, 4, 2
         );
+        this.animationName = animationName;
         this.handler = new PlayerHandler();
         this.halo = new ImageGraphics(ResourcePath.getForegrounds("lightHalo"), 10.f, 10.f);
         this.halo.setParent(this);
@@ -144,9 +147,9 @@ public class Player extends MovableAreaEntity implements Interactor {
 
         @Override
         public void interactWith(SpriteGiver giver) {
-            animation = giver.getAnimation();
+            animationName = giver.getAnimationName();
+            animation = Animation.from4x4(animationName, Player.this);
             animation.resetOrientation(getOrientation());
-            animation.setParent(Player.this);
         }
 
         @Override
@@ -160,7 +163,7 @@ public class Player extends MovableAreaEntity implements Interactor {
             DiscreteCoordinates behindMe = getCurrentMainCellCoordinates().jump(orientation.opposite().toVector());
             Area thisArea = getOwnerArea();
             if (thisArea.canEnter(Player.this, Collections.singletonList(behindMe))) {
-                Player clone = new Player(thisArea, orientation, behindMe);
+                Player clone = new Player(thisArea, animationName, orientation, behindMe);
                 // We can't reuse enterArea
                 thisArea.registerActor(clone);
                 clone.setOwnerArea(thisArea);

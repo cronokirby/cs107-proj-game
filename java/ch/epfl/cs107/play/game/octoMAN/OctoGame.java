@@ -25,7 +25,7 @@ public class OctoGame extends AreaGame {
         setCurrentArea(starting.getTitle(), false);
         // Initialising the player
         DiscreteCoordinates playerPos = new DiscreteCoordinates(5, 10);
-        Player player = new Player(starting, Orientation.DOWN, playerPos);
+        Player player = new Player(starting, "boy.1", Orientation.DOWN, playerPos);
         player.enterArea(starting, playerPos);
         return superOK && areasOK;
     }
