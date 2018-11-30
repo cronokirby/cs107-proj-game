@@ -9,9 +9,6 @@ import ch.epfl.cs107.play.game.octoMAN.handler.OctoInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
-import java.util.Collections;
-import java.util.List;
-
 public class WiredLever extends AreaEntity {
     /// The sprite associated with this lever when not on
     private Sprite leftSprite;

@@ -41,8 +41,6 @@ public interface OctoInteractionVisitor extends AreaInteractionVisitor {
     default void interactWith(WiredLever lever) {
     }
 
-
-
     /**
      * Simulate an interaction with a cell
      */

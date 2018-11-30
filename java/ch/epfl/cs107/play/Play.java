@@ -1,7 +1,6 @@
 package ch.epfl.cs107.play;
 
 import ch.epfl.cs107.play.game.Game;
-import ch.epfl.cs107.play.game.enigme.Enigme;
 import ch.epfl.cs107.play.game.octoMAN.OctoGame;
 import ch.epfl.cs107.play.io.DefaultFileSystem;
 import ch.epfl.cs107.play.io.FileSystem;
