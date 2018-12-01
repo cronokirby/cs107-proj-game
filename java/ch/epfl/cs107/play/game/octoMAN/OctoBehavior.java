@@ -97,7 +97,7 @@ public class OctoBehavior extends AreaBehavior {
         int height = behaviorMap.getHeight();
         Cell[][] cells = getCells();
         for (int x = 0; x < width; ++x) {
-            for (int y = 0; y < width; ++y) {
+            for (int y = 0; y < height; ++y) {
                 int type = behaviorMap.getRGB(height - 1 - y, x);
                 cells[x][y] = new OctoCell(x, y, OctoCellType.fromType(type));
             }

@@ -4,6 +4,7 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.octoMAN.actor.Player;
+import ch.epfl.cs107.play.game.octoMAN.area.CharacterSelect;
 import ch.epfl.cs107.play.game.octoMAN.area.TestArea;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -19,12 +20,12 @@ public class OctoGame extends AreaGame {
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
         boolean superOK = super.begin(window, fileSystem);
-        Area starting = new TestArea();
+        Area starting = new CharacterSelect();
         addArea(starting);
         boolean areasOK = beginAreas();
         setCurrentArea(starting.getTitle(), false);
         // Initialising the player
-        DiscreteCoordinates playerPos = new DiscreteCoordinates(5, 10);
+        DiscreteCoordinates playerPos = new DiscreteCoordinates(2, 2);
         Player player = new Player(starting, "boy.1", Orientation.DOWN, playerPos);
         player.enterArea(starting, playerPos);
         return superOK && areasOK;
