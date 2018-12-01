@@ -175,6 +175,19 @@ public abstract class Area implements Playable {
     }
 
     /**
+     * Check if an entity can enter a list of cells, but don't make
+     * any commitment.
+     * This is useful to make a decision based on whether or not an entity
+     * could move into a cell.
+     * @param entity the entity to check
+     * @param entering the list of cells the entity is entering
+     * @return true if the entity can enter
+     */
+    public final boolean canEnter(Interactable entity, List<DiscreteCoordinates> entering) {
+        return areaBehavior.canEnter(entity, entering);
+    }
+
+    /**
      * Set the behavior of this method.
      * @param behavior The behavior to set for this area
      */

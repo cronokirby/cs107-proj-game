@@ -4,9 +4,13 @@ import ch.epfl.cs107.play.game.enigme.actor.*;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
+import ch.epfl.cs107.play.signal.logic.LogicNumber;
 import ch.epfl.cs107.play.signal.logic.MultipleAnd;
 import ch.epfl.cs107.play.signal.logic.Not;
 import ch.epfl.cs107.play.window.Window;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Represents the 3rd level for part6,
@@ -35,12 +39,13 @@ public class Level3 extends EnigmeArea {
             switches[i] = new PressureSwitch(this, new DiscreteCoordinates(x, y));
         }
         Logic allSwitches = new MultipleAnd(switches);
-        int[] leverXs = {10, 9, 8};
-        Logic[] levers = new Logic[leverXs.length];
-        levers[0] = new Lever(this, new DiscreteCoordinates(8, 5));
-        levers[1] = new Not(new Lever(this, new DiscreteCoordinates(9, 5)));
-        levers[2] = new Lever(this, new DiscreteCoordinates(10, 5));
-        Logic rightLevers = new MultipleAnd(levers);
+        int[] leverXs = {8, 9, 10};
+        List<Logic> levers = new LinkedList<>();
+        for (int i = 0; i < leverXs.length; ++i) {
+            int x = leverXs[i];
+            levers.add(new Lever(this, new DiscreteCoordinates(x, 5)));
+        }
+        Logic rightLevers = new LogicNumber(5f, levers);
         new SignalDoor(key, this, "LevelSelector", new DiscreteCoordinates(3, 6),
                        new DiscreteCoordinates(5, 9));
         new SignalRock(plate, this, new DiscreteCoordinates(6, 8));
