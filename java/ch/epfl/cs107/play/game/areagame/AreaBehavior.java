@@ -134,9 +134,15 @@ public abstract class AreaBehavior {
     /**
      * Get the cell at a certain coordinate
      * @param coordinate the coordinate of the cell to fetch
-     * @return the cell living at that coordinate
+     * @return the cell living at that coordinate, null of OOB
      */
     private Cell getCell(DiscreteCoordinates coordinate) {
+        int x = coordinate.x;
+        int y = coordinate.y;
+        boolean oob = x < 0 || x >= width || y < 0 || y >= height;
+        if (oob) {
+            return null;
+        }
         return cells[coordinate.x][coordinate.y];
     }
 
@@ -172,7 +178,8 @@ public abstract class AreaBehavior {
      */
     public boolean canLeave(Interactable entity, List<DiscreteCoordinates> coordinates) {
         for (DiscreteCoordinates coordinate : coordinates) {
-            if (!getCell(coordinate).canLeave(entity)) {
+            Cell cell = getCell(coordinate);
+            if (cell == null || !cell.canLeave(entity)) {
                 return false;
             }
         }
@@ -187,10 +194,8 @@ public abstract class AreaBehavior {
      */
     public boolean canEnter(Interactable entity, List<DiscreteCoordinates> coordinates) {
         for (DiscreteCoordinates coordinate : coordinates) {
-            int x = coordinate.x;
-            int y = coordinate.y;
-            boolean oob = x < 0 || x >= width || y < 0 || y >= height;
-            if (oob || !getCell(coordinate).canEnter(entity)) {
+            Cell cell = getCell(coordinate);
+            if (cell == null || !cell.canEnter(entity)) {
                 return false;
             }
         }
@@ -203,6 +208,7 @@ public abstract class AreaBehavior {
      */
     public void cellInteractionOf(Interactor interactor) {
         for (DiscreteCoordinates position : interactor.getCurrentCells()) {
+            // A null interaction here means we failed in our logic somewhere else
             getCell(position).cellInteractionOf(interactor);
         }
     }
@@ -213,6 +219,7 @@ public abstract class AreaBehavior {
      */
     public void viewInteractionOf(Interactor interactor) {
         for (DiscreteCoordinates position : interactor.getFieldOfViewCells()) {
+            // A null interaction here means we failed in our logic somewhere else
             getCell(position).viewInteractionOf(interactor);
         }
     }
