@@ -49,6 +49,10 @@ public abstract class Physics extends OctoArea {
         return superOK;
     }
 
+    @Override
+    public boolean resume(Window window, FileSystem fileSystem) {
+        return begin(window, fileSystem);
+    }
 
     private static class Physics1 extends Physics {
         private Physics1() {

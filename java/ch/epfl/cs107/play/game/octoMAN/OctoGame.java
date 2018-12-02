@@ -5,10 +5,7 @@ import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.octoMAN.actor.Door;
 import ch.epfl.cs107.play.game.octoMAN.actor.Player;
-import ch.epfl.cs107.play.game.octoMAN.area.CharacterSelect;
-import ch.epfl.cs107.play.game.octoMAN.area.LevelSelect;
-import ch.epfl.cs107.play.game.octoMAN.area.Physics;
-import ch.epfl.cs107.play.game.octoMAN.area.TestArea;
+import ch.epfl.cs107.play.game.octoMAN.area.*;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
@@ -25,11 +22,11 @@ public class OctoGame extends AreaGame {
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
         boolean superOK = super.begin(window, fileSystem);
-        Area starting = new CharacterSelect();
+        OctoArea starting = new CharacterSelect();
         addArea(starting);
         addArea(new LevelSelect());
         addArea(new TestArea());
-        for (Area a : Physics.subRooms()) {
+        for (OctoArea a : Physics.subRooms()) {
             addArea(a);
         }
         boolean areasOK = beginAreas();
