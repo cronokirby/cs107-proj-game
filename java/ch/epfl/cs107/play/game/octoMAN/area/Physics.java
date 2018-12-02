@@ -8,27 +8,29 @@ import ch.epfl.cs107.play.window.Window;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Physics extends OctoArea {
+/**
+ * Holds the logic for rooms in the physics area
+ */
+public abstract class Physics extends OctoArea {
     /// The title of this subroom
     private String title;
     /// The positions of boulders in this room
     private List<DiscreteCoordinates> boulderPositions;
 
-    private Physics(String title, List<DiscreteCoordinates> boulderPositions) {
+    private Physics(String title) {
         this.title = title;
-        this.boulderPositions = boulderPositions;
     }
 
-    public static List<Physics> subRooms() {
-        List<Physics> subRooms = new LinkedList<>();
-        // Sub Room 1
-        List<DiscreteCoordinates> boulders1 = new LinkedList<>();
-        for (int x = 1; x <= 7; ++x) {
-            boulders1.add(new DiscreteCoordinates(x, 4));
-        }
-        subRooms.add(new Physics("Physics1", boulders1));
-        return subRooms;
-    }
+    /**
+     * Get all the boulders in this area
+     */
+    protected abstract List<DiscreteCoordinates> getBoulders();
+
+    /**
+     * Add all the necessary doors to this room
+     */
+    protected abstract void addDoors();
+
 
     @Override
     public String getTitle() {
@@ -38,9 +40,40 @@ public class Physics extends OctoArea {
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
         boolean superOK = super.begin(window, fileSystem);
-        for (DiscreteCoordinates coordinate : boulderPositions) {
+        for (DiscreteCoordinates coordinate : getBoulders()) {
             new Boulder(this, coordinate);
         }
+        addDoors();
         return superOK;
+    }
+
+
+    private static class Physics1 extends Physics {
+        private Physics1() {
+            super("Physics1");
+        }
+
+        @Override
+        protected List<DiscreteCoordinates> getBoulders() {
+            List<DiscreteCoordinates> boulders1 = new LinkedList<>();
+            for (int x = 1; x <= 7; ++x) {
+                boulders1.add(new DiscreteCoordinates(x, 4));
+            }
+            return boulders1;
+        }
+
+        @Override
+        protected void addDoors() {
+
+        }
+    }
+
+    /**
+     * Get all the subrooms that constitute this area
+     */
+    public static List<Physics> subRooms() {
+        List<Physics> subRooms = new LinkedList<>();
+        subRooms.add(new Physics1());
+        return subRooms;
     }
 }
