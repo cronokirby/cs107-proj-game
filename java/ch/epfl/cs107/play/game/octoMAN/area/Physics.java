@@ -1,8 +1,10 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
 import ch.epfl.cs107.play.game.octoMAN.actor.Boulder;
+import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
 
 import java.util.LinkedList;
@@ -64,7 +66,11 @@ public abstract class Physics extends OctoArea {
 
         @Override
         protected void addDoors() {
-
+            new StandardDoor(
+                    Logic.TRUE, "LevelSelect", new DiscreteCoordinates(2, 8),
+                    this, new DiscreteCoordinates(4, 0)
+            );
+            new StandardDoor(Logic.FALSE, "", null, this, new DiscreteCoordinates(4, 8));
         }
     }
 

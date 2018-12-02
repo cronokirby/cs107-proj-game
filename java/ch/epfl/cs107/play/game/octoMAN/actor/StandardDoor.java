@@ -15,7 +15,7 @@ public class StandardDoor extends Door {
                         Area area, DiscreteCoordinates position) {
         super(signal, destinationArea, destinationPosition, area, position);
         openSprite = new Sprite("door.open.1", 1.f, 1.f, this);
-        closedSprite = new Sprite("door.closed.1", 1.f, 1.f, this);
+        closedSprite = new Sprite("door.close.1", 1.f, 1.f, this);
     }
 
     @Override
