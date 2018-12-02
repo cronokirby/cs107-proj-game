@@ -10,11 +10,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Door extends AreaEntity {
-    /// The sprite for this door when it's open
-    private Sprite openSprite;
-    /// The sprite for this door when it's closed
-    private Sprite closedSprite;
+public abstract class Door extends AreaEntity {
     /// The signal that this door connects to
     private Logic signal;
     /// The name of the area this leads to
@@ -28,21 +24,22 @@ public class Door extends AreaEntity {
      * @param signal the signal that makes this door open
      * @param destinationArea the name of the area this door leads to
      * @param destinationPosition the position this door leads to
-     * @param open the sprite to display when this door is open
-     * @param closed the sprite to display when this door is closed
      * @param area the area this door is in
      * @param position the position this door is in
      */
-    public Door(Logic signal, Sprite open, Sprite closed,
+    public Door(Logic signal,
                 String destinationArea, DiscreteCoordinates destinationPosition,
                 Area area, DiscreteCoordinates position) {
         super(area, Orientation.DOWN, position);
-        this.openSprite = open;
-        this.closedSprite = closed;
+        area.registerActor(this);
         this.signal = signal;
         this.destinationArea = destinationArea;
         this.destinationPosition = destinationPosition;
     }
+
+    protected abstract Sprite getClosedSprite();
+
+    protected abstract Sprite getOpenSprite();
 
     /**
      * Returns true when this door is open.
@@ -68,9 +65,9 @@ public class Door extends AreaEntity {
     @Override
     public void draw(Canvas canvas) {
         if (isOpen()) {
-            openSprite.draw(canvas);
+            getOpenSprite().draw(canvas);
         } else {
-            closedSprite.draw(canvas);
+            getClosedSprite().draw(canvas);
         }
     }
 

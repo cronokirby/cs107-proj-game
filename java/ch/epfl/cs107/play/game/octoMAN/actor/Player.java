@@ -31,6 +31,8 @@ public class Player extends MovableAreaEntity implements Interactor {
     private boolean displayHalo;
     /// The dialog for other actors to fill
     private AdvanceDialog dialog;
+    /// The last door this player passed through, null if none
+    private Door lastDoor;
     /// Whether or not we advanced dialog on the previous frame
     /// This is necessary to make sure that closing dialog doesn't
     /// reopen it with the actor.
@@ -64,6 +66,10 @@ public class Player extends MovableAreaEntity implements Interactor {
         return getOwnerArea().getKeyboard().get(code);
     }
 
+    public Door getLastDoor() {
+        return lastDoor;
+    }
+
     /**
      * Enter this player into a new area.
      * @param area the are to enter this player into
@@ -88,6 +94,7 @@ public class Player extends MovableAreaEntity implements Interactor {
     public void update(float deltaTime) {
         super.update(deltaTime);
         advancedDialog = false;
+        lastDoor = null;
         if (dialog.isOpen()) {
             if (getKey(Keyboard.L).isPressed()) {
                 dialog.advance();
@@ -173,6 +180,11 @@ public class Player extends MovableAreaEntity implements Interactor {
         @Override
         public void interactWith(WiredLever lever) {
             lever.toggle();
+        }
+
+        @Override
+        public void interactWith(Door door) {
+            lastDoor = door;
         }
 
         @Override

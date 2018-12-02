@@ -1,8 +1,10 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
 import ch.epfl.cs107.play.game.octoMAN.actor.SpriteGiver;
+import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
 
 public class CharacterSelect extends OctoArea {
@@ -22,6 +24,8 @@ public class CharacterSelect extends OctoArea {
         new SpriteGiver("girl.3", this, new DiscreteCoordinates(9, 4));
         new SpriteGiver("girl.4", this, new DiscreteCoordinates(7, 4));
         new SpriteGiver("girl.5", this, new DiscreteCoordinates(7, 2));
+        new StandardDoor(Logic.TRUE, "OctoTest", new DiscreteCoordinates(10,13),
+                    this, new DiscreteCoordinates(5, 6));
         return superOK;
     }
 }
