@@ -290,8 +290,27 @@ public abstract class Physics extends OctoArea {
                     this, new DiscreteCoordinates(3, 0)
             );
             new StandardDoor(
-                    Logic.FALSE, "", null,
+                    Logic.TRUE, "Physics9", new DiscreteCoordinates(2, 1),
                     this, new DiscreteCoordinates(3, 11)
+            );
+        }
+    }
+
+    private static class Physics9 extends Physics {
+        private Physics9() {
+            super("Physics9");
+        }
+
+        @Override
+        protected List<DiscreteCoordinates> getBoulders() {
+            return new LinkedList<>();
+        }
+
+        @Override
+        protected void addActors() {
+            new StandardDoor(
+                    Logic.TRUE, "Physics8", new DiscreteCoordinates(3, 10),
+                    this, new DiscreteCoordinates(2, 0)
             );
         }
     }
@@ -309,6 +328,7 @@ public abstract class Physics extends OctoArea {
         subRooms.add(new Physics6());
         subRooms.add(new Physics7());
         subRooms.add(new Physics8());
+        subRooms.add(new Physics9());
         return subRooms;
     }
 }
