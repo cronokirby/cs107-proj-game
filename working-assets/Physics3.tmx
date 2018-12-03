@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="7" height="11" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" source="tilemap.tsx.tsx"/>
+ <layer name="Tile Layer 1" width="7" height="11">
+  <data encoding="csv">
+20,7,14,6,13,7,21,
+27,6,6,6,6,6,28,
+27,6,6,6,6,6,28,
+27,6,6,6,6,6,28,
+27,6,6,6,6,6,28,
+27,6,6,6,6,6,28,
+27,6,6,6,6,6,28,
+27,6,6,6,6,6,28,
+27,6,6,6,6,6,28,
+27,6,6,6,6,6,28,
+7,7,14,6,13,7,7
+</data>
+ </layer>
+</map>

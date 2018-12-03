@@ -115,7 +115,184 @@ public abstract class Physics extends OctoArea {
                     Logic.TRUE, "Physics1", new DiscreteCoordinates(4, 7),
                     this, new DiscreteCoordinates(2, 0)
             );
-            new StandardDoor(Logic.FALSE, "", null, this, new DiscreteCoordinates(2, 8));
+            new StandardDoor(
+                    Logic.TRUE, "Physics3", new DiscreteCoordinates(3, 1),
+                    this, new DiscreteCoordinates(2, 8)
+            );
+        }
+    }
+
+    private static class Physics3 extends Physics {
+        private Physics3() {
+            super("Physics3");
+        }
+
+        @Override
+        protected List<DiscreteCoordinates> getBoulders() {
+            List<DiscreteCoordinates> boulders = new LinkedList<>();
+            int[] xs = { 2, 4, 1, 3, 5, 2, 4, 1, 3, 5, 2, 4 };
+            int[] ys = { 7, 7, 6, 6, 6, 5, 5, 4, 4, 4, 3, 3 };
+            for (int i = 0; i < xs.length; ++i) {
+                boulders.add(new DiscreteCoordinates(xs[i], ys[i]));
+            }
+            return boulders;
+        }
+
+        @Override
+        protected void addActors() {
+            new StandardDoor(
+                    Logic.TRUE, "Physics2", new DiscreteCoordinates(2, 7),
+                    this, new DiscreteCoordinates(3, 0)
+            );
+            new StandardDoor(
+                    Logic.TRUE, "Physics4", new DiscreteCoordinates(3, 1),
+                    this, new DiscreteCoordinates(3, 10)
+            );
+        }
+    }
+
+    private static class Physics4 extends Physics {
+        private Physics4() {
+            super("Physics4");
+        }
+
+        @Override
+        protected List<DiscreteCoordinates> getBoulders() {
+            List<DiscreteCoordinates> boulders = new LinkedList<>();
+            int[] xs = { 1, 4, 1, 3, 1, 2, 4, 3, 1, 2, 3, 4 };
+            int[] ys = { 7, 7, 6, 6, 5, 5, 5, 4, 3, 3, 3, 3 };
+            for (int i = 0; i < xs.length; ++i) {
+                boulders.add(new DiscreteCoordinates(xs[i], ys[i]));
+            }
+            return boulders;
+        }
+
+        @Override
+        protected void addActors() {
+            new StandardDoor(
+                    Logic.TRUE, "Physics3", new DiscreteCoordinates(3, 9),
+                    this, new DiscreteCoordinates(3, 0)
+            );
+            new StandardDoor(
+                    Logic.TRUE, "Physics5", new DiscreteCoordinates(3, 1),
+                    this, new DiscreteCoordinates(2, 10)
+            );
+        }
+    }
+
+    private static class Physics5 extends Physics {
+        private Physics5() {
+            super("Physics5");
+        }
+
+        @Override
+        protected List<DiscreteCoordinates> getBoulders() {
+            List<DiscreteCoordinates> boulders = new LinkedList<>();
+            int[] xs = { 1, 2, 3, 4, 5, 2, 4, 3, 2, 3, 4, 1, 2, 3, 4, 5 };
+            int[] ys = { 7, 7, 7, 7, 7, 6, 6, 5, 4, 4, 4, 3, 3, 3, 3, 3 };
+            for (int i = 0; i < xs.length; ++i) {
+                boulders.add(new DiscreteCoordinates(xs[i], ys[i]));
+            }
+            return boulders;
+        }
+
+        @Override
+        protected void addActors() {
+            new StandardDoor(
+                    Logic.TRUE, "Physics4", new DiscreteCoordinates(2, 9),
+                    this, new DiscreteCoordinates(3, 0)
+            );
+            new StandardDoor(
+                    Logic.TRUE, "Physics6", new DiscreteCoordinates(3, 1),
+                    this, new DiscreteCoordinates(3, 10)
+            );
+        }
+    }
+
+    private static class Physics6 extends Physics {
+        private Physics6() {
+            super("Physics6");
+        }
+
+        @Override
+        protected List<DiscreteCoordinates> getBoulders() {
+            List<DiscreteCoordinates> boulders = new LinkedList<>();
+            int[] xs = { 3, 5, 1, 2, 4, 2, 3, 5, 1, 3, 4, 2, 4, 5, 1, 3 };
+            int[] ys = { 8, 8, 7, 7, 7, 6, 6, 6, 5, 5, 5, 4, 4, 4, 3, 3 };
+            for (int i = 0; i < xs.length; ++i) {
+                boulders.add(new DiscreteCoordinates(xs[i], ys[i]));
+            }
+            return boulders;
+        }
+
+        @Override
+        protected void addActors() {
+            new StandardDoor(
+                    Logic.TRUE, "Physics5", new DiscreteCoordinates(3, 9),
+                    this, new DiscreteCoordinates(3, 0)
+            );
+            new StandardDoor(
+                    Logic.TRUE, "Physics7", new DiscreteCoordinates(3, 1),
+                    this, new DiscreteCoordinates(3, 11)
+            );
+        }
+    }
+
+    private static class Physics7 extends Physics {
+        private Physics7() {
+            super("Physics7");
+        }
+
+        @Override
+        protected List<DiscreteCoordinates> getBoulders() {
+            List<DiscreteCoordinates> boulders = new LinkedList<>();
+            int[] xs = { 2, 4, 5, 1, 3, 2, 3, 4, 1, 2, 4, 3, 5 };
+            int[] ys = { 7, 7, 7, 6, 6, 5, 5, 5, 4, 4, 4, 3, 3 };
+            for (int i = 0; i < xs.length; ++i) {
+                boulders.add(new DiscreteCoordinates(xs[i], ys[i]));
+            }
+            return boulders;
+        }
+
+        @Override
+        protected void addActors() {
+            new StandardDoor(
+                    Logic.TRUE, "Physics6", new DiscreteCoordinates(3, 10),
+                    this, new DiscreteCoordinates(3, 0)
+            );
+            new StandardDoor(
+                    Logic.TRUE, "Physics8", new DiscreteCoordinates(3, 1),
+                    this, new DiscreteCoordinates(3, 10)
+            );
+        }
+    }
+
+    private static class Physics8 extends Physics {
+        private Physics8() {
+            super("Physics8");
+        }
+
+        @Override
+        protected List<DiscreteCoordinates> getBoulders() {
+            List<DiscreteCoordinates> boulders = new LinkedList<>();
+            int[] xs = { 1, 3, 5, 2, 4, 1, 3, 5, 1, 3, 5, 2, 4, 1, 2, 3, 4, 5 };
+            int[] ys = { 8, 8, 8, 7, 7, 6, 6, 6, 5, 5, 5, 4, 4, 3, 3, 3, 3, 3 };
+            for (int i = 0; i < xs.length; ++i) {
+                boulders.add(new DiscreteCoordinates(xs[i], ys[i]));
+            }
+            return boulders;
+        }
+
+        @Override
+        protected void addActors() {
+            new StandardDoor(
+                    Logic.TRUE, "Physics7", new DiscreteCoordinates(3, 9),
+                    this, new DiscreteCoordinates(3, 0)
+            );
+            new StandardDoor(
+                    Logic.FALSE, "", null,
+                    this, new DiscreteCoordinates(3, 11)
+            );
         }
     }
 
@@ -126,6 +303,12 @@ public abstract class Physics extends OctoArea {
         List<Physics> subRooms = new LinkedList<>();
         subRooms.add(new Physics1());
         subRooms.add(new Physics2());
+        subRooms.add(new Physics3());
+        subRooms.add(new Physics4());
+        subRooms.add(new Physics5());
+        subRooms.add(new Physics6());
+        subRooms.add(new Physics7());
+        subRooms.add(new Physics8());
         return subRooms;
     }
 }
