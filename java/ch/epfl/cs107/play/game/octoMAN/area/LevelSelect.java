@@ -15,9 +15,9 @@ public class LevelSelect extends OctoArea {
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
         boolean superOK = super.begin(window, fileSystem);
-        String[] destinations = {"Physics1", "", "", "", "", "", "", ""};
+        String[] destinations = {"Physics1", "Environment", "", "", "", "", "", ""};
         DiscreteCoordinates[] destinationPositions = {
-                new DiscreteCoordinates(4, 1), null, null, null,
+                new DiscreteCoordinates(4, 1), new DiscreteCoordinates(5, 2), null, null,
                 null, null, null, null
         };
         int x = 2;
