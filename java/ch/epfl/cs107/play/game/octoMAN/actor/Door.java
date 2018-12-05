@@ -10,7 +10,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Canvas;
 
-public abstract class Door extends AreaEntity {
+public abstract class Door extends AreaEntity implements Portal {
     /// The signal that this door connects to
     private Logic signal;
     /// The name of the area this leads to
@@ -88,6 +88,6 @@ public abstract class Door extends AreaEntity {
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-        ((OctoInteractionVisitor)v).interactWith(this);
+        ((OctoInteractionVisitor)v).interactWith((Portal)this);
     }
 }

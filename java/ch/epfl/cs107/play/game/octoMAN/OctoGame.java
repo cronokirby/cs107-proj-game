@@ -3,8 +3,8 @@ package ch.epfl.cs107.play.game.octoMAN;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.octoMAN.actor.Door;
 import ch.epfl.cs107.play.game.octoMAN.actor.Player;
+import ch.epfl.cs107.play.game.octoMAN.actor.Portal;
 import ch.epfl.cs107.play.game.octoMAN.area.*;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -42,11 +42,11 @@ public class OctoGame extends AreaGame {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        Door lastDoor = player.getLastDoor();
-        if (lastDoor != null) {
+        Portal lastPortal = player.getLastPortal();
+        if (lastPortal != null) {
             player.leaveCurrentArea();
-            Area next = setCurrentArea(lastDoor.getDestinationArea(), false);
-            player.enterArea(next, lastDoor.getDestinationPosition());
+            Area next = setCurrentArea(lastPortal.getDestinationArea(), false);
+            player.enterArea(next, lastPortal.getDestinationPosition());
         }
     }
 

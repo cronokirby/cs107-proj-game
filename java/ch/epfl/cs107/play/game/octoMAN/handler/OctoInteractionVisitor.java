@@ -42,9 +42,9 @@ public interface OctoInteractionVisitor extends AreaInteractionVisitor {
     }
 
     /**
-     * Simulate an interaction with a door
+     * Simulate an interaction with a portal
      */
-    default void interactWith(Door door) {
+    default void interactWith(Portal portal) {
     }
 
     /**
