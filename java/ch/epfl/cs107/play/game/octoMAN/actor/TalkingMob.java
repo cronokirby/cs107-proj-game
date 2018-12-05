@@ -20,10 +20,10 @@ public class TalkingMob extends WanderingEntity implements Talkable {
     private boolean talking;
 
 
-    public TalkingMob(String text, Area area, Orientation orientation, DiscreteCoordinates position) {
+    public TalkingMob(String text, String sheetName, Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
         area.registerActor(this);
-        this.spriteSheet = Animation.from4x4("mob.1", this);
+        this.spriteSheet = Animation.from4x4(sheetName, this);
         this.spriteSheet.resetOrientation(orientation);
         this.text = text;
     }

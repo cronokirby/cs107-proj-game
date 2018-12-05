@@ -20,7 +20,7 @@ public class TestArea extends OctoArea {
         new SpriteGiver("girl.2", this, new DiscreteCoordinates(6, 8));
         new SpriteGiver("boy.1", this, new DiscreteCoordinates(8, 8));
         new SpriteGiver("boy.2", this, new DiscreteCoordinates(10, 8));
-        new TalkingMob("Je m'apelle Fürbringer, j'ammène le Für", this, Orientation.DOWN, new DiscreteCoordinates(12, 8));
+        new TalkingMob("Je m'apelle Fürbringer, j'ammène le Für", "mob.1", this, Orientation.DOWN, new DiscreteCoordinates(12, 8));
         new Potion(this, new DiscreteCoordinates(10, 10));
         Wire wire1 = new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(9, 2));
         for (int y = 3; y < 11; ++y) {

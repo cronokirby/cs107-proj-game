@@ -87,7 +87,7 @@ public abstract class Physics extends OctoArea {
                     + "Pousse les rochers pour avancer!"
                     + "Si tu fais une erreur, sort et recommence!";
             new TalkingMob(
-                    helpText, this,
+                    helpText, "mob.2", this,
                     Orientation.DOWN, new DiscreteCoordinates(3, 2)
             );
         }

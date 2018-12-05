@@ -32,12 +32,19 @@ public abstract class WanderingEntity extends MovableAreaEntity {
         return true;
     }
 
+    /**
+     * Return the rarity of movement
+     */
+    protected int getRarity() {
+        return 48;
+    }
+
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
         if (canMove()) {
             double random = rand.nextDouble();
-            if (random < 1. / 48) {
+            if (random < 1. / getRarity()) {
                 List<Orientation> orientations = Arrays.asList(Orientation.values());
                 int next = rand.nextInt(orientations.size());
                 Orientation orientation = orientations.get(next);
