@@ -209,7 +209,10 @@ public abstract class AreaBehavior {
     public void cellInteractionOf(Interactor interactor) {
         for (DiscreteCoordinates position : interactor.getCurrentCells()) {
             // A null interaction here means we failed in our logic somewhere else
-            getCell(position).cellInteractionOf(interactor);
+            Cell cell = getCell(position);
+            if (cell != null) {
+                cell.cellInteractionOf(interactor);
+            }
         }
     }
 
@@ -220,7 +223,10 @@ public abstract class AreaBehavior {
     public void viewInteractionOf(Interactor interactor) {
         for (DiscreteCoordinates position : interactor.getFieldOfViewCells()) {
             // A null interaction here means we failed in our logic somewhere else
-            getCell(position).viewInteractionOf(interactor);
+            Cell cell = getCell(position);
+            if (cell != null) {
+                cell.viewInteractionOf(interactor);
+            }
         }
     }
 
