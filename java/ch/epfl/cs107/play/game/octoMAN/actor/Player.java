@@ -117,7 +117,7 @@ public class Player extends MovableAreaEntity implements Interactor {
             }
             if (orientation != null) {
                 if (getOrientation().equals(orientation)) {
-                    int frames = running ? 4 : 8;
+                    int frames = FRAMES_PER_MOVE / (running ? 2 : 1);
                     move(frames);
                 } else {
                     setOrientation(orientation);

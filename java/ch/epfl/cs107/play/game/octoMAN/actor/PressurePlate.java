@@ -13,6 +13,13 @@ public class PressurePlate extends ch.epfl.cs107.play.game.enigme.actor.Pressure
         super(resetTime, area, position);
     }
 
+    /**
+     * Return a pressure plate with a very short defuse time
+     */
+    public static PressurePlate fast(Area area, DiscreteCoordinates position) {
+        return new PressurePlate(0.05f, area, position);
+    }
+
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
         ((OctoInteractionVisitor)v).interactWith((Toggleable)this);

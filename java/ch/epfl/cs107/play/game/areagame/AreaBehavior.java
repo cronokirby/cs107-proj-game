@@ -200,7 +200,6 @@ public abstract class AreaBehavior {
      */
     public boolean canEnter(Interactable entity, List<DiscreteCoordinates> coordinates) {
         for (DiscreteCoordinates coordinate : coordinates) {
-            System.out.println(coordinate);
             Cell cell = getCell(coordinate);
             if (cell == null || !cell.canEnter(entity)) {
                 return false;
