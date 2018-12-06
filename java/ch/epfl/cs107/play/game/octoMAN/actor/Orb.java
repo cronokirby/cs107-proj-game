@@ -9,6 +9,9 @@ import ch.epfl.cs107.play.game.octoMAN.handler.OctoInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
+/**
+ * Represents an orb that can be collected
+ */
 public class Orb extends AreaEntity implements Portal {
     public enum Type {
         PHYSICS,
@@ -81,10 +84,16 @@ public class Orb extends AreaEntity implements Portal {
         destinationPosition = new DiscreteCoordinates(x, 8);
     }
 
+    /**
+     * Return the sprite associated with this orb
+     */
     public Sprite getSprite() {
         return sprite;
     }
 
+    /**
+     * Have this orb be collected by a holder
+     */
     public void collect(OrbHolder holder) {
         holder.insert(this);
         getOwnerArea().unregisterActor(this);
