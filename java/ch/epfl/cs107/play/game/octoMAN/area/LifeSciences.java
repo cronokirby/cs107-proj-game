@@ -106,7 +106,7 @@ public abstract class LifeSciences extends OctoArea {
     }
 
     private static class LifeSciences3 extends LifeSciences {
-        public LifeSciences3() {
+        private LifeSciences3() {
             super("LifeSciences3");
         }
 
