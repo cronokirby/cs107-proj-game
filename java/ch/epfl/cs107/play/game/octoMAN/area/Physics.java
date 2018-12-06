@@ -66,7 +66,6 @@ public abstract class Physics extends OctoArea {
         }
     }
 
-
     private static class Physics1 extends Physics {
         private Physics1() {
             super("Physics1");

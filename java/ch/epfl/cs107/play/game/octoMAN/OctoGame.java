@@ -39,7 +39,6 @@ public class OctoGame extends AreaGame {
         }
         addArea(new Environment());
         setCurrentArea(starting.getTitle(), false);
-
         hud = new Hud();
         // Initialising the player
         DiscreteCoordinates playerPos = new DiscreteCoordinates(5, 1);
