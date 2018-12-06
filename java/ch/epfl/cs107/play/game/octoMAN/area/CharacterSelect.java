@@ -17,7 +17,6 @@ public class CharacterSelect extends OctoArea {
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
         boolean superOK = super.begin(window, fileSystem);
-        new Orb(Orb.Type.PHYSICS, this, new DiscreteCoordinates(1, 1));
         new SpriteGiver("boy.1", this, new DiscreteCoordinates(1, 2));
         new SpriteGiver("boy.2", this, new DiscreteCoordinates(1, 4));
         new SpriteGiver("boy.4", this, new DiscreteCoordinates(3, 2));

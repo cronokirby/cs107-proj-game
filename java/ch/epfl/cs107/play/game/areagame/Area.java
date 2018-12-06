@@ -276,7 +276,6 @@ public abstract class Area implements Playable {
         // actors
         purgeRegistration();
         // drawing
-        updateCamera();
         for (Actor a : actors) {
             a.update(deltaTime);
             a.draw(window);
@@ -290,6 +289,7 @@ public abstract class Area implements Playable {
                 areaBehavior.viewInteractionOf(interactor);
             }
         }
+        updateCamera();
     }
 
     private void updateCamera () {

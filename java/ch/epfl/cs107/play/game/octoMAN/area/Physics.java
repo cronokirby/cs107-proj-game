@@ -2,6 +2,7 @@ package ch.epfl.cs107.play.game.octoMAN.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.octoMAN.actor.Boulder;
+import ch.epfl.cs107.play.game.octoMAN.actor.Orb;
 import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
 import ch.epfl.cs107.play.game.octoMAN.actor.TalkingMob;
 import ch.epfl.cs107.play.io.FileSystem;
@@ -312,6 +313,7 @@ public abstract class Physics extends OctoArea {
                     Logic.TRUE, "Physics8", new DiscreteCoordinates(3, 10),
                     this, new DiscreteCoordinates(2, 0)
             );
+            new Orb(Orb.Type.PHYSICS, this, new DiscreteCoordinates(2, 6));
         }
     }
 
