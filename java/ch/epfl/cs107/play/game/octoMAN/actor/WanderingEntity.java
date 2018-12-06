@@ -39,6 +39,13 @@ public abstract class WanderingEntity extends MovableAreaEntity {
         return 48;
     }
 
+    /**
+     * Return the number of frames it takes to move
+     */
+    protected int framesPerMove() {
+        return 12;
+    }
+
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
@@ -50,7 +57,7 @@ public abstract class WanderingEntity extends MovableAreaEntity {
                 Orientation orientation = orientations.get(next);
                 setOrientation(orientation);
                 getAnimation().resetOrientation(orientation);
-                move(12);
+                move(framesPerMove());
             }
         }
         if (isMoving()) {

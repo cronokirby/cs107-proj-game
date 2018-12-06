@@ -49,31 +49,31 @@ public class Orb extends AreaEntity implements Portal {
                 break;
             case ENVIRONMENT:
                 spriteName = "orb.2";
-                x = 3;
+                x = 5;
                 break;
             case MATHEMATICS:
                 spriteName = "orb.3";
-                x = 6;
+                x = 8;
                 break;
             case LIFESCIENCES:
                 spriteName = "orb.4";
-                x = 9;
+                x = 11;
                 break;
             case ELECTRICITY:
                 spriteName = "orb.5";
-                x = 12;
+                x = 14;
                 break;
             case CHEMISTRY:
                 spriteName = "orb.6";
-                x = 15;
+                x = 17;
                 break;
             case MICROTECHNICS:
                 spriteName = "orb.7";
-                x = 18;
+                x = 20;
                 break;
             case COMPUTERSCIENCE:
                 spriteName = "orb.8";
-                x = 21;
+                x = 23;
                 break;
             case NULL:
                 spriteName = "orb.1";

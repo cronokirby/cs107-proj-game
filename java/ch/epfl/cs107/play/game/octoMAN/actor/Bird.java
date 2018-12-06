@@ -20,4 +20,9 @@ public class Bird extends TalkingMob {
     protected int getRarity() {
         return 6;
     }
+
+    @Override
+    protected int framesPerMove() {
+        return 8;
+    }
 }
