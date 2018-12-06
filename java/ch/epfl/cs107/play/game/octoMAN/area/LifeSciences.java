@@ -99,6 +99,31 @@ public abstract class LifeSciences extends OctoArea {
             switches[2] = PressurePlate.fast(this, new DiscreteCoordinates(10, 10));
             Logic allSwitches = new MultipleAnd(switches);
             new StickyDoor(
+                allSwitches, "LifeSciences3", new DiscreteCoordinates(6, 1),
+                this, new DiscreteCoordinates(6, 11)
+            );
+        }
+    }
+
+    private static class LifeSciences3 extends LifeSciences {
+        public LifeSciences3() {
+            super("LifeSciences3");
+        }
+
+        @Override
+        protected void addActors() {
+            new StandardDoor(
+                    Logic.TRUE, "LifeSciences2", new DiscreteCoordinates(6, 10),
+                    this, new DiscreteCoordinates(6, 0)
+            );
+            new Potion(this, new DiscreteCoordinates(7, 3));
+            new Potion(this, new DiscreteCoordinates(6, 4));
+            Logic[] switches = new Logic[3];
+            switches[0] = PressurePlate.fast(this, new DiscreteCoordinates(6, 7));
+            switches[1] = PressurePlate.fast(this, new DiscreteCoordinates(2, 10));
+            switches[2] = PressurePlate.fast(this, new DiscreteCoordinates(10, 10));
+            Logic allSwitches = new MultipleAnd(switches);
+            new StickyDoor(
                 allSwitches, "LifeSciences9", new DiscreteCoordinates(2, 1),
                 this, new DiscreteCoordinates(6, 11)
             );
@@ -130,6 +155,7 @@ public abstract class LifeSciences extends OctoArea {
         List<LifeSciences> subRooms = new LinkedList<>();
         subRooms.add(new LifeSciences1());
         subRooms.add(new LifeSciences2());
+        subRooms.add(new LifeSciences3());
         subRooms.add(new LifeSciences9());
         return subRooms;
     }
