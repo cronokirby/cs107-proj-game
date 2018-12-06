@@ -1,10 +1,10 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
-import ch.epfl.cs107.play.game.octoMAN.actor.Orb;
-import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
+import ch.epfl.cs107.play.game.octoMAN.actor.*;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
+import ch.epfl.cs107.play.signal.logic.MultipleAnd;
 import ch.epfl.cs107.play.window.Window;
 
 import java.util.LinkedList;
@@ -69,8 +69,12 @@ public abstract class LifeSciences extends OctoArea {
                     Logic.TRUE, "LevelSelect", new DiscreteCoordinates(11, 8),
                     this, new DiscreteCoordinates(4, 0)
             );
-            new StandardDoor(
-                    Logic.TRUE, "LifeSciences9", new DiscreteCoordinates(2, 1),
+            Logic plate1 = new PressurePlate(0.05f, this, new DiscreteCoordinates(6, 9));
+            Logic plate2 = new PressurePlate(0.05f, this, new DiscreteCoordinates(2, 9));
+            new Potion(this, new DiscreteCoordinates(4, 4));
+            MultipleAnd allSwitches = new MultipleAnd(plate1, plate2);
+            new StickyDoor(
+                    allSwitches, "LifeSciences9", new DiscreteCoordinates(2, 1),
                     this, new DiscreteCoordinates(4, 10)
             );
         }

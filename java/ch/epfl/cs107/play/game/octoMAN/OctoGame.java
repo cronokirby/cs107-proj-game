@@ -53,7 +53,6 @@ public class OctoGame extends AreaGame {
         super.update(deltaTime);
         Portal lastPortal = player.getLastPortal();
         if (lastPortal != null) {
-            player.leaveCurrentArea();
             Area next = setCurrentArea(lastPortal.getDestinationArea(), false);
             player.enterArea(next, lastPortal.getDestinationPosition());
         }

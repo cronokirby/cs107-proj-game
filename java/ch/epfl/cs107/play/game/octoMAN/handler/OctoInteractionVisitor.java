@@ -54,6 +54,12 @@ public interface OctoInteractionVisitor extends AreaInteractionVisitor {
     }
 
     /**
+     * Simulate an interaction with a switch
+     */
+    default void interactWith(Toggleable toggleable) {
+    }
+
+    /**
      * Simulate an interaction with a cell
      */
     default void interactWith(OctoBehavior.OctoCell cell) {

@@ -154,7 +154,10 @@ public abstract class AreaBehavior {
      */
     protected void leave(Interactable entity, List<DiscreteCoordinates> coordinates) {
         for (DiscreteCoordinates coordinate : coordinates) {
-            getCell(coordinate).leave(entity);
+            Cell cell = getCell(coordinate);
+            if (cell != null) {
+                cell.leave(entity);
+            }
         }
     }
 
@@ -165,7 +168,10 @@ public abstract class AreaBehavior {
      */
     protected void enter(Interactable entity, List<DiscreteCoordinates> coordinates) {
         for (DiscreteCoordinates coordinate : coordinates) {
-            getCell(coordinate).enter(entity);
+            Cell cell = getCell(coordinate);
+            if (cell != null) {
+                cell.enter(entity);
+            }
         }
     }
 
@@ -179,8 +185,8 @@ public abstract class AreaBehavior {
     public boolean canLeave(Interactable entity, List<DiscreteCoordinates> coordinates) {
         for (DiscreteCoordinates coordinate : coordinates) {
             Cell cell = getCell(coordinate);
-            if (cell == null || !cell.canLeave(entity)) {
-                return false;
+            if (cell == null || cell.canLeave(entity)) {
+                return true;
             }
         }
         return true;
@@ -194,6 +200,7 @@ public abstract class AreaBehavior {
      */
     public boolean canEnter(Interactable entity, List<DiscreteCoordinates> coordinates) {
         for (DiscreteCoordinates coordinate : coordinates) {
+            System.out.println(coordinate);
             Cell cell = getCell(coordinate);
             if (cell == null || !cell.canEnter(entity)) {
                 return false;

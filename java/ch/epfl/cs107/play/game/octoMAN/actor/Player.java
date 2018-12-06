@@ -187,12 +187,18 @@ public class Player extends MovableAreaEntity implements Interactor {
 
         @Override
         public void interactWith(Portal portal) {
+            leaveCurrentArea();
             lastPortal = portal;
         }
 
         @Override
         public void interactWith(Orb orb) {
             orb.collect(holder);
+        }
+
+        @Override
+        public void interactWith(Toggleable toggle) {
+            toggle.toggle();
         }
 
         @Override
