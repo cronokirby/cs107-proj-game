@@ -55,7 +55,6 @@ public class OctoGame extends AreaGame {
             Area next = setCurrentArea(lastPortal.getDestinationArea(), false);
             player.enterArea(next, lastPortal.getDestinationPosition());
         }
-        holder.draw(getWindow());
     }
 
     @Override

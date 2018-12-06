@@ -143,6 +143,9 @@ public class Player extends MovableAreaEntity implements Interactor {
         if (displayHalo) {
             halo.draw(canvas);
         }
+        if (lastPortal == null) {
+            holder.draw(canvas);
+        }
     }
 
     /**
