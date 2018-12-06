@@ -1,7 +1,5 @@
 package ch.epfl.cs107.play.game.octoMAN.actor;
 
-import ch.epfl.cs107.play.game.actor.Actor;
-import ch.epfl.cs107.play.game.actor.Entity;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
@@ -12,15 +10,11 @@ import java.util.Map;
 /**
  * Represents a hud display of every orb the player has collected
  */
-public class OrbHolder extends Entity {
+public class OrbHolder extends AnchoredEntity {
     /// Maps each orb to either a null sprite, or a valid sprite
     private Map<Orb.Type, Sprite> orbs;
     /// The sprite to display when we encounter a missing orb
     private Sprite nullSprite;
-    /// The offset from the top the anchor
-    private Vector startPosition;
-    /// The anchor this hud is centered on
-    private Actor anchor;
 
     /**
      * Construct a new orbholder from an offset position.
@@ -31,17 +25,9 @@ public class OrbHolder extends Entity {
         super(position);
         orbs = new HashMap<>();
         nullSprite = new Sprite("orb.0", 1.f, 1.f, this);
-        startPosition = position;
         for (Orb.Type t : Orb.Type.values()) {
             orbs.put(t, null);
         }
-    }
-
-    /**
-     * Set an anchor for this orb holder to center around
-     */
-    public void setAnchor(Actor anchor) {
-        this.anchor = anchor;
     }
 
     /**
@@ -56,7 +42,6 @@ public class OrbHolder extends Entity {
 
     @Override
     public void draw(Canvas canvas) {
-        setCurrentPosition(anchor.getPosition().add(startPosition));
         for (Orb.Type t : Orb.Type.values()) {
             setCurrentPosition(getPosition().add(1.f, 0));
             Sprite s = orbs.get(t);
@@ -66,6 +51,5 @@ public class OrbHolder extends Entity {
                 s.draw(canvas);
             }
         }
-        setCurrentPosition(startPosition);
     }
 }
