@@ -38,7 +38,6 @@ public class OctoGame extends AreaGame {
             addArea(a);
         }
         addArea(new Environment());
-        boolean areasOK = beginAreas();
         setCurrentArea(starting.getTitle(), false);
 
         hud = new Hud();
@@ -47,7 +46,7 @@ public class OctoGame extends AreaGame {
         player = new Player(hud.getHolder(), starting, "boy.1", Orientation.DOWN, playerPos);
         player.enterArea(starting, playerPos);
         hud.setAnchor(player);
-        return superOK && areasOK;
+        return superOK;
     }
 
     @Override

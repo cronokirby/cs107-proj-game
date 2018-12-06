@@ -39,13 +39,12 @@ public class Enigme extends AreaGame {
         addArea(new Level1());
         addArea(new Level2());
         addArea(new Level3());
-        boolean roomsOK = beginAreas();
         setCurrentArea(starting.getTitle(), false);
         // Initialising the player
         DiscreteCoordinates playerPOS = new DiscreteCoordinates(5, 5);
         player = new EnigmePlayer(starting, Orientation.DOWN, playerPOS);
         player.enterArea(starting, playerPOS);
-        return superOK && roomsOK;
+        return superOK;
     }
 
     @Override
