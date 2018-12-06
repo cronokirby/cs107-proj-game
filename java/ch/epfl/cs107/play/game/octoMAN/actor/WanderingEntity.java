@@ -42,7 +42,7 @@ public abstract class WanderingEntity extends MovableAreaEntity {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        if (canMove()) {
+        if (canMove() && !isMoving()) {
             double random = rand.nextDouble();
             if (random < 1. / getRarity()) {
                 List<Orientation> orientations = Arrays.asList(Orientation.values());

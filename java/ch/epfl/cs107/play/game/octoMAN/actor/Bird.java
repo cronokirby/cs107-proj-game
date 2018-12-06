@@ -18,6 +18,6 @@ public class Bird extends TalkingMob {
 
     @Override
     protected int getRarity() {
-        return 24;
+        return 6;
     }
 }
