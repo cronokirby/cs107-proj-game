@@ -34,6 +34,9 @@ public class OctoGame extends AreaGame {
         for (OctoArea a : Physics.subRooms()) {
             addArea(a);
         }
+        for (OctoArea a : LifeSciences.subRooms()) {
+            addArea(a);
+        }
         addArea(new Environment());
         boolean areasOK = beginAreas();
         setCurrentArea(starting.getTitle(), false);

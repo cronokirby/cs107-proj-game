@@ -19,8 +19,6 @@ import java.util.List;
 public abstract class Physics extends OctoArea {
     /// The title of this subroom
     private String title;
-    /// The positions of boulders in this room
-    private List<DiscreteCoordinates> boulderPositions;
 
     private Physics(String title) {
         this.title = title;
