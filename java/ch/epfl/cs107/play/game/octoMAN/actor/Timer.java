@@ -17,9 +17,34 @@ public class Timer extends AnchoredEntity {
         super(position);
     }
 
+    private static String pad0(int x) {
+        String input = Integer.toString(x);
+        if (input.length() == 1) {
+            return "0" + input;
+        } else {
+            return input;
+        }
+    }
+
+    private String display() {
+        int acc = (int) elapsed;
+        String secondRest = pad0(acc % 60);
+        acc /= 60;
+        String minuteRest = pad0(acc % 60);
+        acc /= 60;
+        int hours = acc % 60;
+        return hours + ":" + minuteRest + ":" + secondRest;
+    }
+
+    @Override
+    public void update(float deltaTime) {
+        super.update(deltaTime);
+        elapsed += deltaTime;
+    }
+
     @Override
     public void draw(Canvas canvas) {
-        TextGraphics g = new TextGraphics("1:00:15", 1.f, Color.WHITE);
+        TextGraphics g = new TextGraphics(display(), 1.f, Color.WHITE);
         g.setParent(this);
         g.draw(canvas);
     }
