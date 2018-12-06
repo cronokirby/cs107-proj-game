@@ -48,6 +48,12 @@ public interface OctoInteractionVisitor extends AreaInteractionVisitor {
     }
 
     /**
+     * Simulate an interaction with an orb
+     */
+    default void interactWith(Orb orb) {
+    }
+
+    /**
      * Simulate an interaction with a cell
      */
     default void interactWith(OctoBehavior.OctoCell cell) {

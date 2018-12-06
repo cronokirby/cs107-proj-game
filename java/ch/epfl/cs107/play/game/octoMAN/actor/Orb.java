@@ -18,7 +18,8 @@ public class Orb extends AreaEntity implements Portal {
         ELECTRICITY,
         CHEMISTRY,
         MICROTECHNICS,
-        COMPUTERSCIENCE
+        COMPUTERSCIENCE,
+        NULL
     }
 
     /// The underlying type for this orb
@@ -31,7 +32,9 @@ public class Orb extends AreaEntity implements Portal {
 
     public Orb(Type type, Area area, DiscreteCoordinates position) {
         super(area, Orientation.DOWN, position);
-        area.registerActor(this);
+        if (type != Type.NULL) {
+            area.registerActor(this);
+        }
         this.type = type;
         String spriteName = "";
         int y = 8;
@@ -69,9 +72,22 @@ public class Orb extends AreaEntity implements Portal {
                 spriteName = "orb.8";
                 x = 21;
                 break;
+            case NULL:
+                spriteName = "orb.1";
+                x = -1;
+                break;
         }
         sprite = new Sprite(spriteName, 1.f, 1.f, this);
         destinationPosition = new DiscreteCoordinates(x, 8);
+    }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
+
+    public void collect(OrbHolder holder) {
+        holder.insert(this);
+        getOwnerArea().unregisterActor(this);
     }
 
     @Override
@@ -108,5 +124,6 @@ public class Orb extends AreaEntity implements Portal {
     public void acceptInteraction(AreaInteractionVisitor v) {
         OctoInteractionVisitor o = (OctoInteractionVisitor) v;
         o.interactWith((Portal)this);
+        o.interactWith(this);
     }
 }
