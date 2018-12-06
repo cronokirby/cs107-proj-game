@@ -22,7 +22,7 @@ public class BirdFactory {
     /// The name of the bird to spawn
     private String birdName;
     /// How rare birds area
-    private int rarity;
+    private double rarity;
 
     /**
      * Create a new range from a set of coordinates
@@ -31,13 +31,13 @@ public class BirdFactory {
      * @param topX the top right x coordinate
      * @param topY the top right y coordinate
      */
-    public BirdFactory(int botX, int botY, int topX, int topY, String birdName, int rarity) {
+    public BirdFactory(int botX, int botY, int topX, int topY, String birdName, double rarity) {
         this.botX = botX;
         this.botY = botY;
         this.topX = topX;
         this.topY = topY;
         this.birdName = birdName;
-        this.rarity = rarity;
+        this.rarity = rarity + 0.8;
     }
 
     private List<DiscreteCoordinates> sample() {
