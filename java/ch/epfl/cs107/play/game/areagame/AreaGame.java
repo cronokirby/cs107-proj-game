@@ -86,7 +86,7 @@ abstract public class AreaGame implements Game {
 
     @Override
     public void update(float deltaTime) {
-        this.currentArea.update(deltaTime);
+        currentArea.update(deltaTime);
     }
 
     @Override

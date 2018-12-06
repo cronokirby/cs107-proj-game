@@ -29,6 +29,13 @@ public abstract class LifeSciences extends OctoArea {
      */
     protected abstract void addActors();
 
+    /**
+     * Whether or not to reset the room
+     */
+    protected boolean reset() {
+        return true;
+    }
+
     @Override
     public String getTitle() {
         return title;
@@ -43,7 +50,12 @@ public abstract class LifeSciences extends OctoArea {
 
     @Override
     public boolean resume(Window window, FileSystem fileSystem) {
-        return begin(window, fileSystem);
+        if (reset()) {
+            return begin(window, fileSystem);
+        }
+        else {
+            return super.resume(window, fileSystem);
+        }
     }
 
     private static class LifeSciences1 extends LifeSciences {
@@ -72,6 +84,15 @@ public abstract class LifeSciences extends OctoArea {
         @Override
         protected void addActors() {
             new Orb(Orb.Type.LIFESCIENCES, this, new DiscreteCoordinates(2, 6));
+            new StandardDoor(
+                    Logic.TRUE, "LifeSciences1", new DiscreteCoordinates(4, 9),
+                    this, new DiscreteCoordinates(2, 0)
+            );
+        }
+
+        @Override
+        protected boolean reset() {
+            return false;
         }
     }
 

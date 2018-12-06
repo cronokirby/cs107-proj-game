@@ -44,7 +44,7 @@ public abstract class Door extends AreaEntity implements Portal {
     /**
      * Returns true when this door is open.
      */
-    private boolean isOpen() {
+    protected boolean isOpen() {
         return signal.isOn();
     }
 

@@ -34,6 +34,12 @@ public abstract class Physics extends OctoArea {
      */
     protected abstract void addActors();
 
+    /**
+     * Whether or not to reset this room
+     */
+    protected boolean reset() {
+        return true;
+    }
 
     @Override
     public String getTitle() {
@@ -53,7 +59,11 @@ public abstract class Physics extends OctoArea {
 
     @Override
     public boolean resume(Window window, FileSystem fileSystem) {
-        return begin(window, fileSystem);
+        if (reset()) {
+            return begin(window, fileSystem);
+        } else {
+            return super.resume(window, fileSystem);
+        }
     }
 
 
@@ -313,7 +323,13 @@ public abstract class Physics extends OctoArea {
             );
             new Orb(Orb.Type.PHYSICS, this, new DiscreteCoordinates(2, 6));
         }
+
+        @Override
+        protected boolean reset() {
+            return false;
+        }
     }
+
 
     /**
      * Get all the subrooms that constitute this area
