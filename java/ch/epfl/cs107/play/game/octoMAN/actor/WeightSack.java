@@ -1,10 +1,13 @@
 package ch.epfl.cs107.play.game.octoMAN.actor;
 
+import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Represents an inventory of weights that the player
@@ -76,6 +79,10 @@ public class WeightSack extends AnchoredEntity {
         for (Element e : elements) {
             setCurrentPosition(getPosition().add(0, -1.f));
             e.sprite.draw(canvas);
+            TextGraphics g = new TextGraphics(Integer.toString(e.count), .8f, Color.WHITE);
+            g.setParent(this);
+            g.setAnchor(new Vector(1.2f, 0.25f));
+            g.draw(canvas);
             if (i == selected) {
                 cursor.draw(canvas);
             }
