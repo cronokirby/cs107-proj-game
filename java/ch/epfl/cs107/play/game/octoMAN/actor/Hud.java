@@ -13,11 +13,14 @@ public class Hud extends Entity {
     private OrbHolder holder;
     /// The timer in the hud
     private Timer timer;
+    /// The weight inventory in the hud
+    private WeightSack sack;
 
     public Hud() {
         super(new Vector(0, 0));
         holder = new OrbHolder(new Vector(-11f, 9f));
         timer = new Timer(new Vector(6f, 9.5f));
+        sack = new WeightSack(new Vector(-10f, 7f));
     }
 
     /**
@@ -28,11 +31,19 @@ public class Hud extends Entity {
     }
 
     /**
+     * Get the weight sack inside this hud
+     */
+    public WeightSack getWeightSack() {
+        return sack;
+    }
+
+    /**
      * Set the anchor actor for this HUD
      */
     public void setAnchor(Actor anchor) {
         holder.setAnchor(anchor);
         timer.setAnchor(anchor);
+        sack.setAnchor(anchor);
     }
 
     @Override
@@ -40,11 +51,13 @@ public class Hud extends Entity {
         super.update(deltaTime);
         holder.update(deltaTime);
         timer.update(deltaTime);
+        sack.update(deltaTime);
     }
 
     @Override
     public void draw(Canvas canvas) {
         holder.draw(canvas);
         timer.draw(canvas);
+        sack.draw(canvas);
     }
 }

@@ -3,10 +3,7 @@ package ch.epfl.cs107.play.game.octoMAN;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.octoMAN.actor.Hud;
-import ch.epfl.cs107.play.game.octoMAN.actor.OrbHolder;
-import ch.epfl.cs107.play.game.octoMAN.actor.Player;
-import ch.epfl.cs107.play.game.octoMAN.actor.Portal;
+import ch.epfl.cs107.play.game.octoMAN.actor.*;
 import ch.epfl.cs107.play.game.octoMAN.area.*;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -40,6 +37,9 @@ public class OctoGame extends AreaGame {
         addArea(new Environment());
         setCurrentArea(starting.getTitle(), false);
         hud = new Hud();
+        WeightSack sack = hud.getWeightSack();
+        sack.addWeight(new Weight("weight.tri.1", 1));
+        sack.addWeight(new Weight("weight.square.2", 1));
         // Initialising the player
         DiscreteCoordinates playerPos = new DiscreteCoordinates(5, 1);
         player = new Player(hud.getHolder(), starting, "boy.1", Orientation.DOWN, playerPos);
