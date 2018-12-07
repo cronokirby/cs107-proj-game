@@ -16,12 +16,9 @@ import java.util.List;
 /**
  * Holds the logic for rooms in the physics area
  */
-public abstract class Physics extends OctoArea {
-    /// The title of this subroom
-    private String title;
-
+public abstract class Physics extends SubRoom {
     private Physics(String title) {
-        this.title = title;
+        super(title);
     }
 
     /**
@@ -29,41 +26,13 @@ public abstract class Physics extends OctoArea {
      */
     protected abstract List<DiscreteCoordinates> getBoulders();
 
-    /**
-     * Add all the necessary actors (besides boulders) to this area
-     */
-    protected abstract void addActors();
-
-    /**
-     * Whether or not to reset this room
-     */
-    protected boolean reset() {
-        return true;
-    }
-
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
         boolean superOK = super.begin(window, fileSystem);
-        for (DiscreteCoordinates coordinate : getBoulders()) {
-            new Boulder(this, coordinate);
+        for (DiscreteCoordinates pos : getBoulders()) {
+            new Boulder(this, pos);
         }
-        addActors();
         return superOK;
-    }
-
-
-    @Override
-    public boolean resume(Window window, FileSystem fileSystem) {
-        if (reset()) {
-            return begin(window, fileSystem);
-        } else {
-            return super.resume(window, fileSystem);
-        }
     }
 
     private static class Physics1 extends Physics {

@@ -13,49 +13,9 @@ import java.util.List;
 /**
  * Represents an abstract version of a sub room in the life sciences area
  */
-public abstract class LifeSciences extends OctoArea {
-    /// The title of this sub room
-    private String title;
-
-    /**
-     * Construct a new subroom from a title
-     */
+public abstract class LifeSciences extends SubRoom {
     private LifeSciences(String title) {
-        this.title = title;
-    }
-
-    /**
-     * Add all the necessary actors to this area
-     */
-    protected abstract void addActors();
-
-    /**
-     * Whether or not to reset the room
-     */
-    protected boolean reset() {
-        return true;
-    }
-
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public boolean begin(Window window, FileSystem fileSystem) {
-        boolean superOK = super.begin(window, fileSystem);
-        addActors();
-        return superOK;
-    }
-
-    @Override
-    public boolean resume(Window window, FileSystem fileSystem) {
-        if (reset()) {
-            return begin(window, fileSystem);
-        }
-        else {
-            return super.resume(window, fileSystem);
-        }
+        super(title);
     }
 
     private static class LifeSciences1 extends LifeSciences {
