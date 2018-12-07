@@ -39,8 +39,8 @@ public class Player extends MovableAreaEntity implements Interactor {
     private boolean advancedDialog;
     /// The Interaction Handler for this player
     private final PlayerHandler handler;
-    /// The orb holder for this player
-    private OrbHolder holder;
+    /// The HUD the player is interacting with
+    private Hud hud;
     /// Whether or not we're currently slipping
     /// Used to not play moving frames
     private boolean slipping;
@@ -49,7 +49,7 @@ public class Player extends MovableAreaEntity implements Interactor {
     /// The amount of frames per move
     private final int FRAMES_PER_MOVE = 8;
 
-    public Player(OrbHolder holder, Area area, String animationName, Orientation orientation, DiscreteCoordinates position) {
+    public Player(Hud hud, Area area, String animationName, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
         this.animation = new Animation(
                 animationName, this, orientation,
@@ -62,7 +62,7 @@ public class Player extends MovableAreaEntity implements Interactor {
         this.halo.setAnchor(new Vector(-4.5f, -4.5f));
         this.displayHalo = false;
         this.dialog = new AdvanceDialog("dialog.1", area);
-        this.holder = holder;
+        this.hud = hud;
     }
 
     private Button getKey(int code) {
@@ -104,6 +104,11 @@ public class Player extends MovableAreaEntity implements Interactor {
                 advancedDialog = true;
             }
         } else {
+            // Hud interaction
+            // J key
+            if (getKey(74).isPressed()) {
+                hud.getWeightSack().incrementCursor();
+            }
             Orientation orientation = null;
             running = !slipping && getKey(Keyboard.K).isDown();
             if (getKey(Keyboard.LEFT).isDown() || getKey(Keyboard.A).isDown()) {
@@ -172,7 +177,7 @@ public class Player extends MovableAreaEntity implements Interactor {
             DiscreteCoordinates behindMe = getCurrentMainCellCoordinates().jump(orientation.opposite().toVector());
             Area thisArea = getOwnerArea();
             if (thisArea.canEnter(Player.this, Collections.singletonList(behindMe))) {
-                Player clone = new Player(holder, thisArea, animationName, orientation, behindMe);
+                Player clone = new Player(hud, thisArea, animationName, orientation, behindMe);
                 // We can't reuse enterArea
                 thisArea.registerActor(clone);
                 clone.setOwnerArea(thisArea);
@@ -193,7 +198,7 @@ public class Player extends MovableAreaEntity implements Interactor {
 
         @Override
         public void interactWith(Orb orb) {
-            orb.collect(holder);
+            orb.collect(hud.getHolder());
         }
 
         @Override

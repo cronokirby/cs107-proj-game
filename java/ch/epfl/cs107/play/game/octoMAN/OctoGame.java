@@ -42,7 +42,7 @@ public class OctoGame extends AreaGame {
         sack.addWeight(new Weight("weight.square.2", 1));
         // Initialising the player
         DiscreteCoordinates playerPos = new DiscreteCoordinates(5, 1);
-        player = new Player(hud.getHolder(), starting, "boy.1", Orientation.DOWN, playerPos);
+        player = new Player(hud, starting, "boy.1", Orientation.DOWN, playerPos);
         player.enterArea(starting, playerPos);
         hud.setAnchor(player);
         return superOK;
