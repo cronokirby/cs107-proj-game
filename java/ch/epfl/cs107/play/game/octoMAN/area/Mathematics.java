@@ -11,11 +11,22 @@ public abstract class Mathematics extends SubRoom {
         super(title);
     }
 
+    private static class Mathematics1 extends Mathematics {
+        private Mathematics1() {
+            super("Mathematics1");
+        }
+
+        @Override
+        protected void addActors() {
+        }
+    }
+
     /**
      * Get a list of all the sub rooms in this area
      */
     public List<Mathematics> subRooms() {
         List<Mathematics> subRooms = new LinkedList<>();
+        subRooms.add(new Mathematics1());
         return subRooms;
     }
 }

@@ -4,7 +4,7 @@ import sys
 import xml.etree.cElementTree as ET
 
 
-WALKABLE = ['2', '4', '6', '8']
+WALKABLE = ['2', '4', '6', '8', '45']
 SLIPPERY = ['3']
 
 

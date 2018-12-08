@@ -19,7 +19,7 @@ public abstract class LifeSciences extends SubRoom {
     }
 
     private static class LifeSciences1 extends LifeSciences {
-        public LifeSciences1() {
+        private LifeSciences1() {
             super("LifeSciences1");
         }
 
@@ -41,7 +41,7 @@ public abstract class LifeSciences extends SubRoom {
     }
 
     private static class LifeSciences2 extends LifeSciences {
-        public LifeSciences2() {
+        private LifeSciences2() {
             super("LifeSciences2");
         }
 
@@ -83,7 +83,7 @@ public abstract class LifeSciences extends SubRoom {
     }
 
     private static class LifeSciences4 extends LifeSciences {
-        public LifeSciences4() {
+        private LifeSciences4() {
             super("LifeSciences4");
         }
 
@@ -106,7 +106,7 @@ public abstract class LifeSciences extends SubRoom {
     }
 
     private static class LifeSciences9 extends LifeSciences {
-        public LifeSciences9() {
+        private LifeSciences9() {
             super("LifeSciences9");
         }
 
