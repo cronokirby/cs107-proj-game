@@ -31,6 +31,9 @@ public class OctoGame extends AreaGame {
         for (OctoArea a : Physics.subRooms()) {
             addArea(a);
         }
+        for (OctoArea a : Mathematics.subRooms()) {
+            addArea(a);
+        }
         for (OctoArea a : LifeSciences.subRooms()) {
             addArea(a);
         }

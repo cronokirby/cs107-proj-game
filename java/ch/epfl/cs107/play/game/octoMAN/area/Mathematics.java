@@ -1,5 +1,9 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
+import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.signal.logic.Logic;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,13 +22,17 @@ public abstract class Mathematics extends SubRoom {
 
         @Override
         protected void addActors() {
+            new StandardDoor(
+                    Logic.TRUE, "LevelSelect", new DiscreteCoordinates(8,8),
+                    this, new DiscreteCoordinates(5, 0)
+            );
         }
     }
 
     /**
      * Get a list of all the sub rooms in this area
      */
-    public List<Mathematics> subRooms() {
+    public static List<Mathematics> subRooms() {
         List<Mathematics> subRooms = new LinkedList<>();
         subRooms.add(new Mathematics1());
         return subRooms;
