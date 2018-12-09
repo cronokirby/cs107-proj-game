@@ -135,7 +135,7 @@ public class WeightSack extends AnchoredEntity {
         if (target.decrement()) {
             elements.remove(selected);
             if (selected >= elements.size()) {
-                selected = elements.size();
+                selected = elements.size() - 1;
             }
         }
         return target.weight;
