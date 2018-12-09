@@ -57,9 +57,9 @@ public class Player extends MovableAreaEntity implements Interactor {
         );
         this.animationName = animationName;
         this.handler = new PlayerHandler();
-        this.halo = new ImageGraphics(ResourcePath.getForegrounds("lightHalo"), 10.f, 10.f);
+        this.halo = new ImageGraphics(ResourcePath.getForegrounds("lightHalo"), 30.f, 30.f);
         this.halo.setParent(this);
-        this.halo.setAnchor(new Vector(-4.5f, -4.5f));
+        this.halo.setAnchor(new Vector(-14.5f, -14.5f));
         this.displayHalo = false;
         this.dialog = new AdvanceDialog("dialog.1", area);
         this.hud = hud;
