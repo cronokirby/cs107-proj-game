@@ -1,9 +1,6 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
-import ch.epfl.cs107.play.game.octoMAN.actor.Pedestal;
-import ch.epfl.cs107.play.game.octoMAN.actor.Scale;
-import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
-import ch.epfl.cs107.play.game.octoMAN.actor.Weight;
+import ch.epfl.cs107.play.game.octoMAN.actor.*;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
@@ -40,9 +37,29 @@ public abstract class Mathematics extends SubRoom {
             right.add(new Pedestal(this, new DiscreteCoordinates(6, 5)));
             Logic scale = new Scale(left, right, this, new DiscreteCoordinates(5, 5));
             new StandardDoor(
-                    scale, "LevelSelect", new DiscreteCoordinates(8,8),
+                    Logic.TRUE, "LevelSelect", new DiscreteCoordinates(8,8),
                     this, new DiscreteCoordinates(5, 0)
             );
+            new StandardDoor(
+                   scale, "Mathematics9" , new DiscreteCoordinates(2, 1),
+                    this, new DiscreteCoordinates(5, 10)
+            );
+        }
+    }
+
+    private static class Mathematics9 extends Mathematics {
+        private Mathematics9() {
+            super("Mathematics9");
+        }
+
+        @Override
+        protected void addActors() {
+            new Orb(Orb.Type.MATHEMATICS, this, new DiscreteCoordinates(2, 6));
+        }
+
+        @Override
+        protected boolean reset() {
+            return false;
         }
     }
 
@@ -52,6 +69,7 @@ public abstract class Mathematics extends SubRoom {
     public static List<Mathematics> subRooms() {
         List<Mathematics> subRooms = new LinkedList<>();
         subRooms.add(new Mathematics1());
+        subRooms.add(new Mathematics9());
         return subRooms;
     }
 }
