@@ -1,13 +1,15 @@
 package ch.epfl.cs107.play.game.octoMAN.actor;
 
+import ch.epfl.cs107.play.game.actor.Graphics;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Represents an inventory of weights that the player
@@ -17,28 +19,27 @@ public class WeightSack extends AnchoredEntity {
     /**
      * Represents the type of elements stored in this weight sack
      */
-    private class Element {
+    private class Element implements Graphics {
         private final Weight weight;
         private int count;
-        private final Sprite sprite;
 
-        public Element(Weight weight) {
+        private Element(Weight weight) {
             this.weight = weight;
             this.count = 1;
-            this.sprite = new Sprite(weight.getType(), 1.f, 1.f, WeightSack.this);
+            weight.attachSprite(WeightSack.this);
         }
 
         /**
          * Increment the count of this element
          */
-        public void increment() {
+        private void increment() {
             ++count;
         }
 
         /**
          * Returns true if this element is now empty
          */
-        public boolean decrement() {
+        private boolean decrement() {
             --count;
             return count <= 0;
         }
@@ -54,6 +55,11 @@ public class WeightSack extends AnchoredEntity {
         @Override
         public int hashCode() {
             return Objects.hash(weight.getType());
+        }
+
+        @Override
+        public void draw(Canvas canvas) {
+            weight.draw(canvas);
         }
     }
 
@@ -78,7 +84,7 @@ public class WeightSack extends AnchoredEntity {
         int i = 0;
         for (Element e : elements) {
             setCurrentPosition(getPosition().add(0, -1.f));
-            e.sprite.draw(canvas);
+            e.draw(canvas);
             TextGraphics g = new TextGraphics(Integer.toString(e.count), .8f, Color.WHITE);
             g.setParent(this);
             g.setAnchor(new Vector(1.2f, 0.25f));
