@@ -89,8 +89,9 @@ public class Player extends MovableAreaEntity implements Interactor {
     /**
      * Make the player leave the area they are in
      */
-    public void leaveCurrentArea() {
+    private void leaveCurrentArea() {
         getOwnerArea().unregisterActor(this);
+        hud.getWeightSack().empty();
     }
 
     @Override

@@ -96,7 +96,6 @@ public class WeightSack extends AnchoredEntity {
         }
     }
 
-
     /**
      * Add a new weight to the collection
      * @param weight the weight to add, not null
@@ -120,7 +119,11 @@ public class WeightSack extends AnchoredEntity {
      * Move the cursor forward, cycling if necessary
      */
     public void incrementCursor() {
-        selected = (selected + 1) % elements.size();
+        int sz = elements.size();
+        // selected should remain at 0 otherwise
+        if (sz > 0) {
+            selected = selected + 1 % sz;
+        }
     }
 
     /**
@@ -135,9 +138,17 @@ public class WeightSack extends AnchoredEntity {
         if (target.decrement()) {
             elements.remove(selected);
             if (selected >= elements.size()) {
-                selected = elements.size() - 1;
+                selected = Math.max(elements.size() - 1, 0);
             }
         }
         return target.weight;
+    }
+
+    /**
+     * Remove all elements from this sack
+     */
+    public void empty() {
+        elements.clear();
+        selected = 0;
     }
 }
