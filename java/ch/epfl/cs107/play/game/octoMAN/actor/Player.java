@@ -207,6 +207,19 @@ public class Player extends MovableAreaEntity implements Interactor {
         }
 
         @Override
+        public void interactWith(Pedestal pedestal) {
+            if (pedestal.isEmpty()) {
+                Weight w = hud.getWeightSack().take();
+                // This is fine, it just means we have no weights to place
+                if (w != null) {
+                    pedestal.place(w);
+                }
+            } else {
+                hud.getWeightSack().addWeight(pedestal.take());
+            }
+        }
+
+        @Override
         public void interactWith(OctoBehavior.OctoCell cell) {
             if (cell.type == OctoBehavior.OctoCellType.SLIPPERY) {
                 slipping = true;

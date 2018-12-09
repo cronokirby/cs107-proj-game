@@ -60,6 +60,12 @@ public interface OctoInteractionVisitor extends AreaInteractionVisitor {
     }
 
     /**
+     * Simulate an interaction with a pedestal
+     */
+    default void interactWith(Pedestal pedestal) {
+    }
+
+    /**
      * Simulate an interaction with a cell
      */
     default void interactWith(OctoBehavior.OctoCell cell) {

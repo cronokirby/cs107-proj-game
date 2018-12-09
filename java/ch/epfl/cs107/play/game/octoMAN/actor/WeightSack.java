@@ -99,6 +99,7 @@ public class WeightSack extends AnchoredEntity {
 
     /**
      * Add a new weight to the collection
+     * @param weight the weight to add, not null
      */
     public void addWeight(Weight weight) {
         Element already = null;
