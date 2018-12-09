@@ -18,7 +18,8 @@ public class Scale extends AreaEntity implements Logic {
     private enum Bias {
         Left,
         Right,
-        Even
+        Even,
+        NoWeights
     }
 
     /// The sprite to display when the scale leans left
@@ -27,6 +28,8 @@ public class Scale extends AreaEntity implements Logic {
     private Sprite rightSprite;
     /// The sprite to display when the scale is even
     private Sprite evenSprite;
+    /// The sprite to display when the scale has no weights
+    private Sprite emptySprite;
     /// A list of pedestals on the left side
     private List<Pedestal> leftPedestals;
     /// A list of pedestals on the right side
@@ -41,6 +44,7 @@ public class Scale extends AreaEntity implements Logic {
         leftSprite = new Sprite("scale.left", 1.f, 1.f, this);
         rightSprite = new Sprite("scale.right", 1.f, 1.f, this);
         evenSprite = new Sprite("scale.even", 1.f, 1.f, this);
+        emptySprite = new Sprite("scale.empty", 1.f, 1.f, this);
         this.leftPedestals = leftPedestals;
         this.rightPedestals = rightPedestals;
         setBias();
@@ -62,6 +66,9 @@ public class Scale extends AreaEntity implements Logic {
             bias = Bias.Left;
         } else if (rightSum > leftSum) {
             bias = Bias.Right;
+        } else if (leftSum == 0) {
+            // the right sum is also 0 since they're equal
+            bias = Bias.NoWeights;
         } else {
             bias = Bias.Even;
         }
@@ -81,6 +88,9 @@ public class Scale extends AreaEntity implements Logic {
                 break;
             case Left:
                 leftSprite.draw(canvas);
+                break;
+            case NoWeights:
+                emptySprite.draw(canvas);
                 break;
             case Even:
                 evenSprite.draw(canvas);
