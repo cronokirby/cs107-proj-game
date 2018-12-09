@@ -221,6 +221,11 @@ public class Player extends MovableAreaEntity implements Interactor {
         }
 
         @Override
+        public void interactWith(LightToggler toggler) {
+            displayHalo = toggler.isDark();
+        }
+
+        @Override
         public void interactWith(OctoBehavior.OctoCell cell) {
             if (cell.type == OctoBehavior.OctoCellType.SLIPPERY) {
                 slipping = true;

@@ -1,5 +1,6 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
+import ch.epfl.cs107.play.game.octoMAN.actor.LightToggler;
 import ch.epfl.cs107.play.game.octoMAN.actor.Orb;
 import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -27,6 +28,7 @@ public abstract class Electricity extends SubRoom {
                     Logic.TRUE, "LevelSelect", new DiscreteCoordinates(14, 8),
                     this, new DiscreteCoordinates(2, 0)
             );
+            new LightToggler(true, this, new DiscreteCoordinates(2, 1));
             new StandardDoor(
                     Logic.TRUE, "Electricity9", new DiscreteCoordinates(2, 1),
                     this, new DiscreteCoordinates(17, 19)

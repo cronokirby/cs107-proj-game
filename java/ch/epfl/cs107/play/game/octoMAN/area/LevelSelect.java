@@ -1,5 +1,6 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
+import ch.epfl.cs107.play.game.octoMAN.actor.LightToggler;
 import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -32,6 +33,8 @@ public class LevelSelect extends OctoArea {
             new StandardDoor(open, destinations[i], destination, this, position);
             x += 3;
         }
+        // remove the light when we exit the electricity area
+        new LightToggler(false, this, new DiscreteCoordinates(14, 8));
         return superOK;
     }
 }
