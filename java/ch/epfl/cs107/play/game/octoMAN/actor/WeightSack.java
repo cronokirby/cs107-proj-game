@@ -24,9 +24,9 @@ public class WeightSack extends AnchoredEntity {
         private int count;
 
         private Element(Weight weight) {
-            this.weight = weight;
+            this.weight = new Weight(weight);
             this.count = 1;
-            weight.attachSprite(WeightSack.this);
+            this.weight.attachSprite(WeightSack.this);
         }
 
         /**
@@ -122,7 +122,7 @@ public class WeightSack extends AnchoredEntity {
         int sz = elements.size();
         // selected should remain at 0 otherwise
         if (sz > 0) {
-            selected = selected + 1 % sz;
+            selected = (selected + 1) % sz;
         }
     }
 
@@ -138,10 +138,10 @@ public class WeightSack extends AnchoredEntity {
         if (target.decrement()) {
             elements.remove(selected);
             if (selected >= elements.size()) {
-                selected = Math.max(elements.size() - 1, 0);
+                selected = Math.max((elements.size() - 1), 0);
             }
         }
-        return target.weight;
+        return new Weight(target.weight);
     }
 
     /**

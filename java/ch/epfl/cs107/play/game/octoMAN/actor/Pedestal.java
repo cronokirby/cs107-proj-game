@@ -50,6 +50,18 @@ public class Pedestal extends AreaEntity {
         return ret;
     }
 
+    /**
+     * Get the weight on this pedestal
+     * @return the weight of the object on the pedestal, or 0 if no object
+     */
+    public int weigh() {
+        if (weight != null) {
+            return weight.getWeight();
+        } else {
+            return 0;
+        }
+    }
+
     @Override
     public void draw(Canvas canvas) {
         sprite.draw(canvas);

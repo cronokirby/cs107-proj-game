@@ -23,6 +23,11 @@ public class Weight implements Graphics {
         this.weight = weight;
     }
 
+    public Weight(Weight other) {
+        type = other.type;
+        weight = other.weight;
+    }
+
     /**
      * Get the type of this object
      */
