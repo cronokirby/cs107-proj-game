@@ -9,6 +9,10 @@ import ch.epfl.cs107.play.game.octoMAN.handler.OctoInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Represents an orb that can be collected
  */
@@ -22,7 +26,13 @@ public class Orb extends AreaEntity implements Portal {
         CHEMISTRY,
         MICROTECHNICS,
         COMPUTERSCIENCE,
-        NULL
+        NULL;
+
+        public static List<Type> realValues() {
+            List<Type> ret = new ArrayList<>(Arrays.asList(Type.values()));
+            ret.remove(NULL);
+            return ret;
+        }
     }
 
     /// The underlying type for this orb

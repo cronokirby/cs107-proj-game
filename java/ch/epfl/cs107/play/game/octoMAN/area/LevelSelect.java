@@ -15,11 +15,14 @@ public class LevelSelect extends OctoArea {
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
         boolean superOK = super.begin(window, fileSystem);
-        String[] destinations = {"Physics1", "Environment", "Mathematics1", "LifeSciences1", "", "", "", ""};
+        String[] destinations = {
+                "Physics1", "Environment", "Mathematics1", "LifeSciences1",
+                "Electricity1", "", "", ""
+        };
         DiscreteCoordinates[] destinationPositions = {
                 new DiscreteCoordinates(4, 1), new DiscreteCoordinates(5, 2),
                 new DiscreteCoordinates(5, 1), new DiscreteCoordinates(4, 1),
-                null, null, null, null
+                new DiscreteCoordinates(2, 1), null, null, null
         };
         int x = 2;
         for (int i = 0; i < destinations.length; ++i) {

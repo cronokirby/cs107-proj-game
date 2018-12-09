@@ -25,7 +25,7 @@ public class OrbHolder extends AnchoredEntity {
         super(position);
         orbs = new HashMap<>();
         nullSprite = new Sprite("orb.0", 1.f, 1.f, this);
-        for (Orb.Type t : Orb.Type.values()) {
+        for (Orb.Type t : Orb.Type.realValues()) {
             orbs.put(t, null);
         }
     }
@@ -42,7 +42,7 @@ public class OrbHolder extends AnchoredEntity {
 
     @Override
     public void draw(Canvas canvas) {
-        for (Orb.Type t : Orb.Type.values()) {
+        for (Orb.Type t : Orb.Type.realValues()) {
             setCurrentPosition(getPosition().add(1.f, 0));
             Sprite s = orbs.get(t);
             if (s == null) {
