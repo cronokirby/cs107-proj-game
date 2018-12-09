@@ -72,6 +72,12 @@ public interface OctoInteractionVisitor extends AreaInteractionVisitor {
     }
 
     /**
+     * Simulate an interaction with a light
+     */
+    default void interactWith(Light light) {
+    }
+
+    /**
      * Simulate an interaction with a cell
      */
     default void interactWith(OctoBehavior.OctoCell cell) {

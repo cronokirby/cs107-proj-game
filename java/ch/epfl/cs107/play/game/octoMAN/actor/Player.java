@@ -29,6 +29,8 @@ public class Player extends MovableAreaEntity implements Interactor {
     private ImageGraphics halo;
     /// Whether or not to display the halo
     private boolean displayHalo;
+    /// The scale associated with the halo
+    private float haloScale;
     /// The dialog for other actors to fill
     private AdvanceDialog dialog;
     /// The last portal this player passed through, null if none
@@ -59,8 +61,9 @@ public class Player extends MovableAreaEntity implements Interactor {
         this.handler = new PlayerHandler();
         this.halo = new ImageGraphics(ResourcePath.getForegrounds("lightHalo"), 30.f, 30.f);
         this.halo.setParent(this);
-        this.halo.setAnchor(new Vector(-14.5f, -14.5f));
+        //this.halo.setAnchor(new Vector(-14.8f, -14.8f));
         this.displayHalo = false;
+        this.haloScale = 1.f;
         this.dialog = new AdvanceDialog("dialog.1", area);
         this.hud = hud;
     }
@@ -90,6 +93,7 @@ public class Player extends MovableAreaEntity implements Interactor {
      * Make the player leave the area they are in
      */
     private void leaveCurrentArea() {
+        haloScale = 1.f;
         getOwnerArea().unregisterActor(this);
         hud.getWeightSack().empty();
     }
@@ -138,7 +142,9 @@ public class Player extends MovableAreaEntity implements Interactor {
                 animation.resetOrientation(getOrientation());
                 slipping = false;
             }
-            halo.setRelativeTransform(Transform.I.scaled(1.f));
+            // this works, but I don't really know why
+            Vector translate = new Vector(-14.5f, -14.5f).sub(new Vector(.1f, .1f).mul(haloScale));
+            halo.setRelativeTransform(Transform.I.translated(translate).scaled(haloScale));
         }
     }
 
@@ -223,6 +229,12 @@ public class Player extends MovableAreaEntity implements Interactor {
         @Override
         public void interactWith(LightToggler toggler) {
             displayHalo = toggler.isDark();
+        }
+
+        @Override
+        public void interactWith(Light light) {
+            haloScale += .5f;
+            light.collect();
         }
 
         @Override
