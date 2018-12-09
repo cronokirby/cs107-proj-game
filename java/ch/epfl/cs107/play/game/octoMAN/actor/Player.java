@@ -233,7 +233,7 @@ public class Player extends MovableAreaEntity implements Interactor {
 
         @Override
         public void interactWith(Light light) {
-            haloScale += .5f;
+            haloScale += .3f;
             light.collect();
         }
 

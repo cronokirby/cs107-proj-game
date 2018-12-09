@@ -30,9 +30,12 @@ public abstract class Electricity extends SubRoom {
                     this, new DiscreteCoordinates(2, 0)
             );
             new LightToggler(true, this, new DiscreteCoordinates(2, 1));
-            for (int x = 3; x < 8; ++x) {
-                new Light(this, new DiscreteCoordinates(x, 1));
-            }
+            new Light(this, new DiscreteCoordinates(14, 6));
+            new Light(this, new DiscreteCoordinates(5, 7));
+            new Light(this, new DiscreteCoordinates(3, 12));
+            new Light(this, new DiscreteCoordinates(5, 14));
+            new Light(this, new DiscreteCoordinates(9, 10));
+            new Light(this, new DiscreteCoordinates(18, 14));
             new StandardDoor(
                     Logic.TRUE, "Electricity9", new DiscreteCoordinates(2, 1),
                     this, new DiscreteCoordinates(17, 19)
@@ -48,6 +51,7 @@ public abstract class Electricity extends SubRoom {
 
         @Override
         protected void addActors() {
+            new LightToggler(false, this, new DiscreteCoordinates(2, 1));
             new Orb(Orb.Type.ELECTRICITY, this, new DiscreteCoordinates(2, 6));
         }
 
