@@ -38,6 +38,13 @@ public class Hud extends Entity {
     }
 
     /**
+     * Get the timer inside this hud
+     */
+    public Timer getTimer() {
+        return timer;
+    }
+
+    /**
      * Set the anchor actor for this HUD
      */
     public void setAnchor(Actor anchor) {

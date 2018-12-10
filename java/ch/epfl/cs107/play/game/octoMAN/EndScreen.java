@@ -27,7 +27,10 @@ public class EndScreen implements Game {
     /// The final time display
     private Graphics finalTime;
 
-    public EndScreen(Timer timer) {
+    /**
+     * Set the timer this uses to something.
+     */
+    public void setTimer(Timer timer) {
         this.timer = timer;
     }
 

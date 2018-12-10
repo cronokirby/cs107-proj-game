@@ -57,9 +57,24 @@ public class OctoGame extends AreaGame {
         return superOK;
     }
 
+    /**
+     * Check whether or not we've reached the end of the game
+     * @return true if we've reached the end of the game
+     */
+    public boolean finished() {
+        return false;
+    }
+
+    /**
+     * Get the timer running in this game
+     */
+    public Timer getTimer() {
+        return hud.getTimer();
+    }
+
     @Override
     public void update(float deltaTime) {
-        super.update(deltaTime);
+       super.update(deltaTime);
         Portal lastPortal = player.getLastPortal();
         if (lastPortal != null) {
             Area next = setCurrentArea(lastPortal.getDestinationArea(), false);
