@@ -43,6 +43,9 @@ public class OctoGame extends AreaGame {
         for (OctoArea a : Chemistry.subRooms()) {
             addArea(a);
         }
+        for (OctoArea a : Microtech.subRooms()) {
+            addArea(a);
+        }
         addArea(new Environment());
         setCurrentArea(starting.getTitle(), false);
         hud = new Hud();

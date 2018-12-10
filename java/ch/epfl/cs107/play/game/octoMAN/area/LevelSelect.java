@@ -18,13 +18,13 @@ public class LevelSelect extends OctoArea {
         boolean superOK = super.begin(window, fileSystem);
         String[] destinations = {
                 "Physics1", "Environment", "Mathematics1", "LifeSciences1",
-                "Electricity1", "Chemistry1", "", ""
+                "Electricity1", "Chemistry1", "Microtech1", ""
         };
         DiscreteCoordinates[] destinationPositions = {
                 new DiscreteCoordinates(4, 1), new DiscreteCoordinates(5, 2),
                 new DiscreteCoordinates(5, 1), new DiscreteCoordinates(4, 1),
                 new DiscreteCoordinates(2, 1), new DiscreteCoordinates(3, 1),
-                null, null
+                new DiscreteCoordinates(4, 1), null
         };
         int x = 2;
         for (int i = 0; i < destinations.length; ++i) {
