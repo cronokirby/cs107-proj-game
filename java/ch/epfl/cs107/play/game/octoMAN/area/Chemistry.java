@@ -24,7 +24,7 @@ public abstract class Chemistry extends SubRoom {
         @Override
         protected void addActors() {
             new StandardDoor(
-                    Logic.TRUE, "LevelSelect", new DiscreteCoordinates(17, 8),
+                    Logic.TRUE, "LevelSelect", new DiscreteCoordinates(18, 8),
                     this, new DiscreteCoordinates(3, 0)
             );
             new StandardDoor(

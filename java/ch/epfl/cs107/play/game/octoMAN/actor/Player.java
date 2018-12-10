@@ -43,6 +43,9 @@ public class Player extends MovableAreaEntity implements Interactor {
     private final PlayerHandler handler;
     /// The HUD the player is interacting with
     private Hud hud;
+    /// Whether or not the player has finished the game
+    /// after collecting the final antidote
+    private boolean finished;
     /// Whether or not we're currently slipping
     /// Used to not play moving frames
     private boolean slipping;
@@ -74,6 +77,10 @@ public class Player extends MovableAreaEntity implements Interactor {
 
     public Portal getLastPortal() {
         return lastPortal;
+    }
+
+    public boolean isFinished() {
+        return finished;
     }
 
     /**
@@ -235,6 +242,12 @@ public class Player extends MovableAreaEntity implements Interactor {
         public void interactWith(Light light) {
             haloScale += .3f;
             light.collect();
+        }
+
+        @Override
+        public void interactWith(FinalAntidote antidote) {
+            antidote.collect();
+            finished = true;
         }
 
         @Override

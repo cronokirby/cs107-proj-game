@@ -26,7 +26,7 @@ public abstract class Electricity extends SubRoom {
         @Override
         protected void addActors() {
             new StandardDoor(
-                    Logic.TRUE, "LevelSelect", new DiscreteCoordinates(14, 8),
+                    Logic.TRUE, "LevelSelect", new DiscreteCoordinates(15, 8),
                     this, new DiscreteCoordinates(2, 0)
             );
             new LightToggler(true, this, new DiscreteCoordinates(2, 1));

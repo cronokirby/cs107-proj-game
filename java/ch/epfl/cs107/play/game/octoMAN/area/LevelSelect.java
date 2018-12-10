@@ -29,19 +29,22 @@ public class LevelSelect extends OctoArea {
                 new DiscreteCoordinates(2, 1), new DiscreteCoordinates(3, 1),
                 new DiscreteCoordinates(4, 1), null
         };
-        int x = 2;
+        int[] xs = { 2, 5, 8, 11, 15, 18, 21, 24 };
         for (int i = 0; i < destinations.length; ++i) {
-            DiscreteCoordinates position = new DiscreteCoordinates(x, 9);
+            DiscreteCoordinates position = new DiscreteCoordinates(xs[i], 9);
             DiscreteCoordinates destination = destinationPositions[i];
             Logic open = destination == null ? Logic.FALSE : Logic.TRUE;
             new StandardDoor(open, destinations[i], destination, this, position);
-            x += 3;
         }
+        new StandardDoor(
+                Logic.TRUE, "Final", new DiscreteCoordinates(2, 1),
+                this, new DiscreteCoordinates(13, 19)
+        );
         // remove the light when we exit the electricity area
         new LightToggler(false, this, new DiscreteCoordinates(14, 8));
         new TalkingMob(
                 XMLTexts.getText("levelselect"), "mob.1", this,
-                Orientation.DOWN, new DiscreteCoordinates(13, 5)
+                Orientation.DOWN, new DiscreteCoordinates(13, 6)
         );
         return superOK;
     }

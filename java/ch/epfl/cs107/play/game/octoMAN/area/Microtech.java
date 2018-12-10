@@ -29,7 +29,7 @@ public abstract class Microtech extends SubRoom {
             new WiredLever(start, this, Orientation.UP, new DiscreteCoordinates(4, 3));
             new CrossWire(Orientation.LEFT, Orientation.UP, this, new DiscreteCoordinates(4, 5));
             new StandardDoor(
-                    Logic.TRUE, "LevelSelect", new DiscreteCoordinates(20, 8),
+                    Logic.TRUE, "LevelSelect", new DiscreteCoordinates(21, 8),
                     this, new DiscreteCoordinates(4, 0)
             );
             new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 6));

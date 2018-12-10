@@ -27,6 +27,7 @@ public class OctoGame extends AreaGame {
         OctoArea starting = new CharacterSelect();
         addArea(starting);
         addArea(new LevelSelect());
+        addArea(new FinalArea());
         addArea(new TestArea());
         for (OctoArea a : Physics.subRooms()) {
             addArea(a);
@@ -62,7 +63,7 @@ public class OctoGame extends AreaGame {
      * @return true if we've reached the end of the game
      */
     public boolean finished() {
-        return false;
+        return player.isFinished();
     }
 
     /**
