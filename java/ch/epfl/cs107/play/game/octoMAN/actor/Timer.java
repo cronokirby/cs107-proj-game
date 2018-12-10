@@ -1,5 +1,6 @@
 package ch.epfl.cs107.play.game.octoMAN.actor;
 
+import ch.epfl.cs107.play.game.actor.Actor;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
@@ -26,7 +27,7 @@ public class Timer extends AnchoredEntity {
         }
     }
 
-    private String display() {
+    public String display() {
         int acc = (int) elapsed;
         String secondRest = pad0(acc % 60);
         acc /= 60;

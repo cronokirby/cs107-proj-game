@@ -1,11 +1,14 @@
 package ch.epfl.cs107.play;
 
 import ch.epfl.cs107.play.game.Game;
+import ch.epfl.cs107.play.game.octoMAN.EndScreen;
 import ch.epfl.cs107.play.game.octoMAN.OctoGame;
+import ch.epfl.cs107.play.game.octoMAN.actor.Timer;
 import ch.epfl.cs107.play.io.DefaultFileSystem;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.io.ResourceFileSystem;
 import ch.epfl.cs107.play.io.XMLTexts;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Window;
 import ch.epfl.cs107.play.window.swing.SwingWindow;
 
@@ -28,7 +31,7 @@ public class Play {
 		final FileSystem fileSystem = new ResourceFileSystem(DefaultFileSystem.INSTANCE);
 
         // Create a demo game and initialize corresponding texts
-		final Game game = new OctoGame();
+		final Game game = new EndScreen(new Timer(new Vector(10.f, 10.f)));
 		XMLTexts.initialize(fileSystem, "strings/enigme_fr.xml");
 
 		// Use Swing display
