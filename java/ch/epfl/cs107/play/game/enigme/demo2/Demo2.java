@@ -16,6 +16,9 @@ public class Demo2 extends AreaGame {
     private Room room1;
     /// Whether or not the player is in Room 0
     private boolean inRoom0;
+    /// Whether or not to change areas on the next frame
+    /// We need to shift the change by one frame so that the area can purge the registration
+    private boolean changeAreas;
 
     @Override
     public int getFrameRate() {
@@ -47,9 +50,8 @@ public class Demo2 extends AreaGame {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        if (player.isInDoor()) {
-            player.toggleDoor(false);
-            player.leaveCurrentArea();
+        if (changeAreas) {
+            changeAreas = false;
             // We can forgo checking the exact current room returned,
             // since we're pretty sure these rooms exist.
             if (inRoom0) {
@@ -61,6 +63,12 @@ public class Demo2 extends AreaGame {
                 setCurrentArea(room0.getTitle(), false);
                 inRoom0 = true;
             }
+        }
+        if (player.isInDoor()) {
+            player.toggleDoor(false);
+            player.leaveCurrentArea();
+            changeAreas = true;
+
         }
     }
 }
