@@ -49,6 +49,11 @@ public abstract class Computer extends SubRoom {
         protected void addActors() {
             new Orb(Orb.Type.COMPUTERSCIENCE, this, new DiscreteCoordinates(2, 6));
         }
+
+        @Override
+        protected boolean reset() {
+            return false;
+        }
     }
 
     public static List<Computer> subRooms() {
