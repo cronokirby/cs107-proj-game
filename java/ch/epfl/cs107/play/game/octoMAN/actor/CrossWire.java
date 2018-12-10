@@ -26,7 +26,6 @@ public class CrossWire extends DirectedWire implements Toggleable {
 
     @Override
     public void toggle() {
-        System.out.println("Wire gets toggled");
         first = !first;
         this.unCharge(getOrientation());
         if (first) {

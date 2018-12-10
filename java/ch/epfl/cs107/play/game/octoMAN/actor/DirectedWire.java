@@ -5,6 +5,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Vector;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,10 +29,10 @@ public class DirectedWire extends Wire {
         super(area, orientation, position);
         String wireName = orientation == Orientation.DOWN || orientation == Orientation.UP
                 ? "wire.ud" : "wire.lr";
-        udOn = new Sprite("wire.ud.on", 1.f, 1.f, this);
-        udOff = new Sprite("wire.ud.off", 1.f, 1.f, this);
-        lrOn = new Sprite("wire.lr.on", 1.f, 1.f, this);
-        lrOff = new Sprite("wire.lr.off", 1.f, 1.f, this);
+        udOn = new Sprite("wire.ud.on", 1.f, 1.f, this, null, Vector.ZERO, 1.f, -10f);
+        udOff = new Sprite("wire.ud.off", 1.f, 1.f, this, null, Vector.ZERO, 1.f, -10f);
+        lrOn = new Sprite("wire.lr.on", 1.f, 1.f, this, null, Vector.ZERO, 1.f, -10f);
+        lrOff = new Sprite("wire.lr.off", 1.f, 1.f, this, null, Vector.ZERO, 1.f, -10f);
     }
 
 

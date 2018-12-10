@@ -210,7 +210,6 @@ public class Player extends MovableAreaEntity implements Interactor {
 
         @Override
         public void interactWith(Toggleable toggle) {
-            System.out.println(toggle);
             toggle.toggle();
         }
 
