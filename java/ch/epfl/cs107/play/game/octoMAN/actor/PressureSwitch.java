@@ -10,7 +10,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
  */
 public class PressureSwitch extends ch.epfl.cs107.play.game.enigme.actor.PressureSwitch implements Toggleable {
     public PressureSwitch(Area area, DiscreteCoordinates position) {
-        super(area, position);
+        super("neon.on", "neon.off", area, position);
     }
 
     @Override
