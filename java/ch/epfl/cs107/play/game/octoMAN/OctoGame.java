@@ -24,9 +24,10 @@ public class OctoGame extends AreaGame {
     @Override
     public boolean begin(Window window, FileSystem fileSystem) {
         boolean superOK = super.begin(window, fileSystem);
+        hud = new Hud();
         OctoArea starting = new CharacterSelect();
         addArea(starting);
-        addArea(new LevelSelect());
+        addArea(new LevelSelect(hud.getHolder()));
         addArea(new FinalArea());
         addArea(new TestArea());
         for (OctoArea a : Physics.subRooms()) {
@@ -49,7 +50,6 @@ public class OctoGame extends AreaGame {
         }
         addArea(new Environment());
         setCurrentArea(starting.getTitle(), false);
-        hud = new Hud();
         // Initialising the player
         DiscreteCoordinates playerPos = new DiscreteCoordinates(5, 1);
         player = new Player(hud, starting, "boy.1", Orientation.DOWN, playerPos);

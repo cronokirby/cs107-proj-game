@@ -2,15 +2,17 @@ package ch.epfl.cs107.play.game.octoMAN.actor;
 
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.math.Vector;
+import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Canvas;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represents a hud display of every orb the player has collected
+ * Represents a hud display of every orb the player has collected.
+ * The holder is activated when all orbs are collected.
  */
-public class OrbHolder extends AnchoredEntity {
+public class OrbHolder extends AnchoredEntity implements Logic {
     /// Maps each orb to either a null sprite, or a valid sprite
     private Map<Orb.Type, Sprite> orbs;
     /// The sprite to display when we encounter a missing orb
@@ -28,6 +30,18 @@ public class OrbHolder extends AnchoredEntity {
         for (Orb.Type t : Orb.Type.realValues()) {
             orbs.put(t, null);
         }
+    }
+
+    /**
+     * Return true if the orb holder contains all the orbs
+     */
+    public boolean isOn() {
+        for (Orb.Type t : Orb.Type.realValues()) {
+            if (orbs.get(t) == null) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

@@ -1,9 +1,7 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.octoMAN.actor.LightToggler;
-import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
-import ch.epfl.cs107.play.game.octoMAN.actor.TalkingMob;
+import ch.epfl.cs107.play.game.octoMAN.actor.*;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -11,6 +9,13 @@ import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
 
 public class LevelSelect extends OctoArea {
+    /// When this signal is on, all orbs have been collected
+    private Logic allOrbs;
+
+    public LevelSelect(Logic signal) {
+        allOrbs = signal;
+    }
+
     @Override
     public String getTitle() {
         return "LevelSelect";
@@ -37,7 +42,7 @@ public class LevelSelect extends OctoArea {
             new StandardDoor(open, destinations[i], destination, this, position);
         }
         new StandardDoor(
-                Logic.TRUE, "Final", new DiscreteCoordinates(2, 1),
+                allOrbs, "Final", new DiscreteCoordinates(2, 1),
                 this, new DiscreteCoordinates(13, 19)
         );
         // remove the light when we exit the electricity area
