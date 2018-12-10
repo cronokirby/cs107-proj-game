@@ -55,6 +55,7 @@ public class Enigme extends AreaGame {
             player.leaveCurrentArea();
             // We assume that this is successful
             // This will fail if the door is badly programmed.
+            // The order of this is crucial, otherwise the registration won't get purged
             Area next = setCurrentArea(lastDoor.getDestinationArea(), false);
             player.enterArea(next, lastDoor.getDestinationPosition());
         }

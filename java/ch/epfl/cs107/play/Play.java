@@ -1,6 +1,8 @@
 package ch.epfl.cs107.play;
 
 import ch.epfl.cs107.play.game.Game;
+import ch.epfl.cs107.play.game.enigme.demo2.Demo2;
+import ch.epfl.cs107.play.game.octoMAN.OctoGame;
 import ch.epfl.cs107.play.game.octoMAN.OctoSwitcher;
 import ch.epfl.cs107.play.io.DefaultFileSystem;
 import ch.epfl.cs107.play.io.FileSystem;
@@ -28,7 +30,7 @@ public class Play {
 		final FileSystem fileSystem = new ResourceFileSystem(DefaultFileSystem.INSTANCE);
 
         // Create a demo game and initialize corresponding texts
-		final Game game = new OctoSwitcher();
+		final Game game = new OctoGame();
 		XMLTexts.initialize(fileSystem, "strings/enigme_fr.xml");
 
 		// Use Swing display
