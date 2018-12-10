@@ -1,7 +1,8 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
-import ch.epfl.cs107.play.game.octoMAN.actor.Orb;
-import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.octoMAN.actor.*;
+import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
@@ -20,12 +21,23 @@ public abstract class Microtech extends SubRoom {
 
         @Override
         protected void addActors() {
+            new TalkingMob(
+                    XMLTexts.getText("micro-intro"), "mob.4", this,
+                    Orientation.DOWN, new DiscreteCoordinates(6, 2)
+            );
+            Wire start = new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 4));
+            new WiredLever(start, this, Orientation.UP, new DiscreteCoordinates(4, 3));
+            new CrossWire(Orientation.LEFT, Orientation.UP, this, new DiscreteCoordinates(4, 5));
             new StandardDoor(
                     Logic.TRUE, "LevelSelect", new DiscreteCoordinates(20, 8),
                     this, new DiscreteCoordinates(4, 0)
             );
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 6));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 7));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 8));
+            Wire lastWire = new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 9));
             new StandardDoor(
-                    Logic.TRUE, "Microtech9", new DiscreteCoordinates(2, 1),
+                    lastWire, "Microtech9", new DiscreteCoordinates(2, 1),
                     this, new DiscreteCoordinates(4, 10)
             );
         }

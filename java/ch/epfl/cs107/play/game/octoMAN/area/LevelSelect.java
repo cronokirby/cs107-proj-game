@@ -1,8 +1,11 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.octoMAN.actor.LightToggler;
 import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
+import ch.epfl.cs107.play.game.octoMAN.actor.TalkingMob;
 import ch.epfl.cs107.play.io.FileSystem;
+import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
@@ -36,6 +39,10 @@ public class LevelSelect extends OctoArea {
         }
         // remove the light when we exit the electricity area
         new LightToggler(false, this, new DiscreteCoordinates(14, 8));
+        new TalkingMob(
+                XMLTexts.getText("levelselect"), "mob.1", this,
+                Orientation.DOWN, new DiscreteCoordinates(13, 5)
+        );
         return superOK;
     }
 }

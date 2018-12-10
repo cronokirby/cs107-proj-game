@@ -6,6 +6,7 @@ import ch.epfl.cs107.play.game.octoMAN.actor.Orb;
 import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
 import ch.epfl.cs107.play.game.octoMAN.actor.TalkingMob;
 import ch.epfl.cs107.play.io.FileSystem;
+import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
@@ -59,12 +60,8 @@ public abstract class Physics extends SubRoom {
                     Logic.TRUE, "Physics2", new DiscreteCoordinates(2, 1),
                     this, new DiscreteCoordinates(4, 8)
             );
-            String helpText =
-                    "La Physique...c'est physique!  "
-                    + "Pousse les rochers pour avancer!"
-                    + "Si tu fais une erreur, sort et recommence!";
             new TalkingMob(
-                    helpText, "mob.2", this,
+                    XMLTexts.getText("physique-intro"), "mob.2", this,
                     Orientation.DOWN, new DiscreteCoordinates(3, 2)
             );
         }

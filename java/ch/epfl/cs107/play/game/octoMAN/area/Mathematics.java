@@ -1,6 +1,8 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.octoMAN.actor.*;
+import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
@@ -22,6 +24,10 @@ public abstract class Mathematics extends SubRoom {
 
         @Override
         protected void addActors() {
+            new TalkingMob(
+                    XMLTexts.getText("math-intro"), "mob.3", this,
+                    Orientation.DOWN, new DiscreteCoordinates(8, 2)
+            );
             new Pedestal(this, new DiscreteCoordinates(4, 2))
                     .place(new Weight("weight.square.1", 1));
             new Pedestal(this, new DiscreteCoordinates(3, 2))

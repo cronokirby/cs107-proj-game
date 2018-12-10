@@ -36,9 +36,9 @@ public class WiredLever extends AreaEntity {
     public void toggle() {
         isLeft = !isLeft;
         if (!isLeft) {
-           wire.charge();
+           wire.charge(getOrientation());
         } else {
-            wire.unCharge();
+            wire.unCharge(getOrientation());
         }
     }
 

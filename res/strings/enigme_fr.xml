@@ -10,6 +10,12 @@
     <string name="riddle_1">Il parait que si tu as compris le sens de la vie, alors tu pourras passer</string>
     <string name="riddle_2">On dit qu'il faut savoir ce que l'on cherche pour pouvoir passer...le sais-tu ? Parce que moi pas vraiment...</string>
     <string name="mew_dialog">Mew...mew, mew mew !</string>
-    <string name=""></string>
-    <string name=""></string>
+    <string name="physique-intro">La physique, c'est physique! Pousse les rochers pour avancer. Si tu fais une erreur, sort et recommence.</string>
+    <string name="levelselect">
+        C'est horrible! Tout le monde a été transformé en animal!
+
+        L'antidote est derrière la porte au fond de cette salle, mais il faut les 8 orbes de l'EPFL pour l'ouvrir.
+    </string>
+    <string name="math-intro">Les maths, ca pèse! Equilibre les balances pour avancer!</string>
+    <string name="micro-intro">Tout les circuits sont cassés! Répare-les pour avancer!</string>
 </strings>

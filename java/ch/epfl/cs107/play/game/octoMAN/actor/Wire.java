@@ -5,6 +5,7 @@ import ch.epfl.cs107.play.game.areagame.actor.*;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.octoMAN.handler.OctoInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Canvas;
 
 import java.util.Collections;
@@ -14,7 +15,7 @@ import java.util.List;
  * Represents an actor that can be charged, and then carry current
  * into the cells to which it's connected.
  */
-public abstract class Wire extends AreaEntity implements Interactor {
+public abstract class Wire extends AreaEntity implements Interactor, Logic {
     /// Whether or not this wire is charged
     private boolean charged;
     /// The handler for interactions
@@ -24,22 +25,37 @@ public abstract class Wire extends AreaEntity implements Interactor {
      * Check whether or not this wire is currently charged.
      * This can be overriden for custom logic
      */
-    public boolean isCharged() {
+    protected boolean isCharged() {
         return charged;
     }
+
+    @Override
+    public boolean isOn() {
+        return isCharged();
+    }
+
+    /**
+     * Whether or not this wire accepts charges from an orientation
+     * @return true if the wire accepts a charge from this direction
+     */
+    public abstract boolean accept(Orientation o);
 
     /**
      * Charge this wire
      */
-    public void charge() {
-        charged = true;
+    public void charge(Orientation orientation) {
+        if (accept(orientation)) {
+            charged = true;
+        }
     }
 
     /**
      * Uncharge this wire
      */
-    public void unCharge() {
-        charged = false;
+    public void unCharge(Orientation orientation) {
+        if (accept(orientation)) {
+            charged = false;
+        }
     }
 
     public Wire(Area area, Orientation orientation, DiscreteCoordinates position) {
@@ -100,9 +116,9 @@ public abstract class Wire extends AreaEntity implements Interactor {
         @Override
         public void interactWith(Wire wire) {
             if (isCharged()) {
-                wire.charge();
+                wire.charge(getOrientation());
             } else {
-                wire.unCharge();
+                wire.unCharge(getOrientation());
             }
         }
     }
