@@ -30,7 +30,7 @@ public class Play {
 		final FileSystem fileSystem = new ResourceFileSystem(DefaultFileSystem.INSTANCE);
 
         // Create a demo game and initialize corresponding texts
-		final Game game = new OctoGame();
+		final Game game = new OctoSwitcher();
 		XMLTexts.initialize(fileSystem, "strings/enigme_fr.xml");
 
 		// Use Swing display
