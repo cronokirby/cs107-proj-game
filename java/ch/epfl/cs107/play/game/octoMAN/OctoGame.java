@@ -48,6 +48,9 @@ public class OctoGame extends AreaGame {
         for (OctoArea a : Microtech.subRooms()) {
             addArea(a);
         }
+        for (OctoArea a : Computer.subRooms()) {
+            addArea(a);
+        }
         addArea(new Environment());
         setCurrentArea(starting.getTitle(), false);
         // Initialising the player

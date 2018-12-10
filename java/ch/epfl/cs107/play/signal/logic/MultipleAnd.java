@@ -1,6 +1,8 @@
 package ch.epfl.cs107.play.signal.logic;
 
 
+import java.util.List;
+
 /**
  * Represents a signal that only fires when all of its
  * arguments do
@@ -12,6 +14,11 @@ public class MultipleAnd extends LogicSignal {
 
     public MultipleAnd(Logic ...signals) {
         this.signals = signals;
+    }
+
+    public MultipleAnd(List<Logic> signals) {
+        this.signals = new Logic[signals.size()];
+        this.signals = signals.toArray(this.signals);
     }
 
     @Override
