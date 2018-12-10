@@ -50,7 +50,6 @@ public class Orb extends AreaEntity implements Portal {
         }
         this.type = type;
         String spriteName = "";
-        int y = 8;
         int x = 0;
         switch (type) {
             case PHYSICS:

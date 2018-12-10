@@ -1,8 +1,10 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
 import ch.epfl.cs107.play.game.octoMAN.actor.Orb;
+import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
 
 import java.util.LinkedList;
@@ -18,7 +20,10 @@ public class Environment extends OctoArea {
     public boolean begin(Window window, FileSystem fileSystem) {
         boolean superOK = super.begin(window, fileSystem);
         new Orb(Orb.Type.ENVIRONMENT, this, new DiscreteCoordinates(83, 97));
-
+        new StandardDoor(
+                Logic.TRUE, "LevelSelect", new DiscreteCoordinates(5, 8),
+                this, new DiscreteCoordinates(1, 2)
+        );
         List<BirdFactory> factories = new LinkedList<>();
         factories.add(new BirdFactory(1, 2, 8, 6, "bird.1", 4));
         factories.add(new BirdFactory(2, 9, 7, 13, "bird.2", 3));
