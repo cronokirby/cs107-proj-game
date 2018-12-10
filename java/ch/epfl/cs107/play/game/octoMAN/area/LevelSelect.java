@@ -41,7 +41,7 @@ public class LevelSelect extends OctoArea {
                 this, new DiscreteCoordinates(13, 19)
         );
         // remove the light when we exit the electricity area
-        new LightToggler(false, this, new DiscreteCoordinates(14, 8));
+        new LightToggler(false, this, new DiscreteCoordinates(15, 8));
         new TalkingMob(
                 XMLTexts.getText("levelselect"), "mob.1", this,
                 Orientation.DOWN, new DiscreteCoordinates(13, 6)
