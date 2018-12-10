@@ -34,7 +34,7 @@ public abstract class Computer extends SubRoom {
             }
             Logic allButtons = new MultipleAnd(buttons);
             new StandardDoor(
-                    Logic.TRUE, "Computer2", new DiscreteCoordinates(5, 1),
+                    allButtons, "Computer2", new DiscreteCoordinates(5, 1),
                     this, new DiscreteCoordinates(5, 8)
             );
         }
