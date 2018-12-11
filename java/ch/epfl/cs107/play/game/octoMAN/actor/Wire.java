@@ -29,6 +29,15 @@ public abstract class Wire extends AreaEntity implements Interactor, Logic {
         return charged;
     }
 
+    /**
+     * Allows a wire to remove its own charge.
+     * This can be useful in wires that might change shape, or
+     * only be carrying under certain circumstances
+     */
+    protected void removeCharge() {
+        charged = false;
+    }
+
     @Override
     public boolean isOn() {
         return isCharged();

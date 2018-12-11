@@ -32,13 +32,65 @@ public abstract class Microtech extends SubRoom {
                     Logic.TRUE, "LevelSelect", new DiscreteCoordinates(21, 8),
                     this, new DiscreteCoordinates(4, 0)
             );
-            new CornerWire(Orientation.UP, false, this, new DiscreteCoordinates(4, 6));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 6));
             new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 7));
             new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 8));
             Wire lastWire = new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 9));
             new StandardDoor(
-                    lastWire, "Microtech9", new DiscreteCoordinates(2, 1),
+                    lastWire, "Microtech2", new DiscreteCoordinates(8, 1),
                     this, new DiscreteCoordinates(4, 10)
+            );
+        }
+    }
+
+    private static class Microtech2 extends Microtech {
+        private Microtech2() {
+            super("Microtech2");
+        }
+
+        @Override
+        protected void addActors() {
+            Wire start1 = new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(7, 4));
+            new WiredLever(start1, this, Orientation.UP, new DiscreteCoordinates(7, 3));
+            Wire start2 = new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(9, 4));
+            new WiredLever(start2, this, Orientation.UP, new DiscreteCoordinates(9, 3));
+            new CornerWire(Orientation.UP, true, this, new DiscreteCoordinates(9, 5));
+            new DirectedWire(this, Orientation.LEFT, new DiscreteCoordinates(8, 5));
+            new CrossWire(Orientation.UP, Orientation.LEFT, this, new DiscreteCoordinates(7, 5));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(7, 6));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(7, 7));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(7, 8));
+            new CornerWire(Orientation.UP, false, this, new DiscreteCoordinates(7, 9));
+            new CrossWire(Orientation.UP, Orientation.RIGHT, this, new DiscreteCoordinates(8, 9));
+            new DirectedWire(this, Orientation.RIGHT, new DiscreteCoordinates(9, 9));
+            new CornerWire(Orientation.RIGHT, true, this, new DiscreteCoordinates(10, 9));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(10, 10));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(10, 11));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(10, 12));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(10, 13));
+            new DirectedWire(this, Orientation.LEFT, new DiscreteCoordinates(6, 5));
+            new DirectedWire(this, Orientation.LEFT, new DiscreteCoordinates(5, 5));
+            new DirectedWire(this, Orientation.LEFT, new DiscreteCoordinates(4, 5));
+            new DirectedWire(this, Orientation.LEFT, new DiscreteCoordinates(3, 5));
+            new CornerWire(Orientation.LEFT, false, this, new DiscreteCoordinates(2, 5));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(2, 6));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(2, 7));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(2, 8));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(2, 9));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(2, 10));
+            new CornerWire(Orientation.UP, false, this, new DiscreteCoordinates(2, 11));
+            new DirectedWire(this, Orientation.RIGHT, new DiscreteCoordinates(3, 11));
+            new DirectedWire(this, Orientation.RIGHT, new DiscreteCoordinates(4, 11));
+            new DirectedWire(this, Orientation.RIGHT, new DiscreteCoordinates(5, 11));
+            new CornerWire(Orientation.RIGHT, true, this, new DiscreteCoordinates(6, 11));
+            new CrossWire(Orientation.LEFT, Orientation.UP, this, new DiscreteCoordinates(6, 12));
+            new CornerWire(Orientation.UP, false, this, new DiscreteCoordinates(6, 13));
+            new DirectedWire(this, Orientation.RIGHT, new DiscreteCoordinates(7, 13));
+            new DirectedWire(this, Orientation.RIGHT, new DiscreteCoordinates(8, 13));
+            Wire lastWire = new CornerWire(Orientation.RIGHT, true, this, new DiscreteCoordinates(9, 13));
+            new StandardDoor(
+                    lastWire, "Microtech9", new DiscreteCoordinates(2, 1),
+                    this, new DiscreteCoordinates(9, 14)
             );
         }
     }
@@ -62,6 +114,7 @@ public abstract class Microtech extends SubRoom {
     public static List<Microtech> subRooms() {
         List<Microtech> subRooms = new LinkedList<>();
         subRooms.add(new Microtech1());
+        subRooms.add(new Microtech2());
         subRooms.add(new Microtech9());
         return subRooms;
     }

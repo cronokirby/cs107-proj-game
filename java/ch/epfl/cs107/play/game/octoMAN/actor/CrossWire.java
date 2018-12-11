@@ -16,6 +16,8 @@ public class CrossWire extends DirectedWire implements Toggleable {
     private Orientation firstOrientation;
     /// The second orientation this can be in
     private Orientation secondOrientation;
+    /// The number of frames in which to flip
+    private int flip;
 
     public CrossWire(Orientation first, Orientation second, Area area, DiscreteCoordinates position) {
         super(area, first, position);
@@ -25,13 +27,30 @@ public class CrossWire extends DirectedWire implements Toggleable {
     }
 
     @Override
+    public void update(float deltaTime) {
+        if (flip > 0) {
+            --flip;
+        } else if (flip == 0) {
+            flip = -1;
+            if (first) {
+                setOrientation(firstOrientation);
+            } else {
+                setOrientation(secondOrientation);
+            }
+        }
+    }
+
+    @Override
     public void toggle() {
         first = !first;
-        this.unCharge(getOrientation());
-        if (first) {
-            setOrientation(firstOrientation);
-        } else {
-            setOrientation(secondOrientation);
+        removeCharge();
+        flip = 1;
+    }
+
+    @Override
+    public void charge(Orientation orientation) {
+        if (flip < 0) {
+            super.charge(orientation);
         }
     }
 

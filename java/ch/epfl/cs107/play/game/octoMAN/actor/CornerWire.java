@@ -4,6 +4,7 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Vector;
 
 import java.util.Collections;
 import java.util.List;
@@ -63,8 +64,10 @@ public class CornerWire extends Wire {
                 }
                 break;
         }
-        onSprite = new Sprite(spriteName + ".on", 1.f, 1.f, this);
-        offSprite = new Sprite(spriteName + ".off", 1.f, 1.f, this);
+        /// This is the orientation wires need to accept us from
+        setOrientation(pointed);
+        onSprite = new Sprite(spriteName + ".on", 1.f, 1.f, this, null, Vector.ZERO, 1.f, -10f);
+        offSprite = new Sprite(spriteName + ".off", 1.f, 1.f, this, null, Vector.ZERO, 1.f, -10f);
     }
 
     @Override

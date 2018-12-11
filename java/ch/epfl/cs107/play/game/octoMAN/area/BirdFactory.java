@@ -37,7 +37,7 @@ public class BirdFactory {
         this.topX = topX;
         this.topY = topY;
         this.birdName = birdName;
-        this.rarity = rarity + 0.8;
+        this.rarity = rarity + 2;
     }
 
     private List<DiscreteCoordinates> sample() {
