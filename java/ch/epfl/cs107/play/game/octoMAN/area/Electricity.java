@@ -30,6 +30,7 @@ public abstract class Electricity extends SubRoom {
                     this, new DiscreteCoordinates(2, 0)
             );
             new LightToggler(true, this, new DiscreteCoordinates(2, 1));
+            new Light(this, new DiscreteCoordinates(3, 1));
             new Light(this, new DiscreteCoordinates(14, 6));
             new Light(this, new DiscreteCoordinates(5, 7));
             new Light(this, new DiscreteCoordinates(3, 12));
@@ -37,8 +38,31 @@ public abstract class Electricity extends SubRoom {
             new Light(this, new DiscreteCoordinates(9, 10));
             new Light(this, new DiscreteCoordinates(18, 14));
             new StandardDoor(
-                    Logic.TRUE, "Electricity9", new DiscreteCoordinates(2, 1),
+                    Logic.TRUE, "Electricity2", new DiscreteCoordinates(12, 1),
                     this, new DiscreteCoordinates(17, 19)
+            );
+        }
+    }
+
+    private static class Electricity2 extends Electricity {
+        private Electricity2() {
+            super("Electricity2");
+        }
+
+        @Override
+        protected void addActors() {
+            new Light(this, new DiscreteCoordinates(21, 6));
+            new Light(this, new DiscreteCoordinates(21, 8));
+            new Light(this, new DiscreteCoordinates(1, 3));
+            new Light(this, new DiscreteCoordinates(4, 6));
+            new Light(this, new DiscreteCoordinates(1, 10));
+            new Light(this, new DiscreteCoordinates(2, 12));
+            new Light(this, new DiscreteCoordinates(1, 22));
+            new Light(this, new DiscreteCoordinates(10, 22));
+            new Light(this, new DiscreteCoordinates(21, 17));
+            new StandardDoor(
+                    Logic.TRUE, "Electricity9", new DiscreteCoordinates(2, 1),
+                    this, new DiscreteCoordinates(4, 23)
             );
         }
     }
@@ -64,6 +88,7 @@ public abstract class Electricity extends SubRoom {
     public static List<Electricity> subRooms() {
         List<Electricity> subRooms = new LinkedList<>();
         subRooms.add(new Electricity1());
+        subRooms.add(new Electricity2());
         subRooms.add(new Electricity9());
         return subRooms;
     }
