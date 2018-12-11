@@ -27,8 +27,6 @@ public class DirectedWire extends Wire {
 
     public DirectedWire(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
-        String wireName = orientation == Orientation.DOWN || orientation == Orientation.UP
-                ? "wire.ud" : "wire.lr";
         udOn = new Sprite("wire.ud.on", 1.f, 1.f, this, null, Vector.ZERO, 1.f, -10f);
         udOff = new Sprite("wire.ud.off", 1.f, 1.f, this, null, Vector.ZERO, 1.f, -10f);
         lrOn = new Sprite("wire.lr.on", 1.f, 1.f, this, null, Vector.ZERO, 1.f, -10f);

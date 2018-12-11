@@ -32,7 +32,7 @@ public abstract class Microtech extends SubRoom {
                     Logic.TRUE, "LevelSelect", new DiscreteCoordinates(21, 8),
                     this, new DiscreteCoordinates(4, 0)
             );
-            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 6));
+            new CornerWire(Orientation.UP, false, this, new DiscreteCoordinates(4, 6));
             new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 7));
             new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 8));
             Wire lastWire = new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 9));
