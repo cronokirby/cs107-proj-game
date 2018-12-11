@@ -5,6 +5,7 @@ import ch.epfl.cs107.play.game.octoMAN.actor.*;
 import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
+import org.omg.PortableInterceptor.DISCARDING;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -89,8 +90,65 @@ public abstract class Microtech extends SubRoom {
             new DirectedWire(this, Orientation.RIGHT, new DiscreteCoordinates(8, 13));
             Wire lastWire = new CornerWire(Orientation.RIGHT, true, this, new DiscreteCoordinates(9, 13));
             new StandardDoor(
-                    lastWire, "Microtech9", new DiscreteCoordinates(2, 1),
+                    lastWire, "Microtech3", new DiscreteCoordinates(5, 1),
                     this, new DiscreteCoordinates(9, 14)
+            );
+        }
+    }
+
+    private static class Microtech3 extends Microtech {
+        private Microtech3() {
+            super("Microtech3");
+        }
+
+        @Override
+        protected void addActors() {
+            Wire start1 = new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(4, 4));
+            new WiredLever(start1, this, Orientation.UP, new DiscreteCoordinates(4, 3));
+            Wire start2 = new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(6,4));
+            new WiredLever(start2, this, Orientation.UP, new DiscreteCoordinates(6, 3));
+            Wire start3 = new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(8, 4));
+            new WiredLever(start3, this, Orientation.UP, new DiscreteCoordinates(8, 3));
+            // Make the columns
+            for (int i = 5; i <= 16; ++i) {
+                Orientation o = i == 7 || i == 11 || i == 15 ? Orientation.RIGHT : Orientation.LEFT;
+                new CrossWire(Orientation.UP, o, this, new DiscreteCoordinates(4, i));
+                new CrossWire(Orientation.UP, o, this, new DiscreteCoordinates(6, i));
+            }
+            int[] xs = { 3, 5, 7 };
+            int[] leftYs = { 5, 9, 13 };
+            int[] rightYs = { 7, 11 };
+            for (int x : xs) {
+                for (int y : leftYs) {
+                    new DirectedWire(this, Orientation.LEFT, new DiscreteCoordinates(x, y));
+                }
+                for (int y : rightYs) {
+                    new DirectedWire(this, Orientation.RIGHT, new DiscreteCoordinates(x, y));
+                }
+            }
+            new DirectedWire(this, Orientation.RIGHT, new DiscreteCoordinates(3, 15));
+            new CornerWire(Orientation.LEFT, false, this, new DiscreteCoordinates(2, 5));
+            new CornerWire(Orientation.LEFT, false, this, new DiscreteCoordinates(2, 9));
+            new CornerWire(Orientation.LEFT, false, this, new DiscreteCoordinates(2, 13));
+            new CornerWire(Orientation.RIGHT, true, this, new DiscreteCoordinates(8, 7));
+            new CornerWire(Orientation.RIGHT, true, this, new DiscreteCoordinates(8, 11));
+            new CornerWire(Orientation.RIGHT, true, this, new DiscreteCoordinates(5, 15));
+            new CornerWire(Orientation.UP, true, this, new DiscreteCoordinates(8, 5));
+            new CornerWire(Orientation.UP, true, this, new DiscreteCoordinates(8, 9));
+            new CornerWire(Orientation.UP, true, this, new DiscreteCoordinates(8, 13));
+            new CornerWire(Orientation.UP, false, this, new DiscreteCoordinates(2, 7));
+            new CornerWire(Orientation.UP, false, this, new DiscreteCoordinates(2, 11));
+            new CornerWire(Orientation.UP, false, this, new DiscreteCoordinates(2, 15));
+            // filling in the middle gaps when turning corners
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(2, 6));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(2, 10));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(2, 14));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(8, 8));
+            new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(8, 12));
+            Wire lastWire = new DirectedWire(this, Orientation.UP, new DiscreteCoordinates(5, 16));
+            new StandardDoor(
+                    lastWire, "Microtech9", new DiscreteCoordinates(2, 1),
+                    this, new DiscreteCoordinates(5, 17)
             );
         }
     }
@@ -115,6 +173,7 @@ public abstract class Microtech extends SubRoom {
         List<Microtech> subRooms = new LinkedList<>();
         subRooms.add(new Microtech1());
         subRooms.add(new Microtech2());
+        subRooms.add(new Microtech3());
         subRooms.add(new Microtech9());
         return subRooms;
     }
