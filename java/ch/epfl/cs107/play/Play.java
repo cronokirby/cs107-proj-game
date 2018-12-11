@@ -11,6 +11,8 @@ import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.window.Window;
 import ch.epfl.cs107.play.window.swing.SwingWindow;
 
+import java.util.Arrays;
+
 
 /**
  * Main entry point.
@@ -25,7 +27,6 @@ public class Play {
 	 * @param args (Array of String): ignored
 	 */
 	public static void main(String[] args) {
-
 		// Define cascading file system
 		final FileSystem fileSystem = new ResourceFileSystem(DefaultFileSystem.INSTANCE);
 

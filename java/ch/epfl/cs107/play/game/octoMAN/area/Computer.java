@@ -7,6 +7,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.signal.logic.MultipleAnd;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -70,6 +71,53 @@ public abstract class Computer extends SubRoom {
                     allButtons, "Computer9", new DiscreteCoordinates(2, 1),
                     this, new DiscreteCoordinates(5, 10)
             );
+        }
+    }
+
+    private static class Computer3 extends Computer {
+         private Computer3() {
+             super("Computer3");
+         }
+
+        @Override
+        protected void addActors() {
+            int[][] xs = {
+                { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+                { 1, 2, 3, 4, 5, 6, 11 },
+                { 1, 6, 11 },
+                { 1, 6, 11 },
+                { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+                { 1, 7, 8, 9, 10, 11},
+                { 1, 7, 11 },
+                { 1, 2, 3, 4, 5, 6, 7, 11 },
+                { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+                { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+            };
+            List<Logic> buttons = new LinkedList<>();
+            for (int i = 0; i < xs.length; ++i) {
+                int y = 10 - i;
+                for (int j = 0; j < xs[i].length; ++j) {
+                    buttons.add(new PressureSwitch(this, new DiscreteCoordinates(xs[i][j], y)));
+                }
+            }
+            Logic allButtons = new MultipleAnd(buttons);
+            new StandardDoor(
+                    allButtons, "Computer4", new DiscreteCoordinates(6, 1),
+                    this, new DiscreteCoordinates(6, 1)
+            );
+        }
+    }
+
+    private static class Computer4 extends Computer {
+        private Computer4() {
+            super("Computer4");
+        }
+
+        @Override
+        protected void addActors() {
+            int[][] xs = {
+
+            };
         }
     }
 
