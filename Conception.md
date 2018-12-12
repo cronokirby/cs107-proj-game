@@ -141,3 +141,8 @@ There are a lot of actors. Apologies again. I'll stick to describing the hierarc
   a similar pattern: the class itself is abstract, and its constructor is hidden:
   instead it provides, via a static `subRooms` method, the list of subRooms inheriting from it.
   Each of this is a private static class, containing the logic to addActors into the sub room.
+
+## Other actors
+It would be somewhat redundant, and I believe that the interest of the reader in reading whatever
+precise description I could put here is as small as my interest in writing it, especially when each of the classes
+is well documented in the comments 8^).
