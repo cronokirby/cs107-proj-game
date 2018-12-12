@@ -15,6 +15,15 @@ public class OctoGame extends AreaGame {
     private Player player;
     /// The hud for this game
     private Hud hud;
+    /// The scoreboard for this game
+    private ScoreBoard scoreBoard;
+
+    /**
+     * Construct a new octo game with a given score board
+     */
+    public OctoGame(ScoreBoard board) {
+        scoreBoard = board;
+    }
 
     @Override
     public String getTitle() {
@@ -88,6 +97,9 @@ public class OctoGame extends AreaGame {
         if (lastPortal == null) {
             hud.update(deltaTime);
             hud.draw(getWindow());
+        }
+        if (player.isFinished()) {
+            hud.getTimer().addTo(scoreBoard);
         }
     }
 

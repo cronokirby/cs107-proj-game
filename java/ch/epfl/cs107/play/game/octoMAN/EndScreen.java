@@ -8,6 +8,7 @@ import ch.epfl.cs107.play.game.octoMAN.actor.Timer;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.Transform;
 import ch.epfl.cs107.play.math.Vector;
+import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Window;
 
 import java.awt.*;
@@ -20,6 +21,8 @@ public class EndScreen implements Game {
     private Window window;
     /// The timer associated with this end screen
     private Timer timer;
+    /// True if the player wants to leave the end screen
+    private boolean leaveScreen;
     /// The congratulation message to display
     private Graphics congrats;
     /// The message display the final time text
@@ -52,11 +55,19 @@ public class EndScreen implements Game {
         return true;
     }
 
+    /// Return true if the end screen is finished
+    public boolean isFinished() {
+        return leaveScreen;
+    }
+
     @Override
     public void update(float deltaTime) {
         congrats.draw(window);
         finalTimePrompt.draw(window);
         finalTime.draw(window);
+        if (window.getKeyboard().get(Keyboard.L).isPressed()) {
+            leaveScreen = true;
+        }
     }
 
     @Override

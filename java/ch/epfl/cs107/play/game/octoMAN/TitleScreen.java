@@ -7,6 +7,7 @@ import ch.epfl.cs107.play.game.actor.ImageGraphics;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.actor.Text;
+import ch.epfl.cs107.play.game.octoMAN.actor.ScoreBoard;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.Transform;
 import ch.epfl.cs107.play.math.Vector;
@@ -21,6 +22,8 @@ import java.awt.*;
 public class TitleScreen implements Game {
     /// The window in this title screen
     private Window window;
+    /// The score board in this title screen
+    private ScoreBoard scoreBoard;
     /// Whether or not the player has pressed on new game
     private boolean startNewGame;
     /// Whether or not the player is selecting new game or the scoreboard
@@ -35,6 +38,13 @@ public class TitleScreen implements Game {
     private Sprite newGameCursor;
     /// The cursor for scoreboard
     private Sprite scoreboardCursor;
+
+    /**
+     * Construct a new title screen with access to a certain score board
+     */
+    public TitleScreen(ScoreBoard board) {
+        scoreBoard = board;
+    }
 
     @Override
     public String getTitle() {
@@ -82,6 +92,9 @@ public class TitleScreen implements Game {
             startNewGame = getKeyPressed(Keyboard.L);
         } else {
             scoreboardCursor.draw(window);
+            if (getKeyPressed(Keyboard.L)) {
+                scoreBoard.printScores();
+            }
         }
         boolean upPressed = getKeyPressed(Keyboard.W) || getKeyPressed(Keyboard.UP);
         boolean downPressed = getKeyPressed(Keyboard.S) || getKeyPressed(Keyboard.DOWN);

@@ -37,6 +37,13 @@ public class Timer extends AnchoredEntity {
         return hours + ":" + minuteRest + ":" + secondRest;
     }
 
+    /**
+     * Have this timer add its current elapsed time to the board
+     */
+    public void addTo(ScoreBoard board) {
+        board.addScore(elapsed);
+    }
+
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);

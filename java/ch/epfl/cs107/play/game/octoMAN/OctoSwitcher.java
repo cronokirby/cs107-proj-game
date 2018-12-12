@@ -1,6 +1,7 @@
 package ch.epfl.cs107.play.game.octoMAN;
 
 import ch.epfl.cs107.play.game.Game;
+import ch.epfl.cs107.play.game.octoMAN.actor.ScoreBoard;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.window.Window;
 
@@ -26,10 +27,11 @@ public class OctoSwitcher implements Game {
     public boolean begin(Window window, FileSystem fileSystem) {
         this.window = window;
         this.fileSystem = fileSystem;
-        titleScreen = new TitleScreen();
+        ScoreBoard board = new ScoreBoard();
+        titleScreen = new TitleScreen(board);
         titleScreen.begin(window, fileSystem);
         gameType = OctoGameType.TitleScreen;
-        octoGame = new OctoGame();
+        octoGame = new OctoGame(board);
         endScreen = new EndScreen();
         return true;
     }
@@ -51,6 +53,10 @@ public class OctoSwitcher implements Game {
                 break;
             case EndScreen:
                 endScreen.update(deltaTime);
+                if (endScreen.isFinished()) {
+                    gameType = OctoGameType.TitleScreen;
+                    // no need to begin, since the title screen is the first one
+                }
                 break;
             case MainGame:
                 octoGame.update(deltaTime);
