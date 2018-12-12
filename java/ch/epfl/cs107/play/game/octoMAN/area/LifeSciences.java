@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.octoMAN.area;
 import ch.epfl.cs107.play.game.octoMAN.actor.*;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Polyline;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.signal.logic.MultipleAnd;
 import ch.epfl.cs107.play.window.Window;
@@ -99,8 +100,34 @@ public abstract class LifeSciences extends SubRoom {
             switches[3] = PressurePlate.fast(this, new DiscreteCoordinates(8, 5));
             Logic allSwitches = new MultipleAnd(switches);
             new StickyDoor(
-                allSwitches, "LifeSciences9", new DiscreteCoordinates(2, 1),
+                allSwitches, "LifeSciences5", new DiscreteCoordinates(7, 1),
                 this, new DiscreteCoordinates(6, 13)
+            );
+        }
+    }
+
+    private static class LifeSciences5 extends LifeSciences {
+        private LifeSciences5() {
+            super("LifeSciences5");
+        }
+
+        @Override
+        protected void addActors() {
+            new Potion(this, new DiscreteCoordinates(7, 3));
+            new Potion(this, new DiscreteCoordinates(6, 3));
+            new Potion(this, new DiscreteCoordinates(8, 3));
+            new Potion(this, new DiscreteCoordinates(7, 4));
+            Logic[] switches = {
+                    PressurePlate.fast(this, new DiscreteCoordinates(7, 7)),
+                    PressurePlate.fast(this, new DiscreteCoordinates(4, 5)),
+                    PressurePlate.fast(this, new DiscreteCoordinates(10, 5)),
+                    PressurePlate.fast(this, new DiscreteCoordinates(4, 11)),
+                    PressurePlate.fast(this, new DiscreteCoordinates(10, 11))
+            };
+            Logic allSwitches = new MultipleAnd(switches);
+            new StickyDoor(
+                allSwitches, "LifeSciences9", new DiscreteCoordinates(2, 1),
+                this, new DiscreteCoordinates(7, 12)
             );
         }
     }
@@ -128,6 +155,7 @@ public abstract class LifeSciences extends SubRoom {
         subRooms.add(new LifeSciences2());
         subRooms.add(new LifeSciences3());
         subRooms.add(new LifeSciences4());
+        subRooms.add(new LifeSciences5());
         subRooms.add(new LifeSciences9());
         return subRooms;
     }
