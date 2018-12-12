@@ -108,7 +108,42 @@ public abstract class Mathematics extends SubRoom {
             right.add(new Pedestal(this, new DiscreteCoordinates(9, 5)));
             Logic scale = new Scale(left, right, this, new DiscreteCoordinates(6, 5));
             new StandardDoor(
-                   scale, "Mathematics9" , new DiscreteCoordinates(2, 1),
+                   scale, "Mathematics4" , new DiscreteCoordinates(6, 1),
+                    this, new DiscreteCoordinates(6, 8)
+            );
+        }
+    }
+
+    private static class Mathematics4 extends Mathematics {
+        private Mathematics4() {
+            super("Mathematics4");
+        }
+
+        @Override
+        protected void addActors() {
+            new Pedestal(this, new DiscreteCoordinates(4, 1))
+                    .place(new Weight("weight.tri.1", 3));
+            new Pedestal(this, new DiscreteCoordinates(4, 2))
+                    .place(new Weight("weight.tri.2", 2));
+            new Pedestal(this, new DiscreteCoordinates(4, 3))
+                    .place(new Weight("weight.tri.3", 9));
+            new Pedestal(this, new DiscreteCoordinates(8, 1))
+                    .place(new Weight("weight.tri.4", 1));
+            new Pedestal(this, new DiscreteCoordinates(8, 2))
+                    .place(new Weight("weight.tri.5", 4));
+            new Pedestal(this, new DiscreteCoordinates(8, 3))
+                    .place(new Weight("weight.square.1",5));
+            List<Pedestal> left = new LinkedList<>();
+            left.add(new Pedestal(this, new DiscreteCoordinates(5, 5)));
+            left.add(new Pedestal(this, new DiscreteCoordinates(4, 5)));
+            left.add(new Pedestal(this, new DiscreteCoordinates(3, 5)));
+            List<Pedestal> right = new LinkedList<>();
+            right.add(new Pedestal(this, new DiscreteCoordinates(7, 5)));
+            right.add(new Pedestal(this, new DiscreteCoordinates(8, 5)));
+            right.add(new Pedestal(this, new DiscreteCoordinates(9, 5)));
+            Logic scale = new Scale(left, right, this, new DiscreteCoordinates(6, 5));
+            new StandardDoor(
+                    scale, "Mathematics9" , new DiscreteCoordinates(2, 1),
                     this, new DiscreteCoordinates(6, 8)
             );
         }
@@ -138,6 +173,7 @@ public abstract class Mathematics extends SubRoom {
         subRooms.add(new Mathematics1());
         subRooms.add(new Mathematics2());
         subRooms.add(new Mathematics3());
+        subRooms.add(new Mathematics4());
         subRooms.add(new Mathematics9());
         return subRooms;
     }
