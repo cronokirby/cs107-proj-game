@@ -91,7 +91,7 @@ public class PressureSwitch extends AreaEntity implements Logic, Toggleable {
     }
 
 
-    /// PressureSwitch implements Interactable
+    /// ResetSwitch implements Interactable
 
     @Override
     public boolean takeCellSpace() {

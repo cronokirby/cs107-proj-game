@@ -1,13 +1,12 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
 import ch.epfl.cs107.play.game.octoMAN.actor.Orb;
-import ch.epfl.cs107.play.game.octoMAN.actor.PressureSwitch;
+import ch.epfl.cs107.play.game.octoMAN.actor.ResetSwitch;
 import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.signal.logic.MultipleAnd;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,10 +26,11 @@ public abstract class Computer extends SubRoom {
                 Logic.TRUE, "LevelSelect", new DiscreteCoordinates(24, 8),
                 this, new DiscreteCoordinates(5, 0)
             );
+            DiscreteCoordinates start = new DiscreteCoordinates(5, 1);
             List<Logic> buttons = new LinkedList<>();
             for (int x = 1; x <= 9; ++x) {
                 for (int y = 1; y <= 7; ++y) {
-                    buttons.add(new PressureSwitch(this, new DiscreteCoordinates(x, y)));
+                    buttons.add(new ResetSwitch(this, start, new DiscreteCoordinates(x, y)));
                 }
             }
             Logic allButtons = new MultipleAnd(buttons);
@@ -48,28 +48,28 @@ public abstract class Computer extends SubRoom {
 
         @Override
         protected void addActors() {
+            DiscreteCoordinates start = new DiscreteCoordinates(5, 1);
             int[][] xs = {
                 { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
                 { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
                 { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
-                { 1, 2, 3, 4, 5, 9 },
-                { 1, 2, 3, 4, 5, 9 },
-                { 1, 6, 7, 8, 9 },
-                { 1, 6, 7, 8, 9 },
+                { 1, 2, 8, 9 },
+                { 1, 2, 8, 9 },
                 { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
-                { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+                { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
             };
             List<Logic> buttons = new LinkedList<>();
             for (int i = 0; i < xs.length; ++i) {
-                int y = 9 - i;
+                int y = 8 - i;
                 for (int j = 0; j < xs[i].length; ++j) {
-                    buttons.add(new PressureSwitch(this, new DiscreteCoordinates(xs[i][j], y)));
+                    buttons.add(new ResetSwitch(this, start, new DiscreteCoordinates(xs[i][j], y)));
                 }
             }
              Logic allButtons = new MultipleAnd(buttons);
              new StandardDoor(
-                    allButtons, "Computer9", new DiscreteCoordinates(2, 1),
-                    this, new DiscreteCoordinates(5, 10)
+                     allButtons, "Computer3", new DiscreteCoordinates(6, 1),
+                    this, new DiscreteCoordinates(5, 9)
             );
         }
     }
@@ -81,15 +81,16 @@ public abstract class Computer extends SubRoom {
 
         @Override
         protected void addActors() {
+             DiscreteCoordinates start = new DiscreteCoordinates(6, 1);
             int[][] xs = {
                 { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-                { 1, 2, 3, 4, 5, 6, 11 },
-                { 1, 6, 11 },
-                { 1, 6, 11 },
                 { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
-                { 1, 7, 8, 9, 10, 11},
-                { 1, 7, 11 },
-                { 1, 2, 3, 4, 5, 6, 7, 11 },
+                { 1, 2, 5, 6, 9, 10, 11 },
+                { 1, 2, 5, 6, 9, 10, 11 },
+                { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
+                { 1, 2, 5, 6, 7, 8, 9, 10, 11 },
+                { 1, 2, 5, 6, 7, 10, 11 },
+                { 1, 2, 3, 4, 5, 6, 7, 10, 11 },
                 { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
                 { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 },
             };
@@ -97,13 +98,13 @@ public abstract class Computer extends SubRoom {
             for (int i = 0; i < xs.length; ++i) {
                 int y = 10 - i;
                 for (int j = 0; j < xs[i].length; ++j) {
-                    buttons.add(new PressureSwitch(this, new DiscreteCoordinates(xs[i][j], y)));
+                    buttons.add(new ResetSwitch(this, start, new DiscreteCoordinates(xs[i][j], y)));
                 }
             }
             Logic allButtons = new MultipleAnd(buttons);
             new StandardDoor(
-                    allButtons, "Computer4", new DiscreteCoordinates(6, 1),
-                    this, new DiscreteCoordinates(6, 1)
+                    allButtons, "Computer9", new DiscreteCoordinates(2, 1),
+                    this, new DiscreteCoordinates(6, 11)
             );
         }
     }
@@ -141,6 +142,7 @@ public abstract class Computer extends SubRoom {
         List<Computer> subRooms = new LinkedList<>();
         subRooms.add(new Computer1());
         subRooms.add(new Computer2());
+        subRooms.add(new Computer3());
         subRooms.add(new Computer9());
         return subRooms;
     }

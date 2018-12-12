@@ -21,7 +21,7 @@ public abstract class SwitchActor extends AreaEntity implements Logic, Toggleabl
      * Create a new SwitchActor, and registers it in it
      * @param area the area to register this sprite in
      * @param orientation the initial orientatioe
-        public void interactWith(PressureSwitch pressureSwitch) {
+        public void interactWith(ResetSwitch pressureSwitch) {
             pressureSwitch.toggle();
         }n of this entity
      * @param position the initial position of this entity
