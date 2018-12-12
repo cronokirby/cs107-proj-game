@@ -123,8 +123,36 @@ public abstract class LifeSciences extends SubRoom {
             };
             Logic allSwitches = new MultipleAnd(switches);
             new StickyDoor(
-                allSwitches, "LifeSciences9", new DiscreteCoordinates(2, 1),
+                allSwitches, "LifeSciences6", new DiscreteCoordinates(6, 1),
                 this, new DiscreteCoordinates(7, 12)
+            );
+        }
+    }
+
+    private static class LifeSciences6 extends LifeSciences {
+        private LifeSciences6() {
+            super("LifeSciences6");
+        }
+
+        @Override
+        protected void addActors() {
+            new Potion(this, new DiscreteCoordinates(5, 3));
+            new Potion(this, new DiscreteCoordinates(7, 3));
+            new Potion(this, new DiscreteCoordinates(5, 4));
+            new Potion(this, new DiscreteCoordinates(6, 4));
+            new Potion(this, new DiscreteCoordinates(7, 4));
+            Logic[] switches = {
+                    PressurePlate.fast(this, new DiscreteCoordinates(4, 5)),
+                    PressurePlate.fast(this, new DiscreteCoordinates(8, 5)),
+                    PressurePlate.fast(this, new DiscreteCoordinates(4, 9)),
+                    PressurePlate.fast(this, new DiscreteCoordinates(8, 9)),
+                    PressurePlate.fast(this, new DiscreteCoordinates(4, 14)),
+                    PressurePlate.fast(this, new DiscreteCoordinates(8, 14)),
+            };
+            Logic allSwitches = new MultipleAnd(switches);
+            new StickyDoor(
+                    allSwitches, "LifeSciences9", new DiscreteCoordinates(2, 1),
+                    this, new DiscreteCoordinates(6, 15)
             );
         }
     }
@@ -153,6 +181,7 @@ public abstract class LifeSciences extends SubRoom {
         subRooms.add(new LifeSciences3());
         subRooms.add(new LifeSciences4());
         subRooms.add(new LifeSciences5());
+        subRooms.add(new LifeSciences6());
         subRooms.add(new LifeSciences9());
         return subRooms;
     }
