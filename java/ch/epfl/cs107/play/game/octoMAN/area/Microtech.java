@@ -5,7 +5,6 @@ import ch.epfl.cs107.play.game.octoMAN.actor.*;
 import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
-import org.omg.PortableInterceptor.DISCARDING;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -7,7 +7,6 @@ import ch.epfl.cs107.play.game.octoMAN.actor.*;
 import ch.epfl.cs107.play.game.octoMAN.area.*;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Window;
 
 public class OctoGame extends AreaGame {

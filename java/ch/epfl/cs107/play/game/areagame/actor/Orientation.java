@@ -1,7 +1,6 @@
 package ch.epfl.cs107.play.game.areagame.actor;
 
 import ch.epfl.cs107.play.math.Vector;
-import ch.epfl.cs107.play.math.Vector;
 
 
 public enum Orientation {
