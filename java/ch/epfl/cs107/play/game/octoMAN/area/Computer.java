@@ -146,6 +146,21 @@ public abstract class Computer extends SubRoom {
         }
     }
 
+    private static class Computer5 extends Computer {
+        private Computer5() {
+            super("Computer5");
+        }
+
+        @Override
+        protected void addActors() {
+            DiscreteCoordinates start = new DiscreteCoordinates(7, 1);
+            int[][] xs = {
+                    { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13},
+                    { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13},
+            };
+        }
+    }
+
     private static class Computer9 extends Computer {
         private Computer9() {
             super("Computer9");
