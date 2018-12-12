@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.octoMAN;
 import ch.epfl.cs107.play.game.Game;
 import ch.epfl.cs107.play.game.octoMAN.actor.ScoreBoard;
 import ch.epfl.cs107.play.io.FileSystem;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Window;
 
 /**
@@ -27,7 +28,7 @@ public class OctoSwitcher implements Game {
     public boolean begin(Window window, FileSystem fileSystem) {
         this.window = window;
         this.fileSystem = fileSystem;
-        ScoreBoard board = new ScoreBoard();
+        ScoreBoard board = new ScoreBoard(new Vector(-7f, 5f));
         titleScreen = new TitleScreen(board);
         titleScreen.begin(window, fileSystem);
         gameType = OctoGameType.TitleScreen;

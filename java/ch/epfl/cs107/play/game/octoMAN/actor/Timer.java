@@ -1,6 +1,5 @@
 package ch.epfl.cs107.play.game.octoMAN.actor;
 
-import ch.epfl.cs107.play.game.actor.Actor;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
@@ -27,14 +26,22 @@ public class Timer extends AnchoredEntity {
         }
     }
 
-    public String display() {
-        int acc = (int) elapsed;
+    /**
+     * Format a floating point number of seconds in a nice way
+     * @return the text in h:mm:ss format
+     */
+    public static String formatTime(float f) {
+        int acc = (int) f;
         String secondRest = pad0(acc % 60);
         acc /= 60;
         String minuteRest = pad0(acc % 60);
         acc /= 60;
         int hours = acc % 60;
         return hours + ":" + minuteRest + ":" + secondRest;
+    }
+
+    public String display() {
+        return Timer.formatTime(elapsed);
     }
 
     /**

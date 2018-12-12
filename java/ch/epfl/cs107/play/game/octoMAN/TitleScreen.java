@@ -28,6 +28,8 @@ public class TitleScreen implements Game {
     private boolean startNewGame;
     /// Whether or not the player is selecting new game or the scoreboard
     private boolean onNewGame;
+    /// Whether or not we're in the score board screen
+    private boolean inScoreBoard;
     /// The text for the title
     private Graphics title;
     /// The text for the new game prompt
@@ -82,8 +84,10 @@ public class TitleScreen implements Game {
         return window.getKeyboard().get(code).isPressed();
     }
 
-    @Override
-    public void update(float deltaTime) {
+    /**
+     * Update the title screen section
+     */
+    private void updateTitleScreen() {
         title.draw(window);
         newGamePrompt.draw(window);
         scoreboardPrompt.draw(window);
@@ -92,14 +96,29 @@ public class TitleScreen implements Game {
             startNewGame = getKeyPressed(Keyboard.L);
         } else {
             scoreboardCursor.draw(window);
-            if (getKeyPressed(Keyboard.L)) {
-                scoreBoard.printScores();
-            }
+            inScoreBoard = getKeyPressed(Keyboard.L);
         }
         boolean upPressed = getKeyPressed(Keyboard.W) || getKeyPressed(Keyboard.UP);
         boolean downPressed = getKeyPressed(Keyboard.S) || getKeyPressed(Keyboard.DOWN);
         if (upPressed || downPressed) {
             onNewGame = !onNewGame;
+        }
+    }
+
+    /**
+     * Update the elements in the score board screen
+     */
+    private void updateScoreBoard() {
+        scoreBoard.draw(window);
+        inScoreBoard = !getKeyPressed(Keyboard.L);
+    }
+
+    @Override
+    public void update(float deltaTime) {
+        if (inScoreBoard) {
+            updateScoreBoard();
+        } else {
+            updateTitleScreen();
         }
     }
 
