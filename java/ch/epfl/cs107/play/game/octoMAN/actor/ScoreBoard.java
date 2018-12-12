@@ -8,6 +8,8 @@ import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
 
 import java.awt.*;
+import java.io.*;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -24,6 +26,9 @@ public class ScoreBoard extends Entity {
     /// The TextGraphics can be null, indicating new score
     private TextGraphics[] scoreTexts;
 
+    /**
+     * Create a new score board at a certain position
+     */
     public ScoreBoard(Vector position) {
         super(position);
         scores = new TreeSet<>();
@@ -34,6 +39,37 @@ public class ScoreBoard extends Entity {
         scoreTexts = new TextGraphics[10];
         for (int i = 0; i < scoreTexts.length; ++i) {
             scoreTexts[i] = null;
+        }
+    }
+
+    /**
+     * Load scores into the score board from a file.
+     * @param fileName the fileName to read, as a series of integers
+     */
+    public void loadFile(String fileName) {
+        File file = new File(fileName);
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextFloat()) {
+                scores.add(scanner.nextFloat());
+            }
+            updateScoreTexts();
+        } catch (FileNotFoundException f) {
+            // we could create the file, but we'll do that when we save our scores anyways
+            System.out.println("Scoreboard couldn't load from " + fileName);
+        }
+    }
+
+    public void saveToFile(String fileName) {
+        try {
+            FileWriter fstream = new FileWriter(fileName);
+            BufferedWriter out = new BufferedWriter(fstream);
+            for (float s : scores) {
+                out.write(s + "\n");
+            }
+            out.close();
+        } catch (IOException io) {
+            System.out.println("Couldn't save scoreboard to " + fileName);
         }
     }
 

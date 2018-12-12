@@ -17,6 +17,9 @@ public class OctoSwitcher implements Game {
     private Window window;
     /// The filesystem for this game
     private FileSystem fileSystem;
+    /// The scoreboard in this game
+    /// We need access to be able to save it
+    private ScoreBoard scoreBoard;
     /// The title screen before the main game
     private TitleScreen titleScreen;
     /// The main game we can play
@@ -28,11 +31,12 @@ public class OctoSwitcher implements Game {
     public boolean begin(Window window, FileSystem fileSystem) {
         this.window = window;
         this.fileSystem = fileSystem;
-        ScoreBoard board = new ScoreBoard(new Vector(-7f, 5f));
-        titleScreen = new TitleScreen(board);
+        scoreBoard = new ScoreBoard(new Vector(-7f, 5f));
+        scoreBoard.loadFile("scores.txt");
+        titleScreen = new TitleScreen(scoreBoard);
         titleScreen.begin(window, fileSystem);
         gameType = OctoGameType.TitleScreen;
-        octoGame = new OctoGame(board);
+        octoGame = new OctoGame(scoreBoard);
         endScreen = new EndScreen();
         return true;
     }
@@ -77,5 +81,6 @@ public class OctoSwitcher implements Game {
 
     @Override
     public void end() {
+        scoreBoard.saveToFile("scores.txt");
     }
 }
