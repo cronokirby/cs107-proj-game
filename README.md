@@ -4,7 +4,7 @@ Zelda, et alii. The sprites were given to us, but the tiles
 come from yours truly :)
 
 ## Building / Running
-If you're an corrector reading this, you likely haven't
+If you're a corrector reading this, you likely haven't
 been provided with a jar archive, so the easiest way
 to run the game would be to compile the project (via IDE
 or terminal) and run the `Play` class, which starts the game.
