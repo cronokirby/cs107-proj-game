@@ -15,6 +15,8 @@ public class OctoSwitcher implements Game {
     private Window window;
     /// The filesystem for this game
     private FileSystem fileSystem;
+    /// The title screen before the main game
+    private TitleScreen titleScreen;
     /// The main game we can play
     private OctoGame octoGame;
     /// The end screen we can reach
@@ -24,9 +26,10 @@ public class OctoSwitcher implements Game {
     public boolean begin(Window window, FileSystem fileSystem) {
         this.window = window;
         this.fileSystem = fileSystem;
+        titleScreen = new TitleScreen();
+        titleScreen.begin(window, fileSystem);
+        gameType = OctoGameType.TitleScreen;
         octoGame = new OctoGame();
-        gameType = OctoGameType.MainGame;
-        octoGame.begin(window, fileSystem);
         endScreen = new EndScreen();
         return true;
     }
@@ -39,6 +42,13 @@ public class OctoSwitcher implements Game {
     @Override
     public void update(float deltaTime) {
         switch (gameType) {
+            case TitleScreen:
+                titleScreen.update(deltaTime);
+                if (titleScreen.isFinished()) {
+                    gameType = OctoGameType.MainGame;
+                    octoGame.begin(window, fileSystem);
+                }
+                break;
             case EndScreen:
                 endScreen.update(deltaTime);
                 break;
