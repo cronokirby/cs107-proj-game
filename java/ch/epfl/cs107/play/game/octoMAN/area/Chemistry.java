@@ -70,8 +70,22 @@ public abstract class Chemistry extends SubRoom {
         @Override
         protected void addActors() {
             new StandardDoor(
-                Logic.TRUE, "Chemistry9", new DiscreteCoordinates(2, 1),
+                Logic.TRUE, "Chemistry5", new DiscreteCoordinates(6, 1),
                 this, new DiscreteCoordinates(13, 9)
+            );
+        }
+    }
+
+    private static class Chemistry5 extends Chemistry {
+        private Chemistry5() {
+            super("Chemistry5");
+        }
+
+        @Override
+        protected void addActors() {
+            new StandardDoor(
+                    Logic.TRUE, "Chemistry9", new DiscreteCoordinates(2, 1),
+                    this, new DiscreteCoordinates(9, 16)
             );
         }
     }
@@ -98,6 +112,7 @@ public abstract class Chemistry extends SubRoom {
         subRooms.add(new Chemistry2());
         subRooms.add(new Chemistry3());
         subRooms.add(new Chemistry4());
+        subRooms.add(new Chemistry5());
         subRooms.add(new Chemistry9());
         return subRooms;
     }
