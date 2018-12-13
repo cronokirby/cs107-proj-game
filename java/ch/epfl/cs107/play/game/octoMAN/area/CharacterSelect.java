@@ -25,7 +25,6 @@ public class CharacterSelect extends OctoArea {
         new SpriteGiver("girl.3", this, new DiscreteCoordinates(9, 4));
         new SpriteGiver("girl.4", this, new DiscreteCoordinates(7, 4));
         new SpriteGiver("girl.5", this, new DiscreteCoordinates(7, 2));
-        new FinalAntidote(this, new DiscreteCoordinates(3, 5));
         new StandardDoor(Logic.TRUE, "LevelSelect", new DiscreteCoordinates(13,4),
                     this, new DiscreteCoordinates(5, 6));
         return superOK;
