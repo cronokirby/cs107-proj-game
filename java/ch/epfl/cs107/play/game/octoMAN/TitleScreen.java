@@ -3,8 +3,10 @@ package ch.epfl.cs107.play.game.octoMAN;
 import ch.epfl.cs107.play.game.Game;
 import ch.epfl.cs107.play.game.actor.Graphics;
 import ch.epfl.cs107.play.game.actor.GraphicsEntity;
+import ch.epfl.cs107.play.game.actor.ImageGraphics;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
+import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.game.octoMAN.actor.ScoreBoard;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.Transform;
@@ -55,7 +57,8 @@ public class TitleScreen implements Game {
     public boolean begin(Window window, FileSystem fileSystem) {
         this.window = window;
         window.setRelativeTransform(Transform.I.scaled(22.f));
-        TextGraphics titleText = new TextGraphics("8CT8 MAN", 3.f, Color.WHITE);
+        ImageGraphics titleText = new ImageGraphics(ResourcePath.getBackgrounds("Title"), 22.f, 22.f);
+        titleText.setAnchor(new Vector(-3, -16));
         title = new GraphicsEntity(new Vector(-8, 5), titleText);
         TextGraphics newGameText = new TextGraphics("New Game", 1.3f, Color.WHITE);
         newGamePrompt = new GraphicsEntity(new Vector(-3.5f, -2), newGameText);
