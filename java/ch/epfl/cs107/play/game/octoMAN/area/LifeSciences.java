@@ -30,8 +30,8 @@ public abstract class LifeSciences extends SubRoom {
                     this, new DiscreteCoordinates(4, 0)
             );
             String mobText = XMLTexts.getText("lifesciences-intro");
-            new TalkingMob(mobText, "mob.4", this, Orientation.DOWN, new DiscreteCoordinates(3, 3));
-            new TalkingMob(mobText, "mob.4", this, Orientation.DOWN, new DiscreteCoordinates(5, 3));
+            new StaticMob(mobText, "mob.4", this, Orientation.DOWN, new DiscreteCoordinates(3, 3));
+            new StaticMob(mobText, "mob.4", this, Orientation.DOWN, new DiscreteCoordinates(5, 3));
             Logic plate1 = PressurePlate.fast(this, new DiscreteCoordinates(6, 9));
             Logic plate2 = PressurePlate.fast(this, new DiscreteCoordinates(2, 9));
             new Potion(this, new DiscreteCoordinates(4, 4));
