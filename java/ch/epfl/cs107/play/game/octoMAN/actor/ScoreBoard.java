@@ -24,6 +24,10 @@ public class ScoreBoard extends Entity {
     /// An array of TextGraphics for each score
     /// The TextGraphics can be null, indicating new score
     private TextGraphics[] scoreTexts;
+    // static colors
+    private static final Color gold = new Color(0xF6E319);
+    private static final Color silver = new Color(0x9BA0B3);
+    private static final Color bronze = new Color(0xBC5B0F);
 
     /**
      * Create a new score board at a certain position
@@ -81,7 +85,22 @@ public class ScoreBoard extends Entity {
                 break;
             }
             String txt = "#" + (i + 1) + "                  " + Timer.formatTime(s);
-            TextGraphics g = new TextGraphics(txt, 1.f, Color.WHITE);
+            Color color;
+            switch (i) {
+                case 0:
+                    color = gold;
+                    break;
+                case 1:
+                    color = silver;
+                    break;
+                case 2:
+                    color = bronze;
+                    break;
+                default:
+                    color = Color.LIGHT_GRAY;
+                    break;
+            }
+            TextGraphics g = new TextGraphics(txt, 1.f, color);
             g.setParent(this);
             g.setAnchor(new Vector(1.f, -(i + 1)));
             scoreTexts[i] = g;
