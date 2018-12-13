@@ -1,8 +1,11 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.octoMAN.actor.Orb;
 import ch.epfl.cs107.play.game.octoMAN.actor.ResetSwitch;
 import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
+import ch.epfl.cs107.play.game.octoMAN.actor.StaticMob;
+import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.signal.logic.MultipleAnd;
@@ -27,10 +30,17 @@ public abstract class Computer extends SubRoom {
                 this, new DiscreteCoordinates(5, 0)
             );
             DiscreteCoordinates start = new DiscreteCoordinates(5, 1);
+            String mob1 = XMLTexts.getText("computer-intro");
+            new StaticMob(mob1, "mob.2", this, Orientation.DOWN, new DiscreteCoordinates(5, 2));
+            String mob2 = XMLTexts.getText("computer-joke");
+            new StaticMob(mob2, "mob.4", this, Orientation.UP, new DiscreteCoordinates(5, 3));
             List<Logic> buttons = new LinkedList<>();
             for (int x = 1; x <= 9; ++x) {
                 for (int y = 1; y <= 7; ++y) {
-                    buttons.add(new ResetSwitch(this, start, new DiscreteCoordinates(x, y)));
+                    // everything except (5, 2) and (5, 3) where the mobs are
+                    if (x != 5 || (y != 2 && y != 3)) {
+                        buttons.add(new ResetSwitch(this, start, new DiscreteCoordinates(x, y)));
+                    }
                 }
             }
             Logic allButtons = new MultipleAnd(buttons);
@@ -59,6 +69,7 @@ public abstract class Computer extends SubRoom {
                 { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
                 { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
             };
+
             List<Logic> buttons = new LinkedList<>();
             for (int i = 0; i < xs.length; ++i) {
                 int y = 8 - i;

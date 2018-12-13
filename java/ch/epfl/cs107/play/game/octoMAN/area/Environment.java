@@ -1,8 +1,12 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.octoMAN.actor.Door;
 import ch.epfl.cs107.play.game.octoMAN.actor.Orb;
 import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
+import ch.epfl.cs107.play.game.octoMAN.actor.TalkingMob;
 import ch.epfl.cs107.play.io.FileSystem;
+import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
@@ -24,6 +28,8 @@ public class Environment extends OctoArea {
                 Logic.TRUE, "LevelSelect", new DiscreteCoordinates(5, 8),
                 this, new DiscreteCoordinates(1, 2)
         );
+        String mobText = XMLTexts.getText("environment-intro");
+        new TalkingMob(mobText, "mob.3", this, Orientation.DOWN, new DiscreteCoordinates(3, 3));
         List<BirdFactory> factories = new LinkedList<>();
         factories.add(new BirdFactory(1, 2, 8, 6, "bird.1", 4));
         factories.add(new BirdFactory(2, 9, 7, 13, "bird.2", 3));

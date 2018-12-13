@@ -20,7 +20,7 @@ public class Light extends AreaEntity {
     public Light(Area area, DiscreteCoordinates position) {
         super(area, Orientation.DOWN, position);
         area.registerActor(this);
-        sprite = new Sprite("torch.ground.on.1", 1.f, 1.f, this);
+        sprite = new Sprite("lightbulb", 1.f, 1.f, this);
     }
 
     /**

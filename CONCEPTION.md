@@ -122,7 +122,12 @@ There are a lot of actors. Apologies again. I'll stick to describing the hierarc
  - WanderingEntity
   A lot of mobs with different behavior share the same behavior of walking around randomly in a room:
   to this effect, an abstract class `WanderingEntity` was created, in order to share this logic.
-  
+
+ - TalkingMob
+  A Talking mob is thus a mix of both of these behaviors, both walking and around and having the ability
+  to provide text when talked to. A mob that doesn't move at all (`StaticMob`) extends `TalkingMob`,
+  by never being able to move.
+
  - Door
    There are a few different kinds of doors, but they just vary on the abstract concept of Door.
   

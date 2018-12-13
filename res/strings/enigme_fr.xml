@@ -16,6 +16,19 @@
 
         L'antidote est derrière la porte au fond de cette salle, mais il faut les 8 orbes de l'EPFL pour l'ouvrir.
     </string>
+    <string name="environment-intro">L'environnement, c'est important! Mais là
+        ....
+        ....
+        ....
+        ....
+
+        IL Y A TROP D'OISEAUX!!!
+    </string>
     <string name="math-intro">Les maths, ca pèse! Equilibre les balances pour avancer!</string>
-    <string name="micro-intro">Tout les circuits sont cassés! Répare-les pour avancer!</string>
+    <string name="lifesciences-intro">Je croyais boire l'antidote, mais je me suis cloné à la place! Fou les sciences de la vie hein!</string>
+    <string name="micro-intro">Tout les circuits de Microtechnique sont cassés! Répare-les pour avancer!</string>
+    <string name="electricity-intro">Ahhh je vois rien! Toute l'éléctricité est partie!</string>
+    <string name="chemistry-intro">Ca glisse! Quelqu'un a renversé un produit chimique par terre!</string>
+    <string name="computer-intro">Il faut être optimal en informatique! Marche sur toutes les cases sans revenir sur tes pas!</string>
+    <string name="computer-joke">Moi je bouge pas! J'ai peur de faire une erreur!</string>
 </strings>

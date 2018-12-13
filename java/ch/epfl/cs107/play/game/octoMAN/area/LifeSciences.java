@@ -1,6 +1,8 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.octoMAN.actor.*;
+import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.signal.logic.MultipleAnd;
@@ -27,6 +29,9 @@ public abstract class LifeSciences extends SubRoom {
                     Logic.TRUE, "LevelSelect", new DiscreteCoordinates(11, 8),
                     this, new DiscreteCoordinates(4, 0)
             );
+            String mobText = XMLTexts.getText("lifesciences-intro");
+            new TalkingMob(mobText, "mob.4", this, Orientation.DOWN, new DiscreteCoordinates(3, 3));
+            new TalkingMob(mobText, "mob.4", this, Orientation.DOWN, new DiscreteCoordinates(5, 3));
             Logic plate1 = PressurePlate.fast(this, new DiscreteCoordinates(6, 9));
             Logic plate2 = PressurePlate.fast(this, new DiscreteCoordinates(2, 9));
             new Potion(this, new DiscreteCoordinates(4, 4));

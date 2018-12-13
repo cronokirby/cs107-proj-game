@@ -1,7 +1,10 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.octoMAN.actor.Orb;
 import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
+import ch.epfl.cs107.play.game.octoMAN.actor.StaticMob;
+import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
@@ -27,6 +30,8 @@ public abstract class Chemistry extends SubRoom {
                     Logic.TRUE, "LevelSelect", new DiscreteCoordinates(18, 8),
                     this, new DiscreteCoordinates(3, 0)
             );
+            String mobText = XMLTexts.getText("chemistry-intro");
+            new StaticMob(mobText, "mob.4", this, Orientation.DOWN, new DiscreteCoordinates(5, 1));
             new StandardDoor(
                     Logic.TRUE, "Chemistry2", new DiscreteCoordinates(3, 1),
                     this, new DiscreteCoordinates(6, 7)

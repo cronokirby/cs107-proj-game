@@ -1,9 +1,8 @@
 package ch.epfl.cs107.play.game.octoMAN.area;
 
-import ch.epfl.cs107.play.game.octoMAN.actor.Light;
-import ch.epfl.cs107.play.game.octoMAN.actor.LightToggler;
-import ch.epfl.cs107.play.game.octoMAN.actor.Orb;
-import ch.epfl.cs107.play.game.octoMAN.actor.StandardDoor;
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.octoMAN.actor.*;
+import ch.epfl.cs107.play.io.XMLTexts;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
@@ -29,6 +28,8 @@ public abstract class Electricity extends SubRoom {
                     Logic.TRUE, "LevelSelect", new DiscreteCoordinates(15, 8),
                     this, new DiscreteCoordinates(2, 0)
             );
+            String mobText = XMLTexts.getText("electricity-intro");
+            new StaticMob(mobText, "mob.1", this, Orientation.DOWN, new DiscreteCoordinates(2, 2));
             new LightToggler(true, this, new DiscreteCoordinates(2, 1));
             new Light(this, new DiscreteCoordinates(3, 1));
             new Light(this, new DiscreteCoordinates(14, 6));
