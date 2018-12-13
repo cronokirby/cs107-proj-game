@@ -3,7 +3,7 @@
  <tileset firstgid="1" source="tilemap.tsx.tsx"/>
  <layer name="Tile Layer 1" width="5" height="72">
   <data encoding="csv">
-33,33,33,33,33,
+77,33,33,33,88,
 86,75,75,75,87,
 86,75,75,75,87,
 86,75,75,75,87,

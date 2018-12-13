@@ -140,7 +140,7 @@ public abstract class Computer extends SubRoom {
             }
             Logic allButtons = new MultipleAnd(buttons);
             new StandardDoor(
-                    allButtons, "Computer9", new DiscreteCoordinates(2, 1),
+                    allButtons, "Computer5", new DiscreteCoordinates(7, 1),
                     this, new DiscreteCoordinates(6, 13)
             );
         }
@@ -157,7 +157,30 @@ public abstract class Computer extends SubRoom {
             int[][] xs = {
                     { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13},
                     { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13},
+                    { 1, 2, 5, 6, 7, 8, 9, 12, 13},
+                    { 1, 2, 5, 6, 8, 9, 12, 13},
+                    { 1, 2, 5, 6, 8, 9, 10, 12, 13},
+                    { 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13},
+                    { 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13},
+                    { 1, 2, 6, 7, 8, 11, 12, 13},
+                    { 1, 2, 6, 7, 8, 12, 13},
+                    { 1, 2, 6, 7, 8, 12, 13},
+                    { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13},
+                    { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13},
+                    { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13},
             };
+            List<Logic> buttons = new LinkedList<>();
+            for (int i = 0; i < xs.length; ++i) {
+                int y = 13 - i;
+                for (int j = 0; j < xs[i].length; ++j) {
+                    buttons.add(new ResetSwitch(this, start, new DiscreteCoordinates(xs[i][j], y)));
+                }
+            }
+            Logic allButtons = new MultipleAnd(buttons);
+            new StandardDoor(
+                    allButtons, "Computer9", new DiscreteCoordinates(2, 1),
+                    this, new DiscreteCoordinates(7, 14)
+            );
         }
     }
 
@@ -183,6 +206,7 @@ public abstract class Computer extends SubRoom {
         subRooms.add(new Computer2());
         subRooms.add(new Computer3());
         subRooms.add(new Computer4());
+        subRooms.add(new Computer5());
         subRooms.add(new Computer9());
         return subRooms;
     }
