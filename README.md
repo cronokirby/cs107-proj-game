@@ -82,3 +82,8 @@ Each door is unlocked after stepping on every button on the floor.
 Stepping on a button twice resets the room. If you're savvy, you'll
 recognise this as a variation of the "Hamiltonian Circuit problem",
 which is NP-Complete 8^)
+
+## Walkthrough
+The game is relatively long, and somewhat hard in some spots, so I've preferred
+to provide you with a [video walkthrough](https://www.youtube.com/watch?v=u05BeoZXFxA) showing
+you how to beat the many rooms in the game (pardon my own mistakes 8^)
