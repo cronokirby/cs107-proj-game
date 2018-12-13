@@ -131,17 +131,21 @@ public class WeightSack extends AnchoredEntity {
      * @return null if no weight could be taken
      */
     public Weight take() {
-        Element target = elements.get(selected);
-        if (target == null) {
+        try {
+            Element target = elements.get(selected);
+            if (target == null) {
+                return null;
+            }
+            if (target.decrement()) {
+                elements.remove(selected);
+                if (selected >= elements.size()) {
+                    selected = Math.max((elements.size() - 1), 0);
+                }
+            }
+            return new Weight(target.weight);
+        } catch (IndexOutOfBoundsException ib) {
             return null;
         }
-        if (target.decrement()) {
-            elements.remove(selected);
-            if (selected >= elements.size()) {
-                selected = Math.max((elements.size() - 1), 0);
-            }
-        }
-        return new Weight(target.weight);
     }
 
     /**
